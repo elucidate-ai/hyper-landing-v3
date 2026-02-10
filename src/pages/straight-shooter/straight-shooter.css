@@ -1,13 +1,12 @@
 /* =========================================
    Straight Shooter — Industrial Brutalist
    All styles scoped under [data-page="straight-shooter"]
-   Fonts: Clash Display 700 (headlines) + Outfit 400/500 (body)
+   Fonts: Bricolage Grotesque 700 (headlines) + Outfit 400/500 (body)
    ========================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap');
 
-/* Clash Display is not on Google Fonts — use a CDN from Fontshare */
-@import url('https://api.fontshare.com/v2/css?f[]=clash-display@700&display=swap');
+
 
 /* -----------------------------------------
    Design tokens
@@ -23,7 +22,7 @@
   --ss-danger: #cc2b2b;
   --ss-border: #cdc9c0;
 
-  --ss-font-display: 'Clash Display', 'Impact', 'Arial Black', sans-serif;
+  --ss-font-display: 'Bricolage Grotesque', 'Impact', 'Arial Black', sans-serif;
   --ss-font-body: 'Outfit', 'Helvetica Neue', Arial, sans-serif;
 
   --ss-container: 1280px;

@@ -1,11 +1,11 @@
 /* =========================================
    Storyteller — Editorial Luxury
    All styles scoped under [data-page="storyteller"]
-   Fonts: Instrument Serif 400 (headlines) + Cabinet Grotesk 400/500 (body)
+   Fonts: Instrument Serif 400 (headlines) + DM Sans 400/500 (body)
    ========================================= */
 
 @import url("https://fonts.googleapis.com/css2?family=Instrument+Serif&display=swap");
-@import url("https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400;500&display=swap");
+
 
 /* -----------------------------------------
    Design tokens
@@ -26,7 +26,7 @@
   --st-border: #333333;
 
   --st-font-serif: "Instrument Serif", "Georgia", "Times New Roman", serif;
-  --st-font-body: "Cabinet Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --st-font-body: "DM Sans", "Helvetica Neue", Arial, sans-serif;
 
   --st-container: 1200px;
   --st-container-narrow: 720px;

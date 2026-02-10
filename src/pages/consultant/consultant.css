@@ -1,11 +1,10 @@
 /* =========================================
    Consultant — Strategic Modern
    All styles scoped under [data-page="consultant"]
-   Fonts: Satoshi 600/700 (headlines), General Sans 400/500 (body), JetBrains Mono 400 (data)
+   Fonts: DM Sans 600/700 (headlines), Source Sans 3 400/500 (body), JetBrains Mono 400 (data)
    ========================================= */
 
-/* Fontshare CDN for Satoshi and General Sans */
-@import url('https://api.fontshare.com/v2/css?f[]=satoshi@600,700&f[]=general-sans@400,500&display=swap');
+
 
 /* -----------------------------------------
    Design tokens
@@ -25,8 +24,8 @@
   --co-border: rgba(249, 247, 244, 0.1);
   --co-border-strong: rgba(249, 247, 244, 0.18);
 
-  --co-font-display: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
-  --co-font-body: 'General Sans', 'Helvetica Neue', Arial, sans-serif;
+  --co-font-display: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+  --co-font-body: 'Source Sans 3', 'Helvetica Neue', Arial, sans-serif;
   --co-font-mono: 'JetBrains Mono', 'Menlo', 'Consolas', monospace;
 
   --co-container: 1200px;
