@@ -2,9 +2,11 @@ import './authority.css'
 import { SkipToContent } from '../../shared/components/SkipToContent'
 import { AUNav } from './components/AUNav'
 import { AUHero } from './components/AUHero'
+import { AUProblem } from './components/AUProblem'
+import { AUDataFlow } from './components/AUDataFlow'
 import { AUStatsWall } from './components/AUStatsWall'
-import { AUArchitectureDiagram } from './components/AUArchitectureDiagram'
-import { AUAccordion } from './components/AUAccordion'
+import { AUTestimonials } from './components/AUTestimonials'
+import { AUProcess } from './components/AUProcess'
 import { AUComparisonMatrix } from './components/AUComparisonMatrix'
 import { AUSecurity } from './components/AUSecurity'
 import { AUFinalCta } from './components/AUFinalCta'
@@ -19,11 +21,15 @@ export default function AuthorityPage() {
       <main id="main-content">
         <AUHero />
 
+        <AUProblem />
+
+        <AUDataFlow />
+
         <AUStatsWall />
 
-        <AUArchitectureDiagram />
+        <AUTestimonials />
 
-        <AUAccordion />
+        <AUProcess />
 
         <AUComparisonMatrix />
 

@@ -1,12 +1,7 @@
 import { Suspense, lazy, useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 
-const HubPage = lazy(() => import('./hub/HubPage'))
-const StraightShooterPage = lazy(() => import('./pages/straight-shooter/StraightShooterPage'))
-const StorytellerPage = lazy(() => import('./pages/storyteller/StorytellerPage'))
-const ConsultantPage = lazy(() => import('./pages/consultant/ConsultantPage'))
 const AuthorityPage = lazy(() => import('./pages/authority/AuthorityPage'))
-const BusinessCasePage = lazy(() => import('./pages/business-case/BusinessCasePage'))
 
 function LoadingFallback() {
   return (
@@ -42,14 +37,10 @@ export default function App() {
       <ScrollToTop />
       <Suspense fallback={<LoadingFallback />}>
         <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<HubPage />} />
-        <Route path="/straight-shooter" element={<StraightShooterPage />} />
-        <Route path="/storyteller" element={<StorytellerPage />} />
-        <Route path="/consultant" element={<ConsultantPage />} />
-        <Route path="/authority" element={<AuthorityPage />} />
-        <Route path="/business-case" element={<BusinessCasePage />} />
-      </Routes>
-    </Suspense>
+          <Route path="/" element={<AuthorityPage />} />
+          <Route path="/authority" element={<AuthorityPage />} />
+        </Routes>
+      </Suspense>
     </>
   )
 }

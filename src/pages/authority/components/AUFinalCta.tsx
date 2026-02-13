@@ -3,7 +3,7 @@ import { ScrollReveal } from '../../../shared/components/ScrollReveal'
 
 export function AUFinalCta() {
   return (
-    <section className="au-final-cta" aria-label="Call to action">
+    <section className="au-final-cta" id="contact" aria-label="Call to action">
       <div className="au-container" style={{ position: 'relative' }}>
         <ScrollReveal>
           <div className="au-final-cta__badge">{finalCta.badge}</div>
@@ -23,9 +23,7 @@ export function AUFinalCta() {
               const btnClass =
                 cta.variant === 'primary'
                   ? 'au-btn au-btn--primary-inverted'
-                  : cta.variant === 'secondary'
-                    ? 'au-btn au-btn--secondary-inverted'
-                    : 'au-btn au-btn--secondary-inverted'
+                  : 'au-btn au-btn--secondary-inverted'
               return (
                 <a key={cta.label} href={cta.href} className={btnClass}>
                   {cta.label}
