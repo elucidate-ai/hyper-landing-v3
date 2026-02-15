@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { navigation } from '../../../data/content'
 import { Menu, X } from 'lucide-react'
 
@@ -6,6 +6,12 @@ export function AUNav() {
   const [open, setOpen] = useState(false)
 
   const toggle = useCallback(() => setOpen((v) => !v), [])
+  const close = useCallback(() => setOpen(false), [])
+
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [open])
 
   return (
     <nav className="au-nav" role="navigation" aria-label="Main navigation">
@@ -25,11 +31,11 @@ export function AUNav() {
 
         <div className={`au-nav__links${open ? ' au-nav__links--open' : ''}`}>
           {navigation.items.map((item) => (
-            <a key={item.label} href={item.href} className="au-nav__link">
+            <a key={item.label} href={item.href} className="au-nav__link" onClick={close}>
               {item.label}
             </a>
           ))}
-          <a href={navigation.cta.href} className="au-nav__cta">
+          <a href={navigation.cta.href} className="au-nav__cta" onClick={close}>
             {navigation.cta.label}
           </a>
         </div>

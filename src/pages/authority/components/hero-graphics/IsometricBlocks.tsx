@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
+import { useIntersectionObserver } from '../../../../shared/hooks/useIntersectionObserver'
 
 /* ------------------------------------------------------------------ */
 /*  Block data                                                         */
@@ -455,8 +456,12 @@ const CYCLE_SCATTERED = 0.8
 export function IsometricBlocks() {
   const [phase, setPhase] = useState<'assembling' | 'assembled' | 'scattering'>('assembling')
   const ambientDots = useAmbientDots(16)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const isVisible = useIntersectionObserver(containerRef, { threshold: 0.1 })
 
   useEffect(() => {
+    if (!isVisible) return
+
     let timeout: ReturnType<typeof setTimeout>
 
     function cycle() {
@@ -474,7 +479,7 @@ export function IsometricBlocks() {
 
     cycle()
     return () => clearTimeout(timeout)
-  }, [])
+  }, [isVisible])
 
   const vbWidth = 480
   const vbHeight = 480
@@ -482,6 +487,7 @@ export function IsometricBlocks() {
 
   return (
     <div
+      ref={containerRef}
       style={{
         width: '100%',
         maxWidth: 480,

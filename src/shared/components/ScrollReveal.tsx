@@ -1,6 +1,7 @@
 import { type ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import { useReducedMotion } from '../hooks/useReducedMotion'
+import { useIsMobile } from '../hooks/useIsMobile'
 
 interface ScrollRevealProps {
   children: ReactNode
@@ -28,6 +29,7 @@ export function ScrollReveal({
   as = 'div',
 }: ScrollRevealProps) {
   const prefersReducedMotion = useReducedMotion()
+  const isMobile = useIsMobile()
 
   // If reduced motion is preferred, render children immediately
   if (prefersReducedMotion) {
@@ -35,17 +37,22 @@ export function ScrollReveal({
     return <Tag className={className}>{children}</Tag>
   }
 
+  // Cap animation intensity on mobile
+  const effectiveY = isMobile ? Math.min(y, 16) : y
+  const effectiveDuration = isMobile ? Math.min(duration, 0.4) : duration
+  const effectiveDelay = isMobile ? Math.min(delay, 0.05) : delay
+
   const Component = motion.create(as)
 
   return (
     <Component
       className={className}
-      initial={{ opacity: 0, y }}
+      initial={{ opacity: 0, y: effectiveY }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: threshold }}
       transition={{
-        duration,
-        delay,
+        duration: effectiveDuration,
+        delay: effectiveDelay,
         ease: [0.25, 0.1, 0.25, 1],
       }}
     >

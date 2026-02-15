@@ -1,3 +1,4 @@
+import { useRef, useState, useCallback } from 'react'
 import { comparison } from '../../../data/content'
 import { ScrollReveal } from '../../../shared/components/ScrollReveal'
 
@@ -13,6 +14,25 @@ const metricIcons = [
 ]
 
 export function AUComparisonMatrix() {
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  const onScroll = useCallback(() => {
+    const el = scrollRef.current
+    if (!el) return
+    const scrollLeft = el.scrollLeft
+    const cardWidth = el.scrollWidth / comparison.approaches.length
+    const index = Math.round(scrollLeft / cardWidth)
+    setActiveIndex(Math.min(index, comparison.approaches.length - 1))
+  }, [])
+
+  const scrollTo = useCallback((index: number) => {
+    const el = scrollRef.current
+    if (!el) return
+    const cardWidth = el.scrollWidth / comparison.approaches.length
+    el.scrollTo({ left: cardWidth * index, behavior: 'smooth' })
+  }, [])
+
   return (
     <section className="au-comparison" aria-label="Comparison">
       <div className="au-container">
@@ -25,7 +45,11 @@ export function AUComparisonMatrix() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.1}>
-          <div className="au-comparison__cards">
+          <div
+            className="au-comparison__cards"
+            ref={scrollRef}
+            onScroll={onScroll}
+          >
             {comparison.approaches.map((approach, i) => (
               <article
                 key={i}
@@ -58,6 +82,17 @@ export function AUComparisonMatrix() {
                   <span className="au-comparison__best-for-text">{approach.bestFor}</span>
                 </div>
               </article>
+            ))}
+          </div>
+
+          <div className="au-comparison__dots">
+            {comparison.approaches.map((_, i) => (
+              <button
+                key={i}
+                className={`au-comparison__dot${i === activeIndex ? ' au-comparison__dot--active' : ''}`}
+                onClick={() => scrollTo(i)}
+                aria-label={`Go to card ${i + 1}`}
+              />
             ))}
           </div>
         </ScrollReveal>

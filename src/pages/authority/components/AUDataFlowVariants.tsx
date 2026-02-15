@@ -427,17 +427,47 @@ const BLUEPRINT_CSS = `
     stroke-width: 1;
   }
 
-  @media (max-width: 768px) {
-    .bp-wrap { padding: 40px 24px 64px; }
+  /* Mobile-first: base is mobile layout */
+  .bp-wrap { padding: 32px 16px 48px; }
+  .bp-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    min-height: auto;
+  }
+  .bp-svg, .bp-ann, .bp-dim, .bp-reg { display: none; }
+  .bp-titleblock { display: none; }
+
+  /* Mobile connectors between sections */
+  .bp-mobile-connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 0;
+  }
+  .bp-mobile-connector__line {
+    width: 1px;
+    height: 24px;
+    border-left: 2px dashed rgba(26,58,92,.25);
+  }
+  .bp-mobile-connector__label {
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: rgba(26,58,92,.4);
+  }
+
+  @media (min-width: 1024px) {
+    .bp-wrap { padding: 72px 56px 80px; }
     .bp-grid {
-      grid-template-columns: 1fr;
-      gap: 28px;
-      min-height: auto;
+      grid-template-columns: 220px 1fr 200px;
+      gap: 56px;
+      min-height: 440px;
     }
-    .bp-svg, .bp-ann, .bp-dim, .bp-reg { display: none; }
-    .bp-node-name { font-size: 13px; }
-    .bp-plat-name { font-size: 22px; }
-    .bp-titleblock { display: none; }
+    .bp-svg, .bp-ann, .bp-dim, .bp-reg { display: block; }
+    .bp-titleblock { display: grid; }
+    .bp-mobile-connector { display: none; }
   }
 `
 
@@ -511,6 +541,13 @@ function Blueprint() {
             ))}
           </div>
 
+          {/* Mobile connector: sources → platform */}
+          <div className="bp-mobile-connector">
+            <div className="bp-mobile-connector__line" />
+            <span className="bp-mobile-connector__label">DATA SYNC</span>
+            <div className="bp-mobile-connector__line" />
+          </div>
+
           {/* Center — platform */}
           <motion.div
             className="bp-platform"
@@ -537,6 +574,13 @@ function Blueprint() {
               <div className="bp-plat-name">HyperStore</div>
             </div>
           </motion.div>
+
+          {/* Mobile connector: platform → outputs */}
+          <div className="bp-mobile-connector">
+            <div className="bp-mobile-connector__line" />
+            <span className="bp-mobile-connector__label">QUERY LAYER</span>
+            <div className="bp-mobile-connector__line" />
+          </div>
 
           {/* Right column — outputs */}
           <div className="bp-col">
