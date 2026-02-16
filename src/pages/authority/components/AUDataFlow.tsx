@@ -56,6 +56,7 @@ export function AUDataFlow() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08, duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
                 whileHover={{ borderColor: '#1a3a5c', y: -2 }}
+                whileTap={{ borderColor: '#1a3a5c', y: -1 }}
               >
                 <span className="au-dataflow__node-icon">
                   <source.icon size={20} color={source.color} />
@@ -100,6 +101,7 @@ export function AUDataFlow() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 + i * 0.08, duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
                 whileHover={{ borderColor: '#1a3a5c', y: -2 }}
+                whileTap={{ borderColor: '#1a3a5c', y: -1 }}
               >
                 <span className="au-dataflow__node-icon">
                   <output.icon size={20} color={output.color} />

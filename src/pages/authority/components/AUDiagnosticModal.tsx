@@ -53,6 +53,12 @@ export function AUDiagnosticModal({ open, onClose }: DiagnosticModalProps) {
     }
   }, [open])
 
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [open])
+
   // Close on escape
   useEffect(() => {
     if (!open) return

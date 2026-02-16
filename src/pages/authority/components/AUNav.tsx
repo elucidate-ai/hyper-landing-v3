@@ -29,6 +29,8 @@ export function AUNav() {
           {open ? <X size={24} /> : <Menu size={24} />}
         </button>
 
+        {open && <div className="au-nav__backdrop" onClick={close} />}
+
         <div className={`au-nav__links${open ? ' au-nav__links--open' : ''}`}>
           {navigation.items.map((item) => (
             <a key={item.label} href={item.href} className="au-nav__link" onClick={close}>

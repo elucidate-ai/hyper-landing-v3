@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useIntersectionObserver } from '../../../../shared/hooks/useIntersectionObserver'
+import { useIsMobile } from '../../../../shared/hooks/useIsMobile'
+import { useReducedMotion } from '../../../../shared/hooks/useReducedMotion'
 
 /* ------------------------------------------------------------------ */
 /*  Block data                                                         */
@@ -447,6 +449,84 @@ function BreathingWrapper({ active, children }: { active: boolean; children: Rea
 }
 
 /* ------------------------------------------------------------------ */
+/*  Static block for mobile / reduced-motion                           */
+/* ------------------------------------------------------------------ */
+
+function StaticBlock({
+  block,
+  svgCenter,
+}: {
+  block: BlockDef
+  svgCenter: { x: number; y: number }
+}) {
+  const pos = isoPosition(block.col, block.row, block.stack)
+  return (
+    <g transform={`translate(${svgCenter.x + pos.x}, ${svgCenter.y + pos.y})`}>
+      <CubePolygons shade={block.shade} label={block.label} accent={block.accent} stack={block.stack} />
+    </g>
+  )
+}
+
+function StaticConnectionLines({ svgCenter }: { svgCenter: { x: number; y: number } }) {
+  const connections = [
+    { col: 0, row: 0, fromStack: 0, toStack: 1 },
+    { col: 1, row: 0, fromStack: 0, toStack: 1 },
+    { col: 2, row: 0, fromStack: 0, toStack: 1 },
+    { col: 0, row: 0, fromStack: 1, toStack: 2 },
+    { col: 1, row: 0, fromStack: 1, toStack: 2 },
+    { col: 0, row: 0, fromStack: 2, toStack: 3 },
+  ]
+
+  return (
+    <g>
+      {connections.map((c, i) => {
+        const from = isoPosition(c.col, c.row, c.fromStack)
+        const to = isoPosition(c.col, c.row, c.toStack)
+        return (
+          <line
+            key={i}
+            x1={svgCenter.x + from.x}
+            y1={svgCenter.y + from.y}
+            x2={svgCenter.x + to.x}
+            y2={svgCenter.y + to.y}
+            stroke="#5aadee"
+            strokeWidth={0.75}
+            strokeDasharray="3 4"
+            opacity={0.2}
+          />
+        )
+      })}
+    </g>
+  )
+}
+
+function StaticLayerAnnotations({ svgCenter }: { svgCenter: { x: number; y: number } }) {
+  return (
+    <g>
+      {LAYER_LABELS.map((l, i) => {
+        const pos = isoPosition(l.col, l.row, l.stack)
+        return (
+          <text
+            key={i}
+            x={svgCenter.x + pos.x}
+            y={svgCenter.y + pos.y + 8}
+            textAnchor="end"
+            fill="#5aadee"
+            fontSize="6.5"
+            fontWeight={600}
+            fontFamily="'IBM Plex Mono', monospace"
+            style={{ letterSpacing: '0.12em', pointerEvents: 'none' }}
+            opacity={0.55}
+          >
+            {l.text}
+          </text>
+        )
+      })}
+    </g>
+  )
+}
+
+/* ------------------------------------------------------------------ */
 /*  Main component                                                     */
 /* ------------------------------------------------------------------ */
 
@@ -454,13 +534,17 @@ const CYCLE_ASSEMBLED = 4
 const CYCLE_SCATTERED = 0.8
 
 export function IsometricBlocks() {
+  const isMobile = useIsMobile(1024)
+  const prefersReducedMotion = useReducedMotion()
+  const isStatic = isMobile || prefersReducedMotion
+
   const [phase, setPhase] = useState<'assembling' | 'assembled' | 'scattering'>('assembling')
-  const ambientDots = useAmbientDots(16)
+  const ambientDots = useAmbientDots(isStatic ? 0 : 16)
   const containerRef = useRef<HTMLDivElement>(null)
   const isVisible = useIntersectionObserver(containerRef, { threshold: 0.1 })
 
   useEffect(() => {
-    if (!isVisible) return
+    if (!isVisible || isStatic) return
 
     let timeout: ReturnType<typeof setTimeout>
 
@@ -479,12 +563,84 @@ export function IsometricBlocks() {
 
     cycle()
     return () => clearTimeout(timeout)
-  }, [isVisible])
+  }, [isVisible, isStatic])
 
   const vbWidth = 480
   const vbHeight = 480
   const svgCenter = { x: vbWidth / 2 + 10, y: vbHeight / 2 + 20 }
 
+  /* ── Static render for mobile / reduced-motion ── */
+  if (isStatic) {
+    return (
+      <div
+        ref={containerRef}
+        style={{
+          width: '100%',
+          maxWidth: 480,
+          aspectRatio: '1 / 1',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <svg
+          viewBox={`0 0 ${vbWidth} ${vbHeight}`}
+          width="100%"
+          height="100%"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+          style={{ overflow: 'hidden' }}
+        >
+          <defs>
+            <linearGradient id="top-shine" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#ffffff" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+            </linearGradient>
+            <filter id="ground-shadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="8" />
+            </filter>
+          </defs>
+
+          {/* Faint isometric grid lines */}
+          <g opacity="0.04">
+            {Array.from({ length: 9 }, (_, i) => {
+              const startY = 100 + i * 35
+              return (
+                <line key={`grid-${i}`} x1={40} y1={startY} x2={440} y2={startY} stroke="#1a3a5c" strokeWidth="0.5" />
+              )
+            })}
+          </g>
+
+          <StaticConnectionLines svgCenter={svgCenter} />
+          <StaticLayerAnnotations svgCenter={svgCenter} />
+
+          {/* Ground shadow */}
+          <ellipse
+            cx={svgCenter.x}
+            cy={svgCenter.y + 100}
+            rx={140}
+            ry={22}
+            fill="#1a3a5c"
+            filter="url(#ground-shadow)"
+            opacity={0.12}
+          />
+
+          {/* All blocks at assembled positions */}
+          <g>
+            {BLOCKS.map((block) => (
+              <StaticBlock
+                key={`${block.col}-${block.row}-${block.stack}`}
+                block={block}
+                svgCenter={svgCenter}
+              />
+            ))}
+          </g>
+        </svg>
+      </div>
+    )
+  }
+
+  /* ── Animated render for desktop ── */
   return (
     <div
       ref={containerRef}
@@ -503,7 +659,7 @@ export function IsometricBlocks() {
         height="100%"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
-        style={{ overflow: 'visible' }}
+        style={{ overflow: 'hidden' }}
       >
         <defs>
           {/* Shine gradient for top faces */}

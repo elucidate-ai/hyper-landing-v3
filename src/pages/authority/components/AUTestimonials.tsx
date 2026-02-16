@@ -1,7 +1,27 @@
+import { useRef, useState, useCallback } from 'react'
 import { results } from '../../../data/content'
 import { ScrollReveal } from '../../../shared/components/ScrollReveal'
 
 export function AUTestimonials() {
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  const onScroll = useCallback(() => {
+    const el = scrollRef.current
+    if (!el) return
+    const scrollLeft = el.scrollLeft
+    const cardWidth = el.scrollWidth / results.testimonials.length
+    const index = Math.round(scrollLeft / cardWidth)
+    setActiveIndex(Math.min(index, results.testimonials.length - 1))
+  }, [])
+
+  const scrollTo = useCallback((index: number) => {
+    const el = scrollRef.current
+    if (!el) return
+    const cardWidth = el.scrollWidth / results.testimonials.length
+    el.scrollTo({ left: cardWidth * index, behavior: 'smooth' })
+  }, [])
+
   return (
     <section className="au-testimonials" id="results" aria-label="Testimonials">
       <div className="au-container">
@@ -13,7 +33,11 @@ export function AUTestimonials() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.1}>
-          <div className="au-testimonials__grid">
+          <div
+            className="au-testimonials__grid"
+            ref={scrollRef}
+            onScroll={onScroll}
+          >
             {results.testimonials.map((testimonial, i) => (
               <div key={i} className="au-testimonial">
                 <div className="au-testimonial__quote-mark" aria-hidden="true">&ldquo;</div>
@@ -30,6 +54,17 @@ export function AUTestimonials() {
                   </div>
                 </div>
               </div>
+            ))}
+          </div>
+
+          <div className="au-testimonials__dots">
+            {results.testimonials.map((_, i) => (
+              <button
+                key={i}
+                className={`au-testimonials__dot${i === activeIndex ? ' au-testimonials__dot--active' : ''}`}
+                onClick={() => scrollTo(i)}
+                aria-label={`Go to testimonial ${i + 1}`}
+              />
             ))}
           </div>
         </ScrollReveal>

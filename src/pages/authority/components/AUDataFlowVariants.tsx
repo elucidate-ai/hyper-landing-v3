@@ -205,13 +205,15 @@ const BLUEPRINT_CSS = `
   .bp-node::before { top: -3px; left: -3px; }
   .bp-node::after { bottom: -3px; right: -3px; }
 
-  .bp-node:hover {
+  .bp-node:hover,
+  .bp-node:active {
     background: rgba(255,255,255,.92);
     border-color: rgba(26,58,92,.4);
     transform: translateY(-1px);
     box-shadow: 0 2px 12px rgba(26,58,92,.08);
   }
-  .bp-node:hover::before, .bp-node:hover::after {
+  .bp-node:hover::before, .bp-node:hover::after,
+  .bp-node:active::before, .bp-node:active::after {
     opacity: .5;
   }
 
@@ -456,6 +458,11 @@ const BLUEPRINT_CSS = `
     letter-spacing: 1.4px;
     text-transform: uppercase;
     color: rgba(26,58,92,.4);
+  }
+
+  @media (min-width: 768px) {
+    .bp-wrap { padding: 48px 32px 56px; }
+    .bp-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
   }
 
   @media (min-width: 1024px) {
