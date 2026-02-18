@@ -1,4 +1,3 @@
-import { useRef, useState, useCallback } from 'react'
 import { comparison } from '../../../data/content'
 import { ScrollReveal } from '../../../shared/components/ScrollReveal'
 
@@ -14,24 +13,8 @@ const metricIcons = [
 ]
 
 export function AUComparisonMatrix() {
-  const scrollRef = useRef<HTMLDivElement>(null)
-  const [activeIndex, setActiveIndex] = useState(0)
-
-  const onScroll = useCallback(() => {
-    const el = scrollRef.current
-    if (!el) return
-    const scrollLeft = el.scrollLeft
-    const cardWidth = el.scrollWidth / comparison.approaches.length
-    const index = Math.round(scrollLeft / cardWidth)
-    setActiveIndex(Math.min(index, comparison.approaches.length - 1))
-  }, [])
-
-  const scrollTo = useCallback((index: number) => {
-    const el = scrollRef.current
-    if (!el) return
-    const cardWidth = el.scrollWidth / comparison.approaches.length
-    el.scrollTo({ left: cardWidth * index, behavior: 'smooth' })
-  }, [])
+  const approaches = comparison.approaches
+  const metrics = approaches[0].metrics
 
   return (
     <section className="au-comparison" aria-label="Comparison">
@@ -45,55 +28,52 @@ export function AUComparisonMatrix() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.1}>
-          <div
-            className="au-comparison__cards"
-            ref={scrollRef}
-            onScroll={onScroll}
-          >
-            {comparison.approaches.map((approach, i) => (
-              <article
-                key={i}
-                className={`au-comparison__card${approach.highlighted ? ' au-comparison__card--highlighted' : ''}`}
-              >
-                <div className="au-comparison__card-head">
-                  <span className="au-comparison__card-index">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <h3 className="au-comparison__card-name">{approach.name}</h3>
-                  <p className="au-comparison__card-tagline">{approach.tagline}</p>
-                </div>
-
-                <div className="au-comparison__metrics">
-                  {approach.metrics.map((metric, j) => (
-                    <div key={j} className="au-comparison__metric">
-                      <div className="au-comparison__metric-left">
-                        <span className="au-comparison__metric-icon" aria-hidden="true">
-                          {metricIcons[j]}
-                        </span>
-                        <span className="au-comparison__metric-label">{metric.label}</span>
-                      </div>
-                      <span className="au-comparison__metric-value">{metric.value}</span>
-                    </div>
+          <div className="au-comparison__table-wrap">
+            <table className="au-comparison__table">
+              <thead>
+                <tr>
+                  <th className="au-comparison__table-corner" />
+                  {approaches.map((a, i) => (
+                    <th
+                      key={i}
+                      className={`au-comparison__table-th${a.highlighted ? ' au-comparison__table-th--hl' : ''}`}
+                    >
+                      <span className="au-comparison__table-th-name">{a.name}</span>
+                      <span className="au-comparison__table-th-tag">{a.tagline}</span>
+                    </th>
                   ))}
-                </div>
-
-                <div className="au-comparison__best-for">
-                  <span className="au-comparison__best-for-label">Best for</span>
-                  <span className="au-comparison__best-for-text">{approach.bestFor}</span>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          <div className="au-comparison__dots">
-            {comparison.approaches.map((_, i) => (
-              <button
-                key={i}
-                className={`au-comparison__dot${i === activeIndex ? ' au-comparison__dot--active' : ''}`}
-                onClick={() => scrollTo(i)}
-                aria-label={`Go to card ${i + 1}`}
-              />
-            ))}
+                </tr>
+              </thead>
+              <tbody>
+                {metrics.map((_, mi) => (
+                  <tr key={mi} className="au-comparison__table-row">
+                    <td className="au-comparison__table-label">
+                      <span className="au-comparison__table-label-icon" aria-hidden="true">{metricIcons[mi]}</span>
+                      {metrics[mi].label}
+                    </td>
+                    {approaches.map((a, ai) => (
+                      <td
+                        key={ai}
+                        className={`au-comparison__table-cell${a.highlighted ? ' au-comparison__table-cell--hl' : ''}`}
+                      >
+                        {a.metrics[mi].value}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+                <tr className="au-comparison__table-row au-comparison__table-row--best">
+                  <td className="au-comparison__table-label">Best for</td>
+                  {approaches.map((a, ai) => (
+                    <td
+                      key={ai}
+                      className={`au-comparison__table-cell au-comparison__table-cell--best${a.highlighted ? ' au-comparison__table-cell--hl' : ''}`}
+                    >
+                      {a.bestFor}
+                    </td>
+                  ))}
+                </tr>
+              </tbody>
+            </table>
           </div>
         </ScrollReveal>
       </div>

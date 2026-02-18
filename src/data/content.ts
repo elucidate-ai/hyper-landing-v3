@@ -46,13 +46,12 @@ export interface HeroContent {
 }
 
 export const hero: HeroContent = {
-  eyebrow: 'Fully managed analytics for mid-market companies',
-  headline: 'Scattered data\nto live analytics.',
+  eyebrow: 'Dedicated data engineering for mid-market companies',
+  headline: 'Data infrastructure,\nbuilt and managed for you.',
   subheadline:
-    'Our specialist team delivers dashboards, analytics, and the data infrastructure behind them — tailored to your business, with a working demo in days and live analytics in production within weeks.',
+    'We design, build, and operate production-grade warehousing, orchestration, and governance — turning scattered data into a clean, reliable foundation your team can query and act on.',
   ctas: [
-    { label: 'Book a Free Discovery Call', href: '#contact', variant: 'primary' },
-    { label: 'Get Your Free Data Diagnostic', href: '#diagnostic', variant: 'secondary' },
+    { label: 'Book a Free Discovery Call', href: 'https://calendly.com/saul-elucidate/30min', variant: 'primary' },
   ],
 }
 
@@ -78,7 +77,7 @@ export const trustBar: TrustBar = {
 
 export interface PainPoint {
   headline: string
-  body: string
+  fragments: string[]
 }
 
 export interface ProblemSection {
@@ -92,15 +91,27 @@ export const problem: ProblemSection = {
   painPoints: [
     {
       headline: 'Your data lives in 15 tools. Your decisions live in the dark.',
-      body: "Sales in one CRM. Marketing in another. Finance in spreadsheets. When leadership asks a simple question, someone spends half a day pulling numbers from six tabs. You don't have a data problem — you have a visibility problem. And every day without clear dashboards and analytics costs your team better decisions.",
+      fragments: [
+        'Sales in one CRM. Marketing in another. Finance in spreadsheets.',
+        'Simple questions take <strong>half a day</strong> to answer.',
+        "It's not a data problem — it's a <strong>visibility</strong> problem.",
+      ],
     },
     {
-      headline: 'You tried Databricks or a DIY platform. Then reality hit.',
-      body: "Platforms like Databricks, Snowflake, and dbt promise you can build it yourself. What they deliver is a six-figure bill, a six-month implementation, and the realisation you need a dedicated engineering team just to keep the lights on. DIY platforms are built for companies with 50-person data teams — not mid-market companies that need dashboards and answers now.",
+      headline: 'You tried a DIY platform. Then reality hit.',
+      fragments: [
+        '<strong>Six-figure</strong> bill. <strong>Six-month</strong> implementation.',
+        'You still need a team just to keep the lights on.',
+        'Built for 50-person data teams — <strong>not mid-market companies</strong>.',
+      ],
     },
     {
       headline: "You hired a data person. You still don't have dashboards.",
-      body: "A data analyst builds reports — but can't build the infrastructure those reports need. A single data engineer can't realistically deliver and maintain a production analytics platform alone. Even a small internal team can't match the depth of specialists who've done this dozens of times — and they'll cost you more.",
+      fragments: [
+        "Analysts build reports — not the infrastructure behind them.",
+        "<strong>One engineer</strong> can't maintain a production analytics platform.",
+        'Internal teams <strong>cost more</strong> and <strong>deliver less</strong> than dedicated specialists.',
+      ],
     },
   ],
   transition:
@@ -124,21 +135,21 @@ export interface SolutionSection {
 }
 
 export const solution: SolutionSection = {
-  headline: 'Live dashboards and analytics — built and fully managed',
+  headline: 'Production-grade data infrastructure — designed, built, and fully managed',
   subheadline:
-    "Our specialist team delivers the dashboards, reports, and analytics layer your leadership needs to make faster, better decisions — powered by production-grade data infrastructure we design, build, and manage end-to-end. We've done this dozens of times, so your team gets proven results without managing any of it.",
+    'Our specialist team builds and operates your complete data engineering layer — warehousing, orchestration, governance, and monitoring — so your organisation gets clean, reliable, queryable data without building the capability in-house. Dashboards, analytics, and better decisions follow from a foundation you can trust.',
   products: [
     {
       name: 'HyperFlow',
       tagline: 'Connect & Sync',
       description:
-        'Every data source — CRMs, ERPs, spreadsheets, databases — connected and syncing automatically. Your data arrives clean, on time, and ready for dashboards. No engineering required.',
+        'Every data source — CRMs, ERPs, spreadsheets, databases — connected into a single, automated pipeline. Data arrives clean, on time, and governed. No engineering effort from your team.',
     },
     {
       name: 'HyperStore',
-      tagline: 'Store & Analyse',
+      tagline: 'Warehouse & Govern',
       description:
-        'A fully managed data warehouse with clean, governed, queryable data. Purpose-built for dashboards, business intelligence, and AI — without your team managing any infrastructure.',
+        'A fully managed, production-grade data warehouse — modelled, governed, and queryable from day one. The reliable foundation your organisation needs for reporting, business intelligence, and AI-readiness.',
     },
   ],
 }
@@ -151,6 +162,7 @@ export interface Stage {
   phase: string
   headline: string
   description: string
+  duration?: string
 }
 
 export interface ProcessSection {
@@ -168,24 +180,28 @@ export const process: ProcessSection = {
       headline: 'A diagnostic worth having — even if you stop here',
       description:
         'We map every data source, interview stakeholders, and deliver a prioritised roadmap with quick wins — a standalone deliverable your team can act on, whether or not you move forward with Hyper.',
+      duration: 'Week 1',
     },
     {
       phase: 'Build',
       headline: 'Your first tailored demo in days, live dashboards in weeks',
       description:
         'A working demo tailored to your data within the first week. Weekly walkthroughs, full transparency, no surprises. Most clients are in production within five weeks.',
+      duration: 'Weeks 2–4',
     },
     {
       phase: 'Validate',
       headline: 'Your team tests, verifies, and signs off',
       description:
         "Your team checks dashboards, runs queries, and verifies the numbers match reality. We don't go live until you're confident the data is right.",
+      duration: 'Week 5',
     },
     {
       phase: 'Operate',
       headline: 'A long-term partnership that grows with you',
       description:
         'We monitor 24/7, resolve issues before they reach you, and evolve your platform as you grow. New data sources, new dashboards, new integrations — your managed data department.',
+      duration: 'Ongoing',
     },
   ],
 }
@@ -281,7 +297,7 @@ export interface ResultsSection {
 export const results: ResultsSection = {
   headline: 'Real results from real clients',
   stats: [
-    { value: '5 weeks', label: 'Average time from kickoff to live dashboards' },
+    { value: '35TB', label: 'Total analytics data processed per month' },
     { value: '20+ hours', label: 'Saved weekly on manual reporting per client' },
     { value: '200+', label: 'Pre-built data connectors' },
     { value: '95%+', label: 'Client retention rate year-over-year' },
@@ -381,16 +397,11 @@ export const finalCta: FinalCtaSection = {
   ctas: [
     {
       label: 'Book a Free Discovery Call',
-      href: '#contact',
+      href: 'https://calendly.com/saul-elucidate/30min',
       variant: 'primary',
     },
-    {
-      label: 'Watch a 3-Minute Demo',
-      href: '#demo',
-      variant: 'secondary',
-    },
   ],
-  trustBadges: ['Free data diagnostic included', 'Zero obligation', 'Live dashboards in under 5 weeks'],
+  trustBadges: ['Free data diagnostic included', 'Zero obligation', 'Fully managed from day one'],
 }
 
 // -----------------------------------------

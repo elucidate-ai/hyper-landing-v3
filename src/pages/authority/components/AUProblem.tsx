@@ -12,34 +12,24 @@ export function AUProblem() {
           </div>
         </ScrollReveal>
 
-        <ScrollReveal delay={0.1}>
-          <div className="au-problem__grid">
-            {problem.painPoints.map((point, i) => (
-              <div key={i} className="au-problem__card">
-                <div className="au-problem__card-number">
+        <div className="au-problem__list">
+          {problem.painPoints.map((point, i) => (
+            <ScrollReveal key={i} delay={0.08 * (i + 1)}>
+              <div className="au-problem__item">
+                <span className="au-problem__item-number">
                   {String(i + 1).padStart(2, '0')}
-                </div>
-                <h3 className="au-problem__card-headline">{point.headline}</h3>
-                <p className="au-problem__card-body">{point.body}</p>
+                </span>
+                <h3 className="au-problem__item-headline">{point.headline}</h3>
+                <ul className="au-problem__fragments">
+                  {point.fragments.map((frag, j) => (
+                    <li key={j} className="au-problem__fragment" dangerouslySetInnerHTML={{ __html: frag }} />
+                  ))}
+                </ul>
               </div>
-            ))}
-          </div>
-        </ScrollReveal>
+            </ScrollReveal>
+          ))}
+        </div>
 
-        <ScrollReveal delay={0.15}>
-          <div className="au-problem__transition">
-            <div className="au-problem__transition-accent" aria-hidden="true" />
-            <blockquote className="au-problem__transition-text">
-              <span className="au-problem__transition-lead">
-                You don't need another platform, another tool, or another hire.
-              </span>
-              {' '}You need a specialist team that delivers the dashboards and
-              analytics your leadership needs — and fully manages the
-              infrastructure behind them, so your people can focus on making
-              better decisions.
-            </blockquote>
-          </div>
-        </ScrollReveal>
       </div>
     </section>
   )
