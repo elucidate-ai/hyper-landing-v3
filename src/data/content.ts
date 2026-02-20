@@ -1,5 +1,5 @@
 /* =========================================
-   Content Data — extracted from copy.md
+   Content Data - extracted from copy.md
    Each section is a named export with proper
    TypeScript interfaces.
    ========================================= */
@@ -36,6 +36,7 @@ export interface HeroCta {
   label: string
   href: string
   variant: 'primary' | 'secondary' | 'tertiary'
+  action?: string
 }
 
 export interface HeroContent {
@@ -49,9 +50,10 @@ export const hero: HeroContent = {
   eyebrow: 'Dedicated data engineering for mid-market companies',
   headline: 'Data infrastructure,\nbuilt and managed for you.',
   subheadline:
-    'We design, build, and operate production-grade warehousing, orchestration, and governance — turning scattered data into a clean, reliable foundation your team can query and act on.',
+    'We design, build, and operate production-grade warehousing, orchestration, and governance, turning scattered data into a clean, reliable foundation your team can query and act on.',
   ctas: [
     { label: 'Book a Free Discovery Call', href: 'https://calendly.com/saul-elucidate/30min', variant: 'primary' },
+    { label: 'Get in Touch', action: 'contact-form', href: '#', variant: 'secondary' },
   ],
 }
 
@@ -94,7 +96,7 @@ export const problem: ProblemSection = {
       fragments: [
         'Sales in one CRM. Marketing in another. Finance in spreadsheets.',
         'Simple questions take <strong>half a day</strong> to answer.',
-        "It's not a data problem — it's a <strong>visibility</strong> problem.",
+        "It's not a data problem. It's a <strong>visibility</strong> problem.",
       ],
     },
     {
@@ -102,20 +104,20 @@ export const problem: ProblemSection = {
       fragments: [
         '<strong>Six-figure</strong> bill. <strong>Six-month</strong> implementation.',
         'You still need a team just to keep the lights on.',
-        'Built for 50-person data teams — <strong>not mid-market companies</strong>.',
+        'Built for 50-person data teams, <strong>not mid-market companies</strong>.',
       ],
     },
     {
       headline: "You hired a data person. You still don't have dashboards.",
       fragments: [
-        "Analysts build reports — not the infrastructure behind them.",
+        "Analysts build reports, not the infrastructure behind them.",
         "<strong>One engineer</strong> can't maintain a production analytics platform.",
         'Internal teams <strong>cost more</strong> and <strong>deliver less</strong> than dedicated specialists.',
       ],
     },
   ],
   transition:
-    "You don't need another platform, another tool, or another hire. You need a specialist team that delivers the dashboards and analytics your leadership needs — and fully manages the infrastructure behind them, so your people can focus on making better decisions.",
+    "You don't need another platform, another tool, or another hire. You need a specialist team that delivers the dashboards and analytics your leadership needs and fully manages the infrastructure behind them, so your people can focus on making better decisions.",
 }
 
 // -----------------------------------------
@@ -135,21 +137,21 @@ export interface SolutionSection {
 }
 
 export const solution: SolutionSection = {
-  headline: 'Production-grade data infrastructure — designed, built, and fully managed',
+  headline: 'Production-grade data infrastructure: designed, built, and fully managed',
   subheadline:
-    'Our specialist team builds and operates your complete data engineering layer — warehousing, orchestration, governance, and monitoring — so your organisation gets clean, reliable, queryable data without building the capability in-house. Dashboards, analytics, and better decisions follow from a foundation you can trust.',
+    'Our specialist team builds and operates your complete data engineering layer, including warehousing, orchestration, governance, and monitoring, so your organisation gets clean, reliable, queryable data without building the capability in-house. Dashboards, analytics, and better decisions follow from a foundation you can trust.',
   products: [
     {
       name: 'HyperFlow',
       tagline: 'Connect & Sync',
       description:
-        'Every data source — CRMs, ERPs, spreadsheets, databases — connected into a single, automated pipeline. Data arrives clean, on time, and governed. No engineering effort from your team.',
+        'Every data source, from CRMs and ERPs to spreadsheets and databases, connected into a single, automated pipeline. Data arrives clean, on time, and governed. No engineering effort from your team.',
     },
     {
       name: 'HyperStore',
       tagline: 'Warehouse & Govern',
       description:
-        'A fully managed, production-grade data warehouse — modelled, governed, and queryable from day one. The reliable foundation your organisation needs for reporting, business intelligence, and AI-readiness.',
+        'A fully managed, production-grade data warehouse: modelled, governed, and queryable from day one. The reliable foundation your organisation needs for reporting, business intelligence, and AI-readiness.',
     },
   ],
 }
@@ -172,19 +174,19 @@ export interface ProcessSection {
 }
 
 export const process: ProcessSection = {
-  headline: 'Live dashboards in weeks, not months',
-  subheadline: 'A proven process refined across dozens of engagements. Your first tailored demo ships in days. Most clients have live dashboards in production within five weeks.',
+  headline: 'From scattered data to clear insights in weeks',
+  subheadline: 'A proven process refined across dozens of engagements. Your first tailored demo ships in days. Most clients have production analytics and reporting within five weeks.',
   stages: [
     {
       phase: 'Discover',
-      headline: 'A diagnostic worth having — even if you stop here',
+      headline: 'A diagnostic worth having, even if you stop here',
       description:
-        'We map every data source, interview stakeholders, and deliver a prioritised roadmap with quick wins — a standalone deliverable your team can act on, whether or not you move forward with Hyper.',
+        'We map every data source, interview stakeholders, and deliver a prioritised roadmap with quick wins: a standalone deliverable your team can act on, whether or not you move forward with Hyper.',
       duration: 'Week 1',
     },
     {
       phase: 'Build',
-      headline: 'Your first tailored demo in days, live dashboards in weeks',
+      headline: 'Your first tailored demo in days, actionable insights in weeks',
       description:
         'A working demo tailored to your data within the first week. Weekly walkthroughs, full transparency, no surprises. Most clients are in production within five weeks.',
       duration: 'Weeks 2–4',
@@ -193,14 +195,14 @@ export const process: ProcessSection = {
       phase: 'Validate',
       headline: 'Your team tests, verifies, and signs off',
       description:
-        "Your team checks dashboards, runs queries, and verifies the numbers match reality. We don't go live until you're confident the data is right.",
+        "Your team reviews the analytics, runs queries, and verifies the numbers match reality. We don't go live until you're confident the data is right.",
       duration: 'Week 5',
     },
     {
       phase: 'Operate',
       headline: 'A long-term partnership that grows with you',
       description:
-        'We monitor 24/7, resolve issues before they reach you, and evolve your platform as you grow. New data sources, new dashboards, new integrations — your managed data department.',
+        'We monitor 24/7, resolve issues before they reach you, and evolve your platform as you grow. New data sources, new insights, and new integrations, all from your managed data department.',
       duration: 'Ongoing',
     },
   ],
@@ -239,10 +241,12 @@ export const comparison: ComparisonSection = {
       tagline: 'Managed analytics partner',
       highlighted: true,
       metrics: [
-        { label: 'Deployment', value: '3\u20135 weeks' },
-        { label: 'Team size', value: '0 engineers' },
-        { label: 'Monthly cost', value: '$5k\u2013$15k' },
-        { label: 'Maintenance', value: 'Fully managed' },
+        { label: 'Time to first insight', value: 'Week 1' },
+        { label: 'Total cost of ownership (Year 1)', value: '$60k\u2013$180k' },
+        { label: 'Ongoing iteration speed', value: 'Days' },
+        { label: 'Risk of project failure', value: 'Low: guaranteed delivery' },
+        { label: 'Expertise included', value: 'Analytics eng. + data modelling' },
+        { label: 'Switching cost / lock-in', value: 'Transition to in-house anytime' },
       ],
       bestFor: 'Teams that need analytics now',
     },
@@ -250,10 +254,12 @@ export const comparison: ComparisonSection = {
       name: 'DIY Platforms',
       tagline: 'Databricks, Snowflake, dbt',
       metrics: [
-        { label: 'Deployment', value: '3\u20136 months' },
-        { label: 'Team size', value: '2\u20135 engineers' },
-        { label: 'Monthly cost', value: '$20k\u2013$50k+' },
-        { label: 'Maintenance', value: 'Self-managed' },
+        { label: 'Time to first insight', value: 'Month 3\u20134' },
+        { label: 'Total cost of ownership (Year 1)', value: '$400k\u2013$800k+' },
+        { label: 'Ongoing iteration speed', value: 'Weeks' },
+        { label: 'Risk of project failure', value: 'Medium: config complexity' },
+        { label: 'Expertise included', value: 'Platform only (BYOE)' },
+        { label: 'Switching cost / lock-in', value: 'High migration cost' },
       ],
       bestFor: 'Enterprises with existing data teams',
     },
@@ -261,10 +267,12 @@ export const comparison: ComparisonSection = {
       name: 'In-House Team',
       tagline: 'Build your own data department',
       metrics: [
-        { label: 'Deployment', value: '4\u20139 months' },
-        { label: 'Team size', value: '3\u20136 hires' },
-        { label: 'Monthly cost', value: '$30k\u2013$60k+' },
-        { label: 'Maintenance', value: 'Self-managed' },
+        { label: 'Time to first insight', value: 'Month 6+' },
+        { label: 'Total cost of ownership (Year 1)', value: '$600k\u2013$1M+' },
+        { label: 'Ongoing iteration speed', value: 'Weeks (backlog dependent)' },
+        { label: 'Risk of project failure', value: 'High: hiring + retention risk' },
+        { label: 'Expertise included', value: 'Depends on who you hire' },
+        { label: 'Switching cost / lock-in', value: 'Key-person dependency' },
       ],
       bestFor: 'Long-term internal data capability',
     },
@@ -313,7 +321,7 @@ export const results: ResultsSection = {
     },
     {
       quote:
-        "We evaluated Databricks and other DIY platforms, but the costs were unpredictable and we'd have needed engineers just to manage them. Hyper gave us live dashboards at a fraction of the cost — fully managed and live in four weeks.",
+        "We evaluated Databricks and other DIY platforms, but the costs were unpredictable and we'd have needed engineers just to manage them. Hyper gave us live dashboards at a fraction of the cost, fully managed and live in four weeks.",
       author: 'Sarah K.',
       title: 'Head of Operations',
       company: 'FinServe Co',
@@ -321,11 +329,11 @@ export const results: ResultsSection = {
     },
     {
       quote:
-        "What started as a dashboard project has grown into a company-wide analytics platform. Hyper's team evolves our infrastructure as we grow — it's like having an entire data department without the headcount.",
+        "What started as a dashboard project has grown into a company-wide analytics platform. Hyper's team evolves our infrastructure as we grow. It's like having an entire data department without the headcount.",
       author: 'Michael T.',
       title: 'CTO',
       company: 'TechStart',
-      result: 'From a single dashboard to company-wide analytics platform in 12 months — and still scaling',
+      result: 'From a single dashboard to company-wide analytics platform in 12 months, and still scaling',
     },
   ],
 }
@@ -352,27 +360,27 @@ export const security: SecuritySection = {
   features: [
     {
       name: 'SOC 2 Type II',
-      description: 'Annual third-party audits of our security controls',
+      description: 'Annual third-party audits verify the design and operating effectiveness of our security controls. Every audit report is available to clients under NDA upon request.',
     },
     {
       name: 'GDPR Compliant',
-      description: 'Data residency and privacy controls for EU requirements',
+      description: 'Full data residency controls and privacy safeguards that meet EU regulatory requirements. We support data subject access requests, right-to-erasure, and consent management out of the box.',
     },
     {
       name: 'HIPAA Ready',
-      description: 'Healthcare-grade security for protected health information',
+      description: 'Healthcare-grade safeguards for protected health information, including BAA execution. Our infrastructure meets the administrative, physical, and technical requirements for HIPAA compliance.',
     },
     {
       name: 'AES-256 Encryption',
-      description: 'Data encrypted in transit and at rest, always',
+      description: 'All data is encrypted in transit via TLS 1.3 and at rest using AES-256, the same standard used by banks and government agencies. Encryption keys are managed through a dedicated key management service with automatic rotation.',
     },
     {
       name: 'Role-Based Access',
-      description: 'Granular permissions and complete audit logging',
+      description: 'Granular permissions ensure team members only access the data they need, with complete audit logging of every action. Integrates with your existing SSO provider for centralised identity management.',
     },
     {
       name: 'Data Residency',
-      description: 'Your data stays in your chosen geographic region',
+      description: 'Your data stays in your chosen geographic region, with no exceptions. We operate in multiple cloud regions so you can meet local data sovereignty and compliance obligations.',
     },
   ],
 }
@@ -393,12 +401,18 @@ export const finalCta: FinalCtaSection = {
   badge: 'START HERE',
   headline: 'See what your analytics could look like in five weeks',
   subheadline:
-    "Start with a free discovery call. We'll map your data landscape, identify quick wins, and show you a tailored preview of the dashboards and analytics we'd build — a valuable diagnostic whether or not you move forward.",
+    "Start with a free discovery call. We'll map your data landscape, identify quick wins, and show you a tailored preview of the dashboards and analytics we'd build. It's a valuable diagnostic whether or not you move forward.",
   ctas: [
     {
       label: 'Book a Free Discovery Call',
       href: 'https://calendly.com/saul-elucidate/30min',
       variant: 'primary',
+    },
+    {
+      label: 'Get in Touch',
+      action: 'contact-form',
+      href: '#',
+      variant: 'secondary',
     },
   ],
   trustBadges: ['Free data diagnostic included', 'Zero obligation', 'Fully managed from day one'],
@@ -439,7 +453,7 @@ export const footer: FooterContent = {
   brand: {
     name: 'hyper',
     tagline:
-      "Dashboards, analytics, and data infrastructure — built and managed by specialists, so you never have to hire your own.",
+      "Dashboards, analytics, and data infrastructure, built and managed by specialists so you never have to hire your own.",
   },
   linkGroups: [
     {
@@ -495,7 +509,7 @@ export interface SiteMetadata {
 }
 
 export const siteMetadata: SiteMetadata = {
-  title: 'hyper — Dashboards & Analytics, Fully Managed for Mid-Market Companies',
+  title: 'hyper | Dashboards & Analytics, Fully Managed for Mid-Market Companies',
   description:
-    "Go from scattered data to live dashboards in weeks. Hyper's specialist team builds and fully manages your analytics, data warehouse, and pipelines — so you get the visibility to make better decisions without hiring a data team.",
+    "Go from scattered data to live dashboards in weeks. Hyper's specialist team builds and fully manages your analytics, data warehouse, and pipelines so you get the visibility to make better decisions without hiring a data team.",
 }

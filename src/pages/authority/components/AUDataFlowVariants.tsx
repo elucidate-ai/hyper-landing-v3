@@ -508,7 +508,7 @@ function Blueprint() {
 
         {/* Title block */}
         <div className="bp-titleblock">
-          <div className="bp-titleblock__title">HYPER SYSTEMS — DATA ARCHITECTURE</div>
+          <div className="bp-titleblock__title">HYPER SYSTEMS | DATA ARCHITECTURE</div>
           <div className="bp-titleblock__cell">
             <span className="bp-titleblock__label">Project</span>
             <span className="bp-titleblock__value">DATA-ARCH</span>

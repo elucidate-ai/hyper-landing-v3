@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import './authority.css'
 import { SkipToContent } from '../../shared/components/SkipToContent'
 import { AUNav } from './components/AUNav'
@@ -10,8 +11,11 @@ import { AUProcess } from './components/AUProcess'
 import { AUComparisonMatrix } from './components/AUComparisonMatrix'
 import { AUSecurity } from './components/AUSecurity'
 import { AUFinalCta } from './components/AUFinalCta'
+import { AUContactModal } from './components/AUContactModal'
 
 export default function AuthorityPage() {
+  const [contactOpen, setContactOpen] = useState(false)
+
   return (
     <div data-page="authority">
       <SkipToContent />
@@ -19,7 +23,7 @@ export default function AuthorityPage() {
       <AUNav />
 
       <main id="main-content">
-        <AUHero />
+        <AUHero onOpenContact={() => setContactOpen(true)} />
 
         <AUProblem />
 
@@ -35,8 +39,13 @@ export default function AuthorityPage() {
 
         <AUSecurity />
 
-        <AUFinalCta />
+        <AUFinalCta onOpenContact={() => setContactOpen(true)} />
       </main>
+
+      <AUContactModal
+        open={contactOpen}
+        onClose={() => setContactOpen(false)}
+      />
     </div>
   )
 }

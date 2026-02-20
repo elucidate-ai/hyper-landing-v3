@@ -671,6 +671,62 @@
   line-height: 1.6;
 }
 
+/* -----------------------------------------
+   Contact form fields
+   ----------------------------------------- */
+[data-page="authority"] .au-modal__field {
+  margin-bottom: 1.25rem;
+}
+
+[data-page="authority"] .au-modal__label {
+  font-family: var(--au-font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--au-text);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+[data-page="authority"] .au-modal__input,
+[data-page="authority"] .au-modal__textarea {
+  width: 100%;
+  font-family: var(--au-font-body);
+  font-size: 0.9375rem;
+  color: var(--au-text);
+  background: var(--au-bg);
+  border: 1px solid var(--au-border);
+  border-radius: var(--au-radius);
+  padding: 0.75rem 1rem;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+[data-page="authority"] .au-modal__input {
+  min-height: 48px;
+}
+
+[data-page="authority"] .au-modal__textarea {
+  resize: vertical;
+}
+
+[data-page="authority"] .au-modal__input::placeholder,
+[data-page="authority"] .au-modal__textarea::placeholder {
+  color: var(--au-text-light);
+}
+
+[data-page="authority"] .au-modal__input:focus,
+[data-page="authority"] .au-modal__textarea:focus {
+  border-color: var(--au-navy);
+  outline: 2px solid rgba(26, 58, 92, 0.15);
+  outline-offset: 0;
+}
+
+[data-page="authority"] .au-modal__error {
+  font-size: 0.875rem;
+  color: var(--au-red);
+  margin-bottom: 0.75rem;
+}
+
 /* =========================================
    PROBLEM SECTION
    ========================================= */
@@ -909,7 +965,7 @@
 
 [data-page="authority"] .au-dataflow__header {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
   max-width: 640px;
   margin-inline: auto;
 }

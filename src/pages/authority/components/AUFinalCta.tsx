@@ -1,7 +1,11 @@
 import { finalCta } from '../../../data/content'
 import { ScrollReveal } from '../../../shared/components/ScrollReveal'
 
-export function AUFinalCta() {
+interface AUFinalCtaProps {
+  onOpenContact?: () => void
+}
+
+export function AUFinalCta({ onOpenContact }: AUFinalCtaProps) {
   return (
     <section className="au-final-cta" id="contact" aria-label="Call to action">
       <div className="au-container" style={{ position: 'relative' }}>
@@ -24,7 +28,16 @@ export function AUFinalCta() {
                 cta.variant === 'primary'
                   ? 'au-btn au-btn--primary-inverted'
                   : 'au-btn au-btn--secondary-inverted'
-              return (
+              return cta.action === 'contact-form' ? (
+                <button
+                  key={cta.label}
+                  type="button"
+                  className={btnClass}
+                  onClick={onOpenContact}
+                >
+                  {cta.label}
+                </button>
+              ) : (
                 <a key={cta.label} href={cta.href} className={btnClass}>
                   {cta.label}
                 </a>

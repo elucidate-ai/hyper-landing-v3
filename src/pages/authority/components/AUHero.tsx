@@ -2,7 +2,11 @@ import { hero } from '../../../data/content'
 import { ScrollReveal } from '../../../shared/components/ScrollReveal'
 import { IsometricBlocks } from './hero-graphics/IsometricBlocks'
 
-export function AUHero() {
+interface AUHeroProps {
+  onOpenContact?: () => void
+}
+
+export function AUHero({ onOpenContact }: AUHeroProps) {
   return (
     <section className="au-hero" aria-label="Hero">
       <div className="au-container au-hero__inner">
@@ -21,15 +25,26 @@ export function AUHero() {
 
           <ScrollReveal delay={0.3}>
             <div className="au-hero__ctas">
-              {hero.ctas.map((cta) => (
-                <a
-                  key={cta.label}
-                  href={cta.href}
-                  className={`au-btn au-btn--${cta.variant}`}
-                >
-                  {cta.label}
-                </a>
-              ))}
+              {hero.ctas.map((cta) =>
+                cta.action === 'contact-form' ? (
+                  <button
+                    key={cta.label}
+                    type="button"
+                    className={`au-btn au-btn--${cta.variant}`}
+                    onClick={onOpenContact}
+                  >
+                    {cta.label}
+                  </button>
+                ) : (
+                  <a
+                    key={cta.label}
+                    href={cta.href}
+                    className={`au-btn au-btn--${cta.variant}`}
+                  >
+                    {cta.label}
+                  </a>
+                )
+              )}
             </div>
           </ScrollReveal>
         </div>
