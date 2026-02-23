@@ -468,7 +468,19 @@ const BLUEPRINT_CSS = `
 
   @media (min-width: 768px) {
     .bp-wrap { padding: 48px 32px 56px; }
-    .bp-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+    /* Keep single column grid - 2-col was breaking with mobile connectors as grid items */
+    .bp-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .bp-col-label {
+      grid-column: 1 / -1;
+    }
+    .bp-platform {
+      max-width: 360px;
+      margin-inline: auto;
+    }
   }
 
   @media (min-width: 1024px) {
@@ -477,6 +489,18 @@ const BLUEPRINT_CSS = `
       grid-template-columns: 220px 1fr 200px;
       gap: 56px;
       min-height: 440px;
+    }
+    .bp-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .bp-col-label {
+      grid-column: unset;
+    }
+    .bp-platform {
+      max-width: none;
+      margin-inline: 0;
     }
     .bp-svg, .bp-ann, .bp-dim, .bp-reg { display: block; }
     .bp-titleblock { display: grid; }

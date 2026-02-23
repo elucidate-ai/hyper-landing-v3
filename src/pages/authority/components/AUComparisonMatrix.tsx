@@ -31,6 +31,7 @@ export function AUComparisonMatrix() {
           </div>
         </ScrollReveal>
 
+        {/* Desktop table layout (hidden on mobile) */}
         <ScrollReveal delay={0.1}>
           <div className="au-comparison__table-wrap">
             <table className="au-comparison__table">
@@ -68,6 +69,46 @@ export function AUComparisonMatrix() {
                 ))}
               </tbody>
             </table>
+          </div>
+        </ScrollReveal>
+
+        {/* Mobile card layout (hidden on desktop) */}
+        <ScrollReveal delay={0.1}>
+          <div className="au-comparison__mobile">
+            {/* Approach column headers */}
+            <div className="au-comparison__mobile-header">
+              {approaches.map((a, i) => (
+                <div
+                  key={i}
+                  className={`au-comparison__mobile-approach${a.highlighted ? ' au-comparison__mobile-approach--hl' : ''}`}
+                >
+                  {a.highlighted && <span className="au-comparison__mobile-badge">Recommended</span>}
+                  <span className="au-comparison__mobile-approach-name">{a.name}</span>
+                  <span className="au-comparison__mobile-approach-tag">{a.tagline}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Metric cards */}
+            {metrics.map((_, mi) => (
+              <div key={mi} className="au-comparison__mobile-card">
+                <div className="au-comparison__mobile-card-label">
+                  <span className="au-comparison__table-label-icon" aria-hidden="true">{metricIcons[mi]}</span>
+                  {metrics[mi].label}
+                </div>
+                <div className="au-comparison__mobile-card-values">
+                  {approaches.map((a, ai) => (
+                    <div
+                      key={ai}
+                      className={`au-comparison__mobile-card-col${a.highlighted ? ' au-comparison__mobile-card-col--hl' : ''}`}
+                    >
+                      <span className="au-comparison__mobile-card-col-name">{a.name}</span>
+                      <span className="au-comparison__mobile-card-col-value">{a.metrics[mi].value}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </ScrollReveal>
       </div>
