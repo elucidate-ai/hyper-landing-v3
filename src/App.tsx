@@ -1,5 +1,6 @@
-import { Suspense, lazy, useEffect } from 'react'
+import { Suspense, lazy, useEffect, useState, useRef } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
+import logoSvg from '../assets/logo-blue.svg'
 
 const AuthorityPage = lazy(() => import('./pages/authority/AuthorityPage'))
 
@@ -7,7 +8,10 @@ function LoadingFallback() {
   return (
     <div
       style={{
-        minHeight: '100vh',
+        position: 'fixed',
+        inset: 0,
+        zIndex: 9999,
+        background: '#f8f7f5',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -15,10 +19,59 @@ function LoadingFallback() {
       aria-live="polite"
       aria-busy="true"
     >
-      <span style={{ opacity: 0.4, fontSize: '0.875rem', letterSpacing: '0.05em' }}>
-        Loading...
-      </span>
+      <img
+        src={logoSvg}
+        alt="Hypr"
+        style={{ height: 36, opacity: 0.6 }}
+      />
     </div>
+  )
+}
+
+function SplashWrapper({ children }: { children: React.ReactNode }) {
+  const [loaded, setLoaded] = useState(false)
+  const [visible, setVisible] = useState(true)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    setLoaded(true)
+    const timer = setTimeout(() => setVisible(false), 500)
+    return () => clearTimeout(timer)
+  }, [])
+
+  if (!visible) return <>{children}</>
+
+  return (
+    <>
+      {children}
+      <div
+        ref={ref}
+        style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 9999,
+          background: '#f8f7f5',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          opacity: loaded ? 0 : 1,
+          transform: loaded ? 'scale(1.15)' : 'scale(1)',
+          transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
+          pointerEvents: 'none',
+        }}
+      >
+        <img
+          src={logoSvg}
+          alt=""
+          style={{
+            height: 36,
+            opacity: loaded ? 0 : 0.6,
+            transform: loaded ? 'scale(1.4)' : 'scale(1)',
+            transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
+          }}
+        />
+      </div>
+    </>
   )
 }
 
@@ -35,10 +88,12 @@ export default function App() {
     <>
       <ScrollToTop />
       <Suspense fallback={<LoadingFallback />}>
-        <Routes>
-          <Route path="/" element={<AuthorityPage />} />
-          <Route path="/authority" element={<AuthorityPage />} />
-        </Routes>
+        <SplashWrapper>
+          <Routes>
+            <Route path="/" element={<AuthorityPage />} />
+            <Route path="/authority" element={<AuthorityPage />} />
+          </Routes>
+        </SplashWrapper>
       </Suspense>
     </>
   )
