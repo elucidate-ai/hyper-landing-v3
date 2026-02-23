@@ -731,7 +731,7 @@ function Blueprint() {
           <div className="bp-ann" style={{ bottom: "6%", left: "23%" }}>
             ETL PIPELINE
           </div>
-          <div className="bp-ann" style={{ top: "24%", right: "17%" }}>
+          <div className="bp-ann" style={{ top: "8%", right: "17%" }}>
             QUERY LAYER
           </div>
         </div>

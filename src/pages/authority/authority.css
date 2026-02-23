@@ -1009,10 +1009,8 @@
 }
 
 [data-page="authority"] .au-dataflow__header {
-  text-align: center;
   margin-bottom: clamp(2rem, 5vw, 3.5rem);
   max-width: 640px;
-  margin-inline: auto;
 }
 
 [data-page="authority"] .au-dataflow__title {
@@ -1953,6 +1951,20 @@
 [data-page="authority"] .au-comparison__table-th--hl {
   background: var(--au-navy-faint);
   border-top: 3px solid var(--au-navy);
+}
+
+[data-page="authority"] .au-comparison__table-th-badge {
+  display: inline-block;
+  font-family: var(--au-font-mono);
+  font-size: 0.625rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: var(--au-navy);
+  padding: 0.2em 0.6em;
+  border-radius: var(--au-radius);
+  margin-bottom: 0.5rem;
 }
 
 [data-page="authority"] .au-comparison__table-th-name {

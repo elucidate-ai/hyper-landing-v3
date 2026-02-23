@@ -42,6 +42,7 @@ export function AUComparisonMatrix() {
                       key={i}
                       className={`au-comparison__table-th${a.highlighted ? ' au-comparison__table-th--hl' : ''}`}
                     >
+                      {a.highlighted && <span className="au-comparison__table-th-badge">Recommended</span>}
                       <span className="au-comparison__table-th-name">{a.name}</span>
                       <span className="au-comparison__table-th-tag">{a.tagline}</span>
                     </th>
@@ -65,17 +66,6 @@ export function AUComparisonMatrix() {
                     ))}
                   </tr>
                 ))}
-                <tr className="au-comparison__table-row au-comparison__table-row--best">
-                  <td className="au-comparison__table-label">Best for</td>
-                  {approaches.map((a, ai) => (
-                    <td
-                      key={ai}
-                      className={`au-comparison__table-cell au-comparison__table-cell--best${a.highlighted ? ' au-comparison__table-cell--hl' : ''}`}
-                    >
-                      {a.bestFor}
-                    </td>
-                  ))}
-                </tr>
               </tbody>
             </table>
           </div>
