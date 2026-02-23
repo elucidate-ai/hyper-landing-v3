@@ -25,7 +25,7 @@ export const navigation: Navigation = {
     { label: 'Process', href: '#process' },
     { label: 'Security', href: '#security' },
   ],
-  cta: { label: 'BOOK A CALL', href: '#contact' },
+  cta: { label: 'BOOK A CALL', href: 'https://calendly.com/saul-elucidate/30min' },
 }
 
 // -----------------------------------------
