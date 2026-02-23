@@ -1,13 +1,16 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useImperativeHandle, forwardRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, CheckCircle } from 'lucide-react'
 
-interface ContactModalProps {
-  open: boolean
-  onClose: () => void
+export interface ContactModalHandle {
+  open: () => void
 }
 
-export function AUContactModal({ open, onClose }: ContactModalProps) {
+export const AUContactModal = forwardRef<ContactModalHandle>(function AUContactModal(_, ref) {
+  const [open, setOpen] = useState(false)
+  const onClose = useCallback(() => setOpen(false), [])
+
+  useImperativeHandle(ref, () => ({ open: () => setOpen(true) }), [])
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
@@ -192,4 +195,4 @@ export function AUContactModal({ open, onClose }: ContactModalProps) {
       )}
     </AnimatePresence>
   )
-}
+})

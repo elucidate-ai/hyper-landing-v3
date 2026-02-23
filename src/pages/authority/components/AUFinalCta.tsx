@@ -1,6 +1,6 @@
 import { finalCta } from '../../../data/content'
 import { ScrollReveal } from '../../../shared/components/ScrollReveal'
-import logoSvg from '../../../../assets/logo.svg'
+import logoSvg from '../../../../assets/logo-blue.svg'
 
 interface AUFinalCtaProps {
   onOpenContact?: () => void
@@ -8,7 +8,7 @@ interface AUFinalCtaProps {
 
 export function AUFinalCta({ onOpenContact }: AUFinalCtaProps) {
   return (
-    <section className="au-final-cta" id="contact" aria-label="Call to action">
+    <section className="au-final-cta" id="contact" aria-label="Call to action" style={{ paddingBottom: '6rem' }}>
       <div className="au-container" style={{ position: 'relative' }}>
         <ScrollReveal>
           <img src={logoSvg} alt="" className="au-final-cta__logo" />
@@ -57,6 +57,9 @@ export function AUFinalCta({ onOpenContact }: AUFinalCtaProps) {
             ))}
           </div>
         </ScrollReveal>
+        <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.4)', fontSize: '0.8rem', paddingTop: '5rem', margin: 0 }}>
+          &copy; 2026 Hypr. All rights reserved.
+        </p>
       </div>
     </section>
   )

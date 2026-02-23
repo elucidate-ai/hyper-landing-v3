@@ -1,7 +1,7 @@
 import { hero } from '../../../data/content'
 import { ScrollReveal } from '../../../shared/components/ScrollReveal'
 import { IsometricBlocks } from './hero-graphics/IsometricBlocks'
-import logoSvg from '../../../../assets/logo.svg'
+import logoSvg from '../../../../assets/logo-blue.svg'
 
 interface AUHeroProps {
   onOpenContact?: () => void

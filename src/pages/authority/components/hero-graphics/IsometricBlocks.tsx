@@ -393,10 +393,10 @@ function ConnectionLines({ svgCenter, visible }: { svgCenter: { x: number; y: nu
 /* ------------------------------------------------------------------ */
 
 const LAYER_LABELS = [
-  { stack: 0, text: 'SOURCES', col: -0.6, row: 2.6 },
-  { stack: 1, text: 'TRANSFORM', col: -0.6, row: 1.6 },
-  { stack: 2, text: 'WAREHOUSE', col: -0.4, row: 1.2 },
-  { stack: 3, text: 'ANALYTICS', col: -0.3, row: 0.4 },
+  { stack: 0, text: 'SOURCES', col: 4, row: -0.35 },
+  { stack: 1, text: 'TRANSFORM', col: 3, row: -0.35 },
+  { stack: 2, text: 'WAREHOUSE', col: 2, row: -0.25 },
+  { stack: 3, text: 'ANALYTICS', col: 1.15, row: -0.3 },
 ]
 
 function LayerAnnotations({
@@ -415,7 +415,7 @@ function LayerAnnotations({
             key={i}
             x={svgCenter.x + pos.x}
             y={svgCenter.y + pos.y + 8}
-            textAnchor="end"
+            textAnchor="start"
             fill="#5aadee"
             fontSize="6.5"
             fontWeight={600}
@@ -510,7 +510,7 @@ function StaticLayerAnnotations({ svgCenter }: { svgCenter: { x: number; y: numb
             key={i}
             x={svgCenter.x + pos.x}
             y={svgCenter.y + pos.y + 8}
-            textAnchor="end"
+            textAnchor="start"
             fill="#5aadee"
             fontSize="6.5"
             fontWeight={600}

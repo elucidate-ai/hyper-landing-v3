@@ -1,22 +1,28 @@
-import { motion } from 'framer-motion'
-import { SiSalesforce, SiHubspot, SiSap, SiQuickbooks, SiGooglesheets } from 'react-icons/si'
-import { TbChartBar, TbBrain, TbFileAnalytics } from 'react-icons/tb'
-import { solution } from '../../../data/content'
-import { ScrollReveal } from '../../../shared/components/ScrollReveal'
+import { motion } from "framer-motion";
+import {
+  SiSalesforce,
+  SiHubspot,
+  SiSap,
+  SiQuickbooks,
+  SiGooglesheets,
+} from "react-icons/si";
+import { TbChartBar, TbBrain, TbFileAnalytics } from "react-icons/tb";
+import { solution } from "../../../data/content";
+import { ScrollReveal } from "../../../shared/components/ScrollReveal";
 
 const DATA_SOURCES = [
-  { icon: SiSalesforce, color: '#00A1E0', name: 'Salesforce' },
-  { icon: SiHubspot, color: '#FF7A59', name: 'HubSpot' },
-  { icon: SiSap, color: '#0FAAFF', name: 'SAP' },
-  { icon: SiQuickbooks, color: '#2CA01C', name: 'QuickBooks' },
-  { icon: SiGooglesheets, color: '#34A853', name: 'Google Sheets' },
-]
+  { icon: SiSalesforce, color: "#00A1E0", name: "Salesforce" },
+  { icon: SiHubspot, color: "#FF7A59", name: "HubSpot" },
+  { icon: SiSap, color: "#0FAAFF", name: "SAP" },
+  { icon: SiQuickbooks, color: "#2CA01C", name: "QuickBooks" },
+  { icon: SiGooglesheets, color: "#34A853", name: "Google Sheets" },
+];
 
 const OUTPUTS = [
-  { icon: TbChartBar, color: '#1a3a5c', name: 'Dashboards' },
-  { icon: TbBrain, color: '#1a3a5c', name: 'AI & ML' },
-  { icon: TbFileAnalytics, color: '#1a3a5c', name: 'Reports' },
-]
+  { icon: TbChartBar, color: "#1a3a5c", name: "Dashboards" },
+  { icon: TbBrain, color: "#1a3a5c", name: "AI & ML" },
+  { icon: TbFileAnalytics, color: "#1a3a5c", name: "Reports" },
+];
 
 const BLUEPRINT_CSS = `
   @keyframes bp-march {
@@ -476,24 +482,24 @@ const BLUEPRINT_CSS = `
     .bp-titleblock { display: grid; }
     .bp-mobile-connector { display: none; }
   }
-`
+`;
 
 /* ── SVG path data for smooth bezier connections ── */
 // Left connections: each source node connects to the platform's left edge
 // These are calculated based on the grid layout proportions
 const LEFT_PATHS = [
-  'M 220 76 C 244 76, 252 210, 268 210',
-  'M 220 142 C 248 142, 256 210, 268 210',
-  'M 220 210 L 268 210',
-  'M 220 278 C 248 278, 256 210, 268 210',
-  'M 220 344 C 244 344, 252 210, 268 210',
-]
+  "M 220 76 C 244 76, 252 210, 268 210",
+  "M 220 142 C 248 142, 256 210, 268 210",
+  "M 220 210 L 268 210",
+  "M 220 278 C 248 278, 256 210, 268 210",
+  "M 220 344 C 244 344, 252 210, 268 210",
+];
 
 const RIGHT_PATHS = [
-  'M 736 210 C 752 210, 756 148, 784 148',
-  'M 736 210 L 784 210',
-  'M 736 210 C 752 210, 756 272, 784 272',
-]
+  "M 736 210 C 760 210, 780 148, 830 148",
+  "M 736 210 L 830 210",
+  "M 736 210 C 760 210, 780 310, 830 310",
+];
 
 function Blueprint() {
   return (
@@ -508,7 +514,9 @@ function Blueprint() {
 
         {/* Title block */}
         <div className="bp-titleblock">
-          <div className="bp-titleblock__title">HYPR SYSTEMS | DATA ARCHITECTURE</div>
+          <div className="bp-titleblock__title">
+            HYPR SYSTEMS | DATA ARCHITECTURE
+          </div>
           <div className="bp-titleblock__cell">
             <span className="bp-titleblock__label">Project</span>
             <span className="bp-titleblock__value">DATA-ARCH</span>
@@ -537,9 +545,16 @@ function Blueprint() {
                 className="bp-node"
                 initial={{ opacity: 0, x: -16 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * .08, duration: .45, ease: [.25, .1, .25, 1] }}
+                transition={{
+                  delay: i * 0.08,
+                  duration: 0.45,
+                  ease: [0.25, 0.1, 0.25, 1],
+                }}
               >
-                <div className="bp-node-accent" style={{ background: s.color }} />
+                <div
+                  className="bp-node-accent"
+                  style={{ background: s.color }}
+                />
                 <div className="bp-node-icon" style={{ color: s.color }}>
                   <s.icon size={18} />
                 </div>
@@ -558,9 +573,13 @@ function Blueprint() {
           {/* Center — platform */}
           <motion.div
             className="bp-platform"
-            initial={{ opacity: 0, scale: .95 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: .25, duration: .5, ease: [.25, .1, .25, 1] }}
+            transition={{
+              delay: 0.25,
+              duration: 0.5,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
           >
             <div className="bp-platform-corner bp-platform-corner--tl" />
             <div className="bp-platform-corner bp-platform-corner--tr" />
@@ -598,7 +617,11 @@ function Blueprint() {
                 className="bp-node"
                 initial={{ opacity: 0, x: 16 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: .4 + i * .08, duration: .45, ease: [.25, .1, .25, 1] }}
+                transition={{
+                  delay: 0.4 + i * 0.08,
+                  duration: 0.45,
+                  ease: [0.25, 0.1, 0.25, 1],
+                }}
               >
                 <div className="bp-node-icon" style={{ color: o.color }}>
                   <o.icon size={18} />
@@ -609,7 +632,11 @@ function Blueprint() {
           </div>
 
           {/* SVG connections layer */}
-          <svg className="bp-svg" viewBox="0 0 1004 420" preserveAspectRatio="none">
+          <svg
+            className="bp-svg"
+            viewBox="0 0 1004 420"
+            preserveAspectRatio="none"
+          >
             <defs>
               <filter id="bp-glow">
                 <feGaussianBlur stdDeviation="2" result="blur" />
@@ -650,9 +677,9 @@ function Blueprint() {
                 opacity="0"
               >
                 <animateMotion
-                  dur={`${2.2 + i * .3}s`}
+                  dur={`${2.2 + i * 0.3}s`}
                   repeatCount="indefinite"
-                  begin={`${i * .5}s`}
+                  begin={`${i * 0.5}s`}
                   path={d}
                   keyPoints="0;1"
                   keyTimes="0;1"
@@ -661,9 +688,9 @@ function Blueprint() {
                   attributeName="opacity"
                   values="0;.6;.6;0"
                   keyTimes="0;0.05;0.85;1"
-                  dur={`${2.2 + i * .3}s`}
+                  dur={`${2.2 + i * 0.3}s`}
                   repeatCount="indefinite"
-                  begin={`${i * .5}s`}
+                  begin={`${i * 0.5}s`}
                 />
               </circle>
             ))}
@@ -678,9 +705,9 @@ function Blueprint() {
                 opacity="0"
               >
                 <animateMotion
-                  dur={`${2.5 + i * .3}s`}
+                  dur={`${2.5 + i * 0.3}s`}
                   repeatCount="indefinite"
-                  begin={`${1.5 + i * .6}s`}
+                  begin={`${1.5 + i * 0.6}s`}
                   path={d}
                   keyPoints="0;1"
                   keyTimes="0;1"
@@ -689,27 +716,37 @@ function Blueprint() {
                   attributeName="opacity"
                   values="0;.6;.6;0"
                   keyTimes="0;0.05;0.85;1"
-                  dur={`${2.5 + i * .3}s`}
+                  dur={`${2.5 + i * 0.3}s`}
                   repeatCount="indefinite"
-                  begin={`${1.5 + i * .6}s`}
+                  begin={`${1.5 + i * 0.6}s`}
                 />
               </circle>
             ))}
           </svg>
 
           {/* Annotations */}
-          <div className="bp-ann" style={{ top: '8%', left: '23%' }}>DATA SYNC</div>
-          <div className="bp-ann" style={{ bottom: '6%', left: '23%' }}>ETL PIPELINE</div>
-          <div className="bp-ann" style={{ top: '24%', right: '17%' }}>QUERY LAYER</div>
+          <div className="bp-ann" style={{ top: "8%", left: "23%" }}>
+            DATA SYNC
+          </div>
+          <div className="bp-ann" style={{ bottom: "6%", left: "23%" }}>
+            ETL PIPELINE
+          </div>
+          <div className="bp-ann" style={{ top: "24%", right: "17%" }}>
+            QUERY LAYER
+          </div>
         </div>
       </div>
     </>
-  )
+  );
 }
 
 export function AUDataFlowVariants() {
   return (
-    <section className="au-dataflow" id="solutions" aria-label="How your data flows">
+    <section
+      className="au-dataflow"
+      id="solutions"
+      aria-label="How your data flows"
+    >
       <div className="au-container">
         <ScrollReveal>
           <div className="au-dataflow__header">
@@ -726,13 +763,17 @@ export function AUDataFlowVariants() {
             {solution.products.map((product) => (
               <div key={product.name} className="au-dataflow__product">
                 <h3 className="au-dataflow__product-name">{product.name}</h3>
-                <p className="au-dataflow__product-tagline">{product.tagline}</p>
-                <p className="au-dataflow__product-desc">{product.description}</p>
+                <p className="au-dataflow__product-tagline">
+                  {product.tagline}
+                </p>
+                <p className="au-dataflow__product-desc">
+                  {product.description}
+                </p>
               </div>
             ))}
           </div>
         </ScrollReveal>
       </div>
     </section>
-  )
+  );
 }

@@ -31,12 +31,11 @@ function ScrollToTop() {
 }
 
 export default function App() {
-  const location = useLocation()
   return (
     <>
       <ScrollToTop />
       <Suspense fallback={<LoadingFallback />}>
-        <Routes location={location} key={location.pathname}>
+        <Routes>
           <Route path="/" element={<AuthorityPage />} />
           <Route path="/authority" element={<AuthorityPage />} />
         </Routes>

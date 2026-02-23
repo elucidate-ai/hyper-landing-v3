@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from 'react'
 import { navigation } from '../../../data/content'
 import { Menu, X } from 'lucide-react'
-import logoSvg from '../../../../assets/logo.svg'
+import logoSvg from '../../../../assets/logo-blue.svg'
 
 export function AUNav() {
   const [open, setOpen] = useState(false)
