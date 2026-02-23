@@ -222,7 +222,7 @@ export interface ComparisonApproach {
   tagline: string
   highlighted?: boolean
   metrics: ComparisonMetric[]
-  bestFor: string
+  bestFor?: string
 }
 
 export interface ComparisonSection {
