@@ -1,7 +1,8 @@
-import { problem } from '../../../data/content'
+import { useContent } from '../../../data/ContentContext'
 import { ScrollReveal } from '../../../shared/components/ScrollReveal'
 
 export function AUProblem() {
+  const { problem } = useContent()
   return (
     <section className="au-problem" aria-label="The problem">
       <div className="au-container">

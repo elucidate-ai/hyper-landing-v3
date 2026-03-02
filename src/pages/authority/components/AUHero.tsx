@@ -1,4 +1,4 @@
-import { hero } from '../../../data/content'
+import { useContent } from '../../../data/ContentContext'
 import { ScrollReveal } from '../../../shared/components/ScrollReveal'
 import { IsometricBlocks } from './hero-graphics/IsometricBlocks'
 import logoSvg from '../../../../assets/logo-blue.svg'
@@ -8,6 +8,7 @@ interface AUHeroProps {
 }
 
 export function AUHero({ onOpenContact }: AUHeroProps) {
+  const { hero } = useContent()
   return (
     <section className="au-hero" aria-label="Hero">
       <div className="au-container au-hero__inner">

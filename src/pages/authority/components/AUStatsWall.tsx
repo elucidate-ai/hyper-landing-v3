@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react'
-import { results } from '../../../data/content'
+import { useContent } from '../../../data/ContentContext'
 import { useReducedMotion } from '../../../shared/hooks/useReducedMotion'
 import {
   setupGsapScroll,
@@ -27,6 +27,7 @@ function parseStat(value: string): {
 }
 
 export function AUStatsWall() {
+  const { results } = useContent()
   const sectionRef = useRef<HTMLElement>(null)
   const valueRefs = useRef<(HTMLSpanElement | null)[]>([])
   const prefersReducedMotion = useReducedMotion()

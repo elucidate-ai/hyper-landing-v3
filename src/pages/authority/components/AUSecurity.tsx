@@ -1,4 +1,4 @@
-import { security } from '../../../data/content'
+import { useContent } from '../../../data/ContentContext'
 import { ScrollReveal } from '../../../shared/components/ScrollReveal'
 
 /**
@@ -16,6 +16,7 @@ function SecurityIcon({ name }: { name: string }) {
         </svg>
       )
     case 'GDPR Compliant':
+    case 'POPIA Compliant':
       return (
         <svg {...common} aria-hidden="true">
           <circle cx="12" cy="12" r="10" />
@@ -63,6 +64,7 @@ function SecurityIcon({ name }: { name: string }) {
 }
 
 export function AUSecurity() {
+  const { security } = useContent()
   return (
     <section className="au-security" id="security" aria-label="Data safety">
       <div className="au-container">

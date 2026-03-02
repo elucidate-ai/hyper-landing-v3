@@ -1,28 +1,13 @@
+import { useMemo } from "react";
 import { motion } from "framer-motion";
-import {
-  SiSalesforce,
-  SiHubspot,
-  SiSap,
-  SiQuickbooks,
-  SiGooglesheets,
-} from "react-icons/si";
-import { TbChartBar, TbBrain, TbFileAnalytics } from "react-icons/tb";
-import { solution } from "../../../data/content";
+import { TbDatabase } from "react-icons/tb";
+import { useContent } from "../../../data/ContentContext";
+import { iconRegistry } from "../../../data/icon-registry";
 import { ScrollReveal } from "../../../shared/components/ScrollReveal";
 
-const DATA_SOURCES = [
-  { icon: SiSalesforce, color: "#00A1E0", name: "Salesforce" },
-  { icon: SiHubspot, color: "#FF7A59", name: "HubSpot" },
-  { icon: SiSap, color: "#0FAAFF", name: "SAP" },
-  { icon: SiQuickbooks, color: "#2CA01C", name: "QuickBooks" },
-  { icon: SiGooglesheets, color: "#34A853", name: "Google Sheets" },
-];
-
-const OUTPUTS = [
-  { icon: TbChartBar, color: "#1a3a5c", name: "Dashboards" },
-  { icon: TbBrain, color: "#1a3a5c", name: "AI & ML" },
-  { icon: TbFileAnalytics, color: "#1a3a5c", name: "Reports" },
-];
+function resolveIcon(key: string) {
+  return iconRegistry[key] || TbDatabase;
+}
 
 const BLUEPRINT_CSS = `
   @keyframes bp-march {
@@ -525,7 +510,11 @@ const RIGHT_PATHS = [
   "M 736 210 C 760 210, 780 310, 830 310",
 ];
 
-function Blueprint() {
+function Blueprint({ sources, outputs, titleBlockText }: {
+  sources: { icon: React.ComponentType<{ size: number }>; color: string; name: string }[];
+  outputs: { icon: React.ComponentType<{ size: number }>; color: string; name: string }[];
+  titleBlockText: string;
+}) {
   return (
     <>
       <style>{BLUEPRINT_CSS}</style>
@@ -539,7 +528,7 @@ function Blueprint() {
         {/* Title block */}
         <div className="bp-titleblock">
           <div className="bp-titleblock__title">
-            HYPR SYSTEMS | DATA ARCHITECTURE
+            {titleBlockText}
           </div>
           <div className="bp-titleblock__cell">
             <span className="bp-titleblock__label">Project</span>
@@ -563,7 +552,7 @@ function Blueprint() {
           {/* Left column — data sources */}
           <div className="bp-col">
             <div className="bp-col-label">Data Sources</div>
-            {DATA_SOURCES.map((s, i) => (
+            {sources.map((s, i) => (
               <motion.div
                 key={s.name}
                 className="bp-node"
@@ -635,7 +624,7 @@ function Blueprint() {
           {/* Right column — outputs */}
           <div className="bp-col">
             <div className="bp-col-label">Outputs</div>
-            {OUTPUTS.map((o, i) => (
+            {outputs.map((o, i) => (
               <motion.div
                 key={o.name}
                 className="bp-node"
@@ -765,6 +754,17 @@ function Blueprint() {
 }
 
 export function AUDataFlowVariants() {
+  const { solution, dataFlow } = useContent()
+
+  const resolvedSources = useMemo(
+    () => dataFlow.sources.map((s) => ({ icon: resolveIcon(s.iconKey), color: s.color, name: s.name })),
+    [dataFlow.sources],
+  )
+  const resolvedOutputs = useMemo(
+    () => dataFlow.outputs.map((o) => ({ icon: resolveIcon(o.iconKey), color: o.color, name: o.name })),
+    [dataFlow.outputs],
+  )
+
   return (
     <section
       className="au-dataflow"
@@ -780,7 +780,7 @@ export function AUDataFlowVariants() {
           </div>
         </ScrollReveal>
 
-        <Blueprint />
+        <Blueprint sources={resolvedSources} outputs={resolvedOutputs} titleBlockText={dataFlow.titleBlockText} />
 
         <ScrollReveal delay={0.15}>
           <div className="au-dataflow__products">

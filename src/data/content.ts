@@ -4,19 +4,25 @@
    TypeScript interfaces.
    ========================================= */
 
+import type {
+  Navigation, HeroContent, TrustBar, ProblemSection, SolutionSection,
+  ProcessSection, ComparisonSection, ResultsSection, SecuritySection,
+  FinalCtaSection, FooterContent, SiteMetadata, DataFlowContent,
+  ContactModalContent, SiteContent,
+} from './content-types'
+
+// Re-export all types so existing imports still work
+export type {
+  NavItem, Navigation, HeroCta, HeroContent, TrustBar, PainPoint,
+  ProblemSection, Product, SolutionSection, Stage, ProcessSection,
+  ComparisonMetric, ComparisonApproach, ComparisonSection, Stat,
+  Testimonial, ResultsSection, SecurityFeature, SecuritySection,
+  FinalCtaSection, FooterLinkGroup, FooterContent, SiteMetadata,
+} from './content-types'
+
 // -----------------------------------------
 // Navigation
 // -----------------------------------------
-
-export interface NavItem {
-  label: string
-  href: string
-}
-
-export interface Navigation {
-  items: NavItem[]
-  cta: { label: string; href: string }
-}
 
 export const navigation: Navigation = {
   items: [
@@ -31,20 +37,6 @@ export const navigation: Navigation = {
 // -----------------------------------------
 // Hero
 // -----------------------------------------
-
-export interface HeroCta {
-  label: string
-  href: string
-  variant: 'primary' | 'secondary' | 'tertiary'
-  action?: string
-}
-
-export interface HeroContent {
-  eyebrow: string
-  headline: string
-  subheadline: string
-  ctas: HeroCta[]
-}
 
 export const hero: HeroContent = {
   eyebrow: 'Dedicated data engineering for mid-market companies',
@@ -61,12 +53,6 @@ export const hero: HeroContent = {
 // Trust Bar
 // -----------------------------------------
 
-export interface TrustBar {
-  label: string
-  clients: string[]
-  microStat: string
-}
-
 export const trustBar: TrustBar = {
   label: 'Powering dashboards and analytics for growing companies',
   clients: ['SayHi', 'Busy Kid', '3Way Marketing', 'Sourcefin', 'DataFirst'],
@@ -76,17 +62,6 @@ export const trustBar: TrustBar = {
 // -----------------------------------------
 // Problem Section
 // -----------------------------------------
-
-export interface PainPoint {
-  headline: string
-  fragments: string[]
-}
-
-export interface ProblemSection {
-  headline: string
-  painPoints: PainPoint[]
-  transition: string
-}
 
 export const problem: ProblemSection = {
   headline: 'Sound familiar?',
@@ -124,18 +99,6 @@ export const problem: ProblemSection = {
 // Solution Section
 // -----------------------------------------
 
-export interface Product {
-  name: string
-  tagline: string
-  description: string
-}
-
-export interface SolutionSection {
-  headline: string
-  subheadline: string
-  products: Product[]
-}
-
 export const solution: SolutionSection = {
   headline: 'Production-grade data infrastructure: designed, built, and fully managed',
   subheadline:
@@ -157,21 +120,28 @@ export const solution: SolutionSection = {
 }
 
 // -----------------------------------------
-// How It Works / Process
+// Data Flow (blueprint diagram)
 // -----------------------------------------
 
-export interface Stage {
-  phase: string
-  headline: string
-  description: string
-  duration?: string
+export const dataFlow: DataFlowContent = {
+  titleBlockText: 'HYPR SYSTEMS | DATA ARCHITECTURE',
+  sources: [
+    { iconKey: 'SiSalesforce', color: '#00A1E0', name: 'Salesforce' },
+    { iconKey: 'SiHubspot', color: '#FF7A59', name: 'HubSpot' },
+    { iconKey: 'SiSap', color: '#0FAAFF', name: 'SAP' },
+    { iconKey: 'SiQuickbooks', color: '#2CA01C', name: 'QuickBooks' },
+    { iconKey: 'SiGooglesheets', color: '#34A853', name: 'Google Sheets' },
+  ],
+  outputs: [
+    { iconKey: 'TbChartBar', color: '#1a3a5c', name: 'Dashboards' },
+    { iconKey: 'TbBrain', color: '#1a3a5c', name: 'AI & ML' },
+    { iconKey: 'TbFileAnalytics', color: '#1a3a5c', name: 'Reports' },
+  ],
 }
 
-export interface ProcessSection {
-  headline: string
-  subheadline: string
-  stages: Stage[]
-}
+// -----------------------------------------
+// How It Works / Process
+// -----------------------------------------
 
 export const process: ProcessSection = {
   headline: 'From scattered data to clear insights in weeks',
@@ -189,7 +159,7 @@ export const process: ProcessSection = {
       headline: 'Your first tailored demo in days, actionable insights in weeks',
       description:
         'A working demo tailored to your data within the first week. Weekly walkthroughs, full transparency, no surprises. Most clients are in production within five weeks.',
-      duration: 'Weeks 2–4',
+      duration: 'Weeks 2\u20134',
     },
     {
       phase: 'Validate',
@@ -211,25 +181,6 @@ export const process: ProcessSection = {
 // -----------------------------------------
 // Comparison Matrix
 // -----------------------------------------
-
-export interface ComparisonMetric {
-  label: string
-  value: string
-}
-
-export interface ComparisonApproach {
-  name: string
-  tagline: string
-  highlighted?: boolean
-  metrics: ComparisonMetric[]
-  bestFor?: string
-}
-
-export interface ComparisonSection {
-  headline: string
-  subheadline: string
-  approaches: ComparisonApproach[]
-}
 
 export const comparison: ComparisonSection = {
   headline: 'Three paths to analytics. One doesn\u2019t require a data team.',
@@ -280,25 +231,6 @@ export const comparison: ComparisonSection = {
 // Results & Testimonials
 // -----------------------------------------
 
-export interface Stat {
-  value: string
-  label: string
-}
-
-export interface Testimonial {
-  quote: string
-  author: string
-  title: string
-  company: string
-  result?: string
-}
-
-export interface ResultsSection {
-  headline: string
-  stats: Stat[]
-  testimonials: Testimonial[]
-}
-
 export const results: ResultsSection = {
   headline: 'Real results from real clients',
   stats: [
@@ -339,17 +271,6 @@ export const results: ResultsSection = {
 // Security
 // -----------------------------------------
 
-export interface SecurityFeature {
-  name: string
-  description: string
-}
-
-export interface SecuritySection {
-  headline: string
-  subheadline: string
-  features: SecurityFeature[]
-}
-
 export const security: SecuritySection = {
   headline: 'Your data security is non-negotiable',
   subheadline:
@@ -386,14 +307,6 @@ export const security: SecuritySection = {
 // Final CTA
 // -----------------------------------------
 
-export interface FinalCtaSection {
-  badge: string
-  headline: string
-  subheadline: string
-  ctas: HeroCta[]
-  trustBadges: string[]
-}
-
 export const finalCta: FinalCtaSection = {
   badge: 'START HERE',
   headline: 'See what your analytics could look like in five weeks',
@@ -418,27 +331,6 @@ export const finalCta: FinalCtaSection = {
 // -----------------------------------------
 // Footer
 // -----------------------------------------
-
-export interface FooterLinkGroup {
-  title: string
-  links: { label: string; href: string }[]
-}
-
-export interface FooterContent {
-  ctaBar: {
-    text: string
-    email: string
-  }
-  brand: {
-    name: string
-    tagline: string
-  }
-  linkGroups: FooterLinkGroup[]
-  bottomBar: {
-    copyright: string
-    status: string
-  }
-}
 
 export const footer: FooterContent = {
   ctaBar: {
@@ -495,16 +387,41 @@ export const footer: FooterContent = {
 }
 
 // -----------------------------------------
-// Site Metadata
+// Contact Modal
 // -----------------------------------------
 
-export interface SiteMetadata {
-  title: string
-  description: string
+export const contactModal: ContactModalContent = {
+  title: 'Tell us about your data challenge',
+  subtitle: 'Not ready for a call? No problem. Drop us a message and we\u2019ll get back to you within one business day.',
 }
+
+// -----------------------------------------
+// Site Metadata
+// -----------------------------------------
 
 export const siteMetadata: SiteMetadata = {
   title: 'hypr | Dashboards & Analytics, Fully Managed for Mid-Market Companies',
   description:
     "Go from scattered data to live dashboards in weeks. Hypr's specialist team builds and fully manages your analytics, data warehouse, and pipelines so you get the visibility to make better decisions without hiring a data team.",
+}
+
+// -----------------------------------------
+// Default (aggregate) content — used by main site
+// -----------------------------------------
+
+export const defaultContent: SiteContent = {
+  siteMetadata,
+  navigation,
+  hero,
+  trustBar,
+  problem,
+  solution,
+  dataFlow,
+  process,
+  comparison,
+  results,
+  security,
+  finalCta,
+  contactModal,
+  footer,
 }

@@ -1,4 +1,6 @@
 import { useRef, useCallback } from 'react'
+import { ContentProvider } from '../../data/ContentContext'
+import { defaultContent } from '../../data/content'
 import './authority.css'
 import { SkipToContent } from '../../shared/components/SkipToContent'
 import { AUNav } from './components/AUNav'
@@ -18,32 +20,34 @@ export default function AuthorityPage() {
   const openContact = useCallback(() => contactRef.current?.open(), [])
 
   return (
-    <div data-page="authority">
-      <SkipToContent />
+    <ContentProvider content={defaultContent}>
+      <div data-page="authority">
+        <SkipToContent />
 
-      <AUNav />
+        <AUNav />
 
-      <main id="main-content">
-        <AUHero onOpenContact={openContact} />
+        <main id="main-content">
+          <AUHero onOpenContact={openContact} />
 
-        <AUProblem />
+          <AUProblem />
 
-        <AUDataFlowVariants />
+          <AUDataFlowVariants />
 
-        <AUStatsWall />
+          <AUStatsWall />
 
-        <AUTestimonials />
+          <AUTestimonials />
 
-        <AUProcess />
+          <AUProcess />
 
-        <AUComparisonMatrix />
+          <AUComparisonMatrix />
 
-        <AUSecurity />
+          <AUSecurity />
 
-        <AUFinalCta onOpenContact={openContact} />
-      </main>
+          <AUFinalCta onOpenContact={openContact} />
+        </main>
 
-      <AUContactModal ref={contactRef} />
-    </div>
+        <AUContactModal ref={contactRef} />
+      </div>
+    </ContentProvider>
   )
 }

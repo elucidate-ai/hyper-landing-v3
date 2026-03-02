@@ -1,4 +1,4 @@
-import { comparison } from '../../../data/content'
+import { useContent } from '../../../data/ContentContext'
 import { ScrollReveal } from '../../../shared/components/ScrollReveal'
 
 const metricIcons = [
@@ -17,6 +17,7 @@ const metricIcons = [
 ]
 
 export function AUComparisonMatrix() {
+  const { comparison } = useContent()
   const approaches = comparison.approaches
   const metrics = approaches[0].metrics
 

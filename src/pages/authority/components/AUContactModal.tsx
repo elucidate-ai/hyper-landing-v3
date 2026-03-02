@@ -1,12 +1,14 @@
 import { useState, useCallback, useEffect, useImperativeHandle, forwardRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, CheckCircle } from 'lucide-react'
+import { useContent } from '../../../data/ContentContext'
 
 export interface ContactModalHandle {
   open: () => void
 }
 
 export const AUContactModal = forwardRef<ContactModalHandle>(function AUContactModal(_, ref) {
+  const { contactModal } = useContent()
   const [open, setOpen] = useState(false)
   const onClose = useCallback(() => setOpen(false), [])
 
@@ -110,11 +112,10 @@ export const AUContactModal = forwardRef<ContactModalHandle>(function AUContactM
             {!submitted ? (
               <form onSubmit={handleSubmit}>
                 <h2 className="au-modal__title">
-                  Tell us about your data challenge
+                  {contactModal.title}
                 </h2>
                 <p className="au-modal__subtitle">
-                  Not ready for a call? No problem. Drop us a message and
-                  we&rsquo;ll get back to you within one business day.
+                  {contactModal.subtitle}
                 </p>
 
                 <div className="au-modal__field">

@@ -1,9 +1,10 @@
 import { useState, useCallback, useEffect } from 'react'
-import { navigation } from '../../../data/content'
+import { useContent } from '../../../data/ContentContext'
 import { Menu, X } from 'lucide-react'
 import logoSvg from '../../../../assets/logo-blue.svg'
 
 export function AUNav() {
+  const { navigation } = useContent()
   const [open, setOpen] = useState(false)
 
   const toggle = useCallback(() => setOpen((v) => !v), [])

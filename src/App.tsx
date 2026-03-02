@@ -1,8 +1,59 @@
 import { Suspense, lazy, useEffect, useState, useRef } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
+import type { SiteContent } from './data/content-types'
 import logoSvg from '../assets/logo-blue.svg'
 
 const AuthorityPage = lazy(() => import('./pages/authority/AuthorityPage'))
+const IndustryPage = lazy(() => import('./pages/industry/IndustryPage'))
+
+// Lazy-load industry content to keep main bundle small
+const industryModules: Record<string, () => Promise<{ default?: SiteContent } & Record<string, SiteContent>>> = {
+  retail: () => import('./data/industries/retail').then((m) => ({ retailContent: m.retailContent }) as never),
+  property: () => import('./data/industries/property').then((m) => ({ propertyContent: m.propertyContent }) as never),
+  motor: () => import('./data/industries/motor').then((m) => ({ motorContent: m.motorContent }) as never),
+  logistics: () => import('./data/industries/logistics').then((m) => ({ logisticsContent: m.logisticsContent }) as never),
+}
+
+const contentKeys: Record<string, string> = {
+  retail: 'retailContent',
+  property: 'propertyContent',
+  motor: 'motorContent',
+  logistics: 'logisticsContent',
+}
+
+function IndustryRoute({ industry }: { industry: string }) {
+  const [content, setContent] = useState<SiteContent | null>(null)
+
+  useEffect(() => {
+    const loader = industryModules[industry]
+    if (!loader) return
+    loader().then((mod) => {
+      const key = contentKeys[industry]
+      setContent((mod as Record<string, SiteContent>)[key])
+    })
+  }, [industry])
+
+  if (!content) return <LoadingFallback />
+  return <IndustryPage content={content} />
+}
+
+/**
+ * Resolve industry from subdomain hostname.
+ * e.g. retail.usehypr.com → "retail"
+ */
+function resolveIndustryFromHost(): string | null {
+  const host = window.location.hostname
+  const match = host.match(/^(retail|property|motor|logistics)\./)
+  return match ? match[1] : null
+}
+
+function SubdomainRedirect() {
+  const industry = resolveIndustryFromHost()
+  if (industry) {
+    return <IndustryRoute industry={industry} />
+  }
+  return <AuthorityPage />
+}
 
 function LoadingFallback() {
   return (
@@ -90,8 +141,12 @@ export default function App() {
       <Suspense fallback={<LoadingFallback />}>
         <SplashWrapper>
           <Routes>
-            <Route path="/" element={<AuthorityPage />} />
+            <Route path="/" element={<SubdomainRedirect />} />
             <Route path="/authority" element={<AuthorityPage />} />
+            <Route path="/retail" element={<IndustryRoute industry="retail" />} />
+            <Route path="/property" element={<IndustryRoute industry="property" />} />
+            <Route path="/motor" element={<IndustryRoute industry="motor" />} />
+            <Route path="/logistics" element={<IndustryRoute industry="logistics" />} />
           </Routes>
         </SplashWrapper>
       </Suspense>

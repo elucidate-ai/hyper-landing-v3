@@ -1,5 +1,25 @@
 {
   "rewrites": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "retail.usehypr.com" }],
+      "destination": "/retail/$1"
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "property.usehypr.com" }],
+      "destination": "/property/$1"
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "motor.usehypr.com" }],
+      "destination": "/motor/$1"
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "logistics.usehypr.com" }],
+      "destination": "/logistics/$1"
+    },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

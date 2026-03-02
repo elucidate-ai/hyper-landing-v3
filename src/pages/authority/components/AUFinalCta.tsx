@@ -1,4 +1,4 @@
-import { finalCta } from '../../../data/content'
+import { useContent } from '../../../data/ContentContext'
 import { ScrollReveal } from '../../../shared/components/ScrollReveal'
 import logoSvg from '../../../../assets/logo-blue.svg'
 
@@ -7,6 +7,7 @@ interface AUFinalCtaProps {
 }
 
 export function AUFinalCta({ onOpenContact }: AUFinalCtaProps) {
+  const { finalCta } = useContent()
   return (
     <section className="au-final-cta" id="contact" aria-label="Call to action" style={{ paddingBottom: '6rem' }}>
       <div className="au-container" style={{ position: 'relative' }}>

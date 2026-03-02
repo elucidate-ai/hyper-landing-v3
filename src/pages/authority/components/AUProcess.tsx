@@ -1,7 +1,8 @@
-import { process } from '../../../data/content'
+import { useContent } from '../../../data/ContentContext'
 import { ScrollReveal } from '../../../shared/components/ScrollReveal'
 
 export function AUProcess() {
+  const { process } = useContent()
   return (
     <section className="au-process" id="process" aria-label="Our process">
       <div className="au-container">

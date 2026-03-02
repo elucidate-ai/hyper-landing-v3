@@ -1,8 +1,9 @@
 import { useRef, useCallback, useEffect } from 'react'
-import { results } from '../../../data/content'
+import { useContent } from '../../../data/ContentContext'
 import { ScrollReveal } from '../../../shared/components/ScrollReveal'
 
 export function AUTestimonials() {
+  const { results } = useContent()
   const scrollRef = useRef<HTMLDivElement>(null)
   const dotsRef = useRef<HTMLDivElement>(null)
   const activeRef = useRef(0)
