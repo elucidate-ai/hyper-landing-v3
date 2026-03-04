@@ -4,6 +4,7 @@ import { TbDatabase } from "react-icons/tb";
 import { useContent } from "../../../data/ContentContext";
 import { iconRegistry } from "../../../data/icon-registry";
 import { ScrollReveal } from "../../../shared/components/ScrollReveal";
+import { useIsMobile } from "../../../shared/hooks/useIsMobile";
 
 function resolveIcon(key: string) {
   return iconRegistry[key] || TbDatabase;
@@ -25,6 +26,16 @@ const BLUEPRINT_CSS = `
   @keyframes bp-pulse-glow {
     0%, 100% { opacity: .12; }
     50% { opacity: .25; }
+  }
+
+  @keyframes bp-march-down {
+    from { background-position: 0 0; }
+    to { background-position: 0 16px; }
+  }
+
+  @keyframes bp-junction-pulse {
+    0%, 100% { opacity: .2; box-shadow: 0 0 0 0 rgba(26,58,92,0); }
+    50% { opacity: .45; box-shadow: 0 0 0 3px rgba(26,58,92,.06); }
   }
 
   .bp-wrap {
@@ -420,54 +431,215 @@ const BLUEPRINT_CSS = `
     stroke-width: 1;
   }
 
-  /* Mobile-first: base is mobile layout */
-  .bp-wrap { padding: 32px 16px 48px; }
+  /* ── Mobile-first base (< 768px) ── */
+  .bp-wrap { padding: 24px 12px 36px; }
   .bp-grid {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 12px;
     min-height: auto;
   }
-  .bp-svg, .bp-ann, .bp-dim, .bp-reg { display: none; }
-  .bp-titleblock { display: none; }
+  .bp-svg, .bp-ann, .bp-dim { display: none; }
 
-  /* Mobile connectors between sections */
-  .bp-mobile-connector {
+  /* Registration marks: smaller on mobile */
+  .bp-reg {
+    width: 12px;
+    height: 12px;
+  }
+  .bp-reg--tl { top: 6px; left: 6px; }
+  .bp-reg--tr { top: 6px; right: 6px; }
+  .bp-reg--bl { bottom: 6px; left: 6px; }
+  .bp-reg--br { bottom: 6px; right: 6px; }
+
+  /* Title block: simplified single-line on mobile */
+  .bp-titleblock {
+    display: block;
+    border: none;
+    background: transparent;
+    bottom: 6px;
+    right: 8px;
+  }
+  .bp-titleblock__title {
+    border-bottom: none;
+    padding: 0;
+    font-size: 7px;
+    opacity: 0.35;
+  }
+  .bp-titleblock__cell { display: none; }
+
+  /* Compact chip nodes in 2-column grid */
+  .bp-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .bp-col-label {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+  }
+  .bp-node {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+  .bp-node::before, .bp-node::after {
+    width: 4px;
+    height: 4px;
+  }
+  .bp-node::before { top: -2px; left: -2px; }
+  .bp-node::after { bottom: -2px; right: -2px; }
+  .bp-node-icon {
+    width: 22px;
+    height: 22px;
+  }
+  .bp-node-name {
+    font-size: 11px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  /* Center the last node when odd count (label is child 1, so odd nodes end at even child index) */
+  .bp-col > .bp-node:last-child:nth-child(even) {
+    grid-column: 1 / -1;
+    max-width: calc(50% - 4px);
+    margin-inline: auto;
+  }
+  .bp-col--out { transform: translateY(-10%); }
+
+  /* Horizontal platform on mobile */
+  .bp-platform {
+    padding: 16px;
+    flex-direction: row;
+    align-items: stretch;
+  }
+  .bp-platform::before { inset: 3px; }
+  .bp-plat-sec {
+    padding: 8px 4px;
+    flex: 1;
+  }
+  .bp-plat-name { font-size: 20px; }
+  .bp-plat-lbl { font-size: 8px; margin-bottom: 4px; letter-spacing: 1.2px; }
+  .bp-plat-divider {
+    width: 1px;
+    height: auto;
+    min-height: 50px;
+    flex-shrink: 0;
+  }
+  .bp-plat-divider::before {
+    width: 1px;
+    height: 100%;
+    left: 0;
+    right: auto;
+    top: 0;
+    background: linear-gradient(180deg, transparent, rgba(26,58,92,.2) 20%, rgba(26,58,92,.2) 80%, transparent);
+  }
+  .bp-plat-divider-dot { display: none; }
+
+  /* Animated flow connectors — marching dashes (matches desktop SVG language) */
+  .bp-flow {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
-    padding: 8px 0;
+    gap: 0;
+    padding: 2px 0;
   }
-  .bp-mobile-connector__line {
-    width: 1px;
-    height: 24px;
-    border-left: 2px dashed rgba(26,58,92,.25);
+  .bp-flow__line {
+    width: 1.5px;
+    height: 18px;
+    background: repeating-linear-gradient(
+      180deg,
+      rgba(26,58,92,.28) 0px,
+      rgba(26,58,92,.28) 5px,
+      transparent 5px,
+      transparent 9px
+    );
+    background-size: 100% 16px;
+    animation: bp-march-down 1.6s linear infinite;
   }
-  .bp-mobile-connector__label {
+  .bp-flow__junction {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #1a3a5c;
+    opacity: .2;
+    flex-shrink: 0;
+    animation: bp-junction-pulse 3s ease-in-out infinite;
+  }
+  .bp-flow__junction--delay { animation-delay: 1.5s; }
+  .bp-flow__label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 0;
     font-size: 8px;
     font-weight: 600;
     letter-spacing: 1.4px;
     text-transform: uppercase;
-    color: rgba(26,58,92,.4);
+    color: rgba(26,58,92,.45);
+  }
+  .bp-flow__tick {
+    display: block;
+    width: 8px;
+    height: 1px;
+    background: rgba(26,58,92,.25);
   }
 
+  /* Hide old mobile connectors */
+  .bp-mobile-connector { display: none; }
+
+  /* ── Tablet (768px+) ── */
   @media (min-width: 768px) {
     .bp-wrap { padding: 48px 32px 56px; }
-    /* Keep single column grid - 2-col was breaking with mobile connectors as grid items */
+    .bp-grid { gap: 20px; }
+
     .bp-col {
-      display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
     }
-    .bp-col-label {
-      grid-column: 1 / -1;
-    }
+    .bp-col-label { grid-column: 1 / -1; }
+
+    /* Restore larger node sizes */
+    .bp-node { padding: 12px 14px; gap: 12px; }
+    .bp-node::before, .bp-node::after { width: 5px; height: 5px; }
+    .bp-node::before { top: -3px; left: -3px; }
+    .bp-node::after { bottom: -3px; right: -3px; }
+    .bp-node-icon { width: 28px; height: 28px; }
+    .bp-node-name { font-size: 13px; }
+
+    /* Restore vertical platform */
     .bp-platform {
       max-width: 360px;
       margin-inline: auto;
+      flex-direction: column;
+      padding: 32px 28px;
+      align-items: center;
     }
+    .bp-platform::before { inset: 4px; }
+    .bp-plat-sec { padding: 16px 0; flex: unset; }
+    .bp-plat-name { font-size: 26px; }
+    .bp-plat-lbl { font-size: 9px; margin-bottom: 8px; letter-spacing: 1.8px; }
+    .bp-plat-divider {
+      width: 100%;
+      height: 1px;
+      min-height: auto;
+    }
+    .bp-plat-divider::before {
+      width: auto;
+      height: 1px;
+      left: 0;
+      right: 0;
+      top: 50%;
+      background: linear-gradient(90deg, transparent, rgba(26,58,92,.2) 20%, rgba(26,58,92,.2) 80%, transparent);
+    }
+    .bp-plat-divider-dot { display: block; }
+
+    /* Larger registration marks */
+    .bp-reg { width: 16px; height: 16px; }
+    .bp-reg--tl { top: 10px; left: 10px; }
+    .bp-reg--tr { top: 10px; right: 10px; }
+    .bp-reg--bl { bottom: 10px; left: 10px; }
+    .bp-reg--br { bottom: 10px; right: 10px; }
   }
 
+  /* ── Desktop (1024px+) ── */
   @media (min-width: 1024px) {
     .bp-wrap { padding: 72px 56px 80px; }
     .bp-grid {
@@ -480,16 +652,53 @@ const BLUEPRINT_CSS = `
       flex-direction: column;
       gap: 16px;
     }
-    .bp-col-label {
+    .bp-col-label { grid-column: unset; }
+    .bp-col > .bp-node:last-child:nth-child(even) {
       grid-column: unset;
+      max-width: none;
+      margin-inline: 0;
+    }
+    .bp-col--out { transform: none; }
+    .bp-node-name {
+      overflow: visible;
+      text-overflow: clip;
+      white-space: normal;
     }
     .bp-platform {
       max-width: none;
       margin-inline: 0;
+      padding: 44px 36px;
     }
-    .bp-svg, .bp-ann, .bp-dim, .bp-reg { display: block; }
-    .bp-titleblock { display: grid; }
+    .bp-svg, .bp-ann, .bp-dim { display: block; }
+    .bp-reg { display: block; width: 20px; height: 20px; }
+    .bp-reg--tl { top: 12px; left: 12px; }
+    .bp-reg--tr { top: 12px; right: 12px; }
+    .bp-reg--bl { bottom: 12px; left: 12px; }
+    .bp-reg--br { bottom: 12px; right: 12px; }
+    .bp-titleblock {
+      display: grid;
+      grid-template-columns: auto auto;
+      border: 1.5px solid #1a3a5c;
+      background: #f0f5f9;
+      bottom: 16px;
+      right: 16px;
+    }
+    .bp-titleblock__title {
+      border-bottom: 1px solid rgba(26,58,92,.2);
+      padding: 8px 12px;
+      font-size: 10px;
+      opacity: 1;
+    }
+    .bp-titleblock__cell { display: flex; }
+    .bp-flow { display: none; }
     .bp-mobile-connector { display: none; }
+  }
+
+  /* ── Reduced motion ── */
+  @media (prefers-reduced-motion: reduce) {
+    .bp-conn { animation: none; }
+    .bp-flow__line { animation: none; }
+    .bp-flow__junction { animation: none; opacity: .25; }
   }
 `;
 
@@ -515,6 +724,8 @@ function Blueprint({ sources, outputs, titleBlockText }: {
   outputs: { icon: React.ComponentType<{ size: number }>; color: string; name: string }[];
   titleBlockText: string;
 }) {
+  const isMobile = useIsMobile(1024);
+
   return (
     <>
       <style>{BLUEPRINT_CSS}</style>
@@ -556,11 +767,11 @@ function Blueprint({ sources, outputs, titleBlockText }: {
               <motion.div
                 key={s.name}
                 className="bp-node"
-                initial={{ opacity: 0, x: -16 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, ...(isMobile ? { y: 8 } : { x: -16 }) }}
+                animate={{ opacity: 1, ...(isMobile ? { y: 0 } : { x: 0 }) }}
                 transition={{
-                  delay: i * 0.08,
-                  duration: 0.45,
+                  delay: isMobile ? i * 0.05 : i * 0.08,
+                  duration: isMobile ? 0.3 : 0.45,
                   ease: [0.25, 0.1, 0.25, 1],
                 }}
               >
@@ -569,14 +780,27 @@ function Blueprint({ sources, outputs, titleBlockText }: {
                   style={{ background: s.color }}
                 />
                 <div className="bp-node-icon" style={{ color: s.color }}>
-                  <s.icon size={18} />
+                  <s.icon size={isMobile ? 14 : 18} />
                 </div>
                 <span className="bp-node-name">{s.name}</span>
               </motion.div>
             ))}
           </div>
 
-          {/* Mobile connector: sources → platform */}
+          {/* Flow connector: sources → platform */}
+          <div className="bp-flow">
+            <div className="bp-flow__junction" />
+            <div className="bp-flow__line" />
+            <div className="bp-flow__label">
+              <span className="bp-flow__tick" />
+              <span>DATA SYNC</span>
+              <span className="bp-flow__tick" />
+            </div>
+            <div className="bp-flow__line" />
+            <div className="bp-flow__junction bp-flow__junction--delay" />
+          </div>
+
+          {/* Legacy mobile connector (hidden by CSS, kept for compat) */}
           <div className="bp-mobile-connector">
             <div className="bp-mobile-connector__line" />
             <span className="bp-mobile-connector__label">DATA SYNC</span>
@@ -589,8 +813,8 @@ function Blueprint({ sources, outputs, titleBlockText }: {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{
-              delay: 0.25,
-              duration: 0.5,
+              delay: isMobile ? 0.15 : 0.25,
+              duration: isMobile ? 0.35 : 0.5,
               ease: [0.25, 0.1, 0.25, 1],
             }}
           >
@@ -614,7 +838,20 @@ function Blueprint({ sources, outputs, titleBlockText }: {
             </div>
           </motion.div>
 
-          {/* Mobile connector: platform → outputs */}
+          {/* Flow connector: platform → outputs */}
+          <div className="bp-flow">
+            <div className="bp-flow__junction" />
+            <div className="bp-flow__line" />
+            <div className="bp-flow__label">
+              <span className="bp-flow__tick" />
+              <span>QUERY LAYER</span>
+              <span className="bp-flow__tick" />
+            </div>
+            <div className="bp-flow__line" />
+            <div className="bp-flow__junction bp-flow__junction--delay" />
+          </div>
+
+          {/* Legacy mobile connector (hidden by CSS, kept for compat) */}
           <div className="bp-mobile-connector">
             <div className="bp-mobile-connector__line" />
             <span className="bp-mobile-connector__label">QUERY LAYER</span>
@@ -622,22 +859,22 @@ function Blueprint({ sources, outputs, titleBlockText }: {
           </div>
 
           {/* Right column — outputs */}
-          <div className="bp-col">
+          <div className="bp-col bp-col--out">
             <div className="bp-col-label">Outputs</div>
             {outputs.map((o, i) => (
               <motion.div
                 key={o.name}
                 className="bp-node"
-                initial={{ opacity: 0, x: 16 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, ...(isMobile ? { y: 8 } : { x: 16 }) }}
+                animate={{ opacity: 1, ...(isMobile ? { y: 0 } : { x: 0 }) }}
                 transition={{
-                  delay: 0.4 + i * 0.08,
-                  duration: 0.45,
+                  delay: isMobile ? 0.2 + i * 0.05 : 0.4 + i * 0.08,
+                  duration: isMobile ? 0.3 : 0.45,
                   ease: [0.25, 0.1, 0.25, 1],
                 }}
               >
                 <div className="bp-node-icon" style={{ color: o.color }}>
-                  <o.icon size={18} />
+                  <o.icon size={isMobile ? 14 : 18} />
                 </div>
                 <span className="bp-node-name">{o.name}</span>
               </motion.div>

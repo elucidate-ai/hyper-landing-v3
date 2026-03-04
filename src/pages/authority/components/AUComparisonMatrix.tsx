@@ -1,5 +1,8 @@
+import { useState, useCallback, KeyboardEvent } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useContent } from '../../../data/ContentContext'
 import { ScrollReveal } from '../../../shared/components/ScrollReveal'
+import { useReducedMotion } from '../../../shared/hooks/useReducedMotion'
 
 const metricIcons = [
   // Hourglass — Time to first insight
@@ -16,10 +19,44 @@ const metricIcons = [
   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3.75" y="8.25" width="10.5" height="7.5" rx="1.5" /><path d="M6 8.25V5.25a3 3 0 0 1 5.87-.87" /></svg>,
 ]
 
+const panelVariants = {
+  enter: (skip: boolean) => skip ? {} : { opacity: 0, y: 8 },
+  center: (skip: boolean) => skip ? {} : { opacity: 1, y: 0, transition: { duration: 0.2, ease: [0.25, 0.1, 0.25, 1] } },
+  exit: (skip: boolean) => skip ? {} : { opacity: 0, y: -8, transition: { duration: 0.15, ease: [0.25, 0.1, 0.25, 1] } },
+}
+
 export function AUComparisonMatrix() {
   const { comparison } = useContent()
   const approaches = comparison.approaches
   const metrics = approaches[0].metrics
+  const reducedMotion = useReducedMotion()
+
+  const [activeTab, setActiveTab] = useState(() => {
+    const hlIndex = approaches.findIndex(a => a.highlighted)
+    return hlIndex >= 0 ? hlIndex : 0
+  })
+
+  const handleTabKeyDown = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
+    const tabs = e.currentTarget.querySelectorAll<HTMLButtonElement>('[role="tab"]')
+    const current = Array.from(tabs).findIndex(t => t === document.activeElement)
+    if (current < 0) return
+
+    let next = current
+    switch (e.key) {
+      case 'ArrowRight': next = (current + 1) % tabs.length; break
+      case 'ArrowLeft': next = (current - 1 + tabs.length) % tabs.length; break
+      case 'Home': next = 0; break
+      case 'End': next = tabs.length - 1; break
+      default: return
+    }
+    e.preventDefault()
+    tabs[next].focus()
+    setActiveTab(next)
+  }, [])
+
+  const active = approaches[activeTab]
+  const panelId = `comparison-panel-${activeTab}`
+  const tabId = (i: number) => `comparison-tab-${i}`
 
   return (
     <section className="au-comparison" aria-label="Comparison">
@@ -73,43 +110,63 @@ export function AUComparisonMatrix() {
           </div>
         </ScrollReveal>
 
-        {/* Mobile card layout (hidden on desktop) */}
+        {/* Mobile tab layout (hidden on desktop) */}
         <ScrollReveal delay={0.1}>
           <div className="au-comparison__mobile">
-            {/* Approach column headers */}
-            <div className="au-comparison__mobile-header">
+            {/* Tab bar */}
+            <div
+              className="au-comparison__tabs"
+              role="tablist"
+              aria-label="Compare approaches"
+              onKeyDown={handleTabKeyDown}
+            >
               {approaches.map((a, i) => (
-                <div
+                <button
                   key={i}
-                  className={`au-comparison__mobile-approach${a.highlighted ? ' au-comparison__mobile-approach--hl' : ''}`}
+                  id={tabId(i)}
+                  role="tab"
+                  aria-selected={i === activeTab}
+                  aria-controls={panelId}
+                  tabIndex={i === activeTab ? 0 : -1}
+                  className={`au-comparison__tab${i === activeTab ? ' au-comparison__tab--active' : ''}${a.highlighted ? ' au-comparison__tab--hl' : ''}`}
+                  onClick={() => setActiveTab(i)}
                 >
-                  {a.highlighted && <span className="au-comparison__mobile-badge">Recommended</span>}
-                  <span className="au-comparison__mobile-approach-name">{a.name}</span>
-                  <span className="au-comparison__mobile-approach-tag">{a.tagline}</span>
-                </div>
+                  <span className="au-comparison__tab-name">{a.name}</span>
+                  {a.highlighted && i === activeTab && (
+                    <span className="au-comparison__tab-badge">Recommended</span>
+                  )}
+                </button>
               ))}
             </div>
 
-            {/* Metric cards */}
-            {metrics.map((_, mi) => (
-              <div key={mi} className="au-comparison__mobile-card">
-                <div className="au-comparison__mobile-card-label">
-                  <span className="au-comparison__table-label-icon" aria-hidden="true">{metricIcons[mi]}</span>
-                  {metrics[mi].label}
+            {/* Panel */}
+            <AnimatePresence mode="wait" custom={reducedMotion}>
+              <motion.div
+                key={activeTab}
+                id={panelId}
+                role="tabpanel"
+                aria-labelledby={tabId(activeTab)}
+                className={`au-comparison__panel${active.highlighted ? ' au-comparison__panel--hl' : ''}`}
+                custom={reducedMotion}
+                variants={panelVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+              >
+                <div className="au-comparison__panel-header">
+                  <span className="au-comparison__panel-tagline">{active.tagline}</span>
                 </div>
-                <div className="au-comparison__mobile-card-values">
-                  {approaches.map((a, ai) => (
-                    <div
-                      key={ai}
-                      className={`au-comparison__mobile-card-col${a.highlighted ? ' au-comparison__mobile-card-col--hl' : ''}`}
-                    >
-                      <span className="au-comparison__mobile-card-col-name">{a.name}</span>
-                      <span className="au-comparison__mobile-card-col-value">{a.metrics[mi].value}</span>
-                    </div>
+                <ul className="au-comparison__metric-list">
+                  {active.metrics.map((m, mi) => (
+                    <li key={mi} className="au-comparison__metric-item">
+                      <span className="au-comparison__metric-icon" aria-hidden="true">{metricIcons[mi]}</span>
+                      <span className="au-comparison__metric-label">{m.label}</span>
+                      <span className={`au-comparison__metric-value${active.highlighted ? ' au-comparison__metric-value--hl' : ''}`}>{m.value}</span>
+                    </li>
                   ))}
-                </div>
-              </div>
-            ))}
+                </ul>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </ScrollReveal>
       </div>
