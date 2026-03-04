@@ -58,9 +58,19 @@ export function AUFinalCta({ onOpenContact }: AUFinalCtaProps) {
             ))}
           </div>
         </ScrollReveal>
-        <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.4)', fontSize: '0.8rem', paddingTop: '5rem', margin: 0 }}>
-          &copy; 2026 Hypr. All rights reserved.
-        </p>
+        <footer className="au-final-cta__footer">
+          <a href="https://www.elucidate.ai/" target="_blank" rel="noopener noreferrer" className="au-final-cta__elucidate">
+            <span className="au-final-cta__elucidate-text">a product of</span>
+            <img
+              src="/assets/primary-logo-grey.svg"
+              alt="Elucidate"
+              className="au-final-cta__elucidate-logo"
+            />
+          </a>
+          <p className="au-final-cta__copyright">
+            &copy; 2026 Hypr. All rights reserved.
+          </p>
+        </footer>
       </div>
     </section>
   )

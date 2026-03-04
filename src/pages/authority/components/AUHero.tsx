@@ -58,6 +58,20 @@ export function AUHero({ onOpenContact }: AUHeroProps) {
           <IsometricBlocks />
         </ScrollReveal>
       </div>
+
+      <a
+        href="https://www.elucidate.ai/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="au-hero__elucidate"
+      >
+        <span className="au-hero__elucidate-text">a product of</span>
+        <img
+          src="/assets/primary-logo-blue.svg"
+          alt="Elucidate"
+          className="au-hero__elucidate-logo"
+        />
+      </a>
     </section>
   )
 }
