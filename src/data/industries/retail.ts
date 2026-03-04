@@ -13,7 +13,7 @@ export const retailContent: SiteContent = {
     subheadline:
       'We design, build, and operate production-grade sell-through pipelines, consolidation, and governance, turning scattered channel data into a clean, reliable foundation your team can query and act on.',
     ctas: [
-      { label: 'Book a Free Discovery Call', href: 'https://calendly.com/saul-elucidate/30min', variant: 'primary' },
+      { label: 'Book a Free Discovery Call', href: 'https://calendly.com/saul-bloch-meeting/30min', variant: 'primary' },
       { label: 'Get in Touch', action: 'contact-form', href: '#', variant: 'secondary' },
     ],
   },
@@ -234,7 +234,7 @@ export const retailContent: SiteContent = {
     subheadline:
       "Start with a free discovery call. We\u2019ll map your sell-through sources, identify quick wins, and show you a tailored preview of the retail dashboards we\u2019d build. It\u2019s a valuable diagnostic whether or not you move forward.",
     ctas: [
-      { label: 'Book a Free Discovery Call', href: 'https://calendly.com/saul-elucidate/30min', variant: 'primary' },
+      { label: 'Book a Free Discovery Call', href: 'https://calendly.com/saul-bloch-meeting/30min', variant: 'primary' },
       { label: 'Get in Touch', action: 'contact-form', href: '#', variant: 'secondary' },
     ],
     trustBadges: ['Free data diagnostic included', 'Zero obligation', 'Fully managed from day one'],

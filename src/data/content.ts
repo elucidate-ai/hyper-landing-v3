@@ -31,7 +31,7 @@ export const navigation: Navigation = {
     { label: 'Process', href: '#process' },
     { label: 'Security', href: '#security' },
   ],
-  cta: { label: 'BOOK A CALL', href: 'https://calendly.com/saul-elucidate/30min' },
+  cta: { label: 'BOOK A CALL', href: 'https://calendly.com/saul-bloch-meeting/30min' },
 }
 
 // -----------------------------------------
@@ -44,7 +44,7 @@ export const hero: HeroContent = {
   subheadline:
     'We design, build, and operate production-grade warehousing, orchestration, and governance, turning scattered data into a clean, reliable foundation your team can query and act on.',
   ctas: [
-    { label: 'Book a Free Discovery Call', href: 'https://calendly.com/saul-elucidate/30min', variant: 'primary' },
+    { label: 'Book a Free Discovery Call', href: 'https://calendly.com/saul-bloch-meeting/30min', variant: 'primary' },
     { label: 'Get in Touch', action: 'contact-form', href: '#', variant: 'secondary' },
   ],
 }
@@ -315,7 +315,7 @@ export const finalCta: FinalCtaSection = {
   ctas: [
     {
       label: 'Book a Free Discovery Call',
-      href: 'https://calendly.com/saul-elucidate/30min',
+      href: 'https://calendly.com/saul-bloch-meeting/30min',
       variant: 'primary',
     },
     {
