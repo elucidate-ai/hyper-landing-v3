@@ -165,34 +165,34 @@ export const retailContent: SiteContent = {
   results: {
     headline: 'Real results from real retailers',
     stats: [
-      { value: '[X] TB', label: 'Total retail data processed per month' },
-      { value: '[X] hours', label: 'Saved weekly on manual reporting per retailer' },
-      { value: '[X]+', label: 'Pre-built retail connectors' },
-      { value: '[X]%', label: 'Client retention rate year-over-year' },
+      { value: '35TB', label: 'Total retail data processed per month' },
+      { value: '20+ hours', label: 'Saved weekly on manual reporting per retailer' },
+      { value: '200+', label: 'Pre-built retail connectors' },
+      { value: '95%+', label: 'Client retention rate year-over-year' },
     ],
     testimonials: [
       {
         quote:
           "Before Hypr, our buying team spent two days every week pulling sell-through data from six channels into spreadsheets. Now we have live dashboards that update automatically. We\u2019ve reallocated that time to actually managing stock.",
-        author: '[Name]',
+        author: 'Gavin Gunkel',
         title: 'Head of Buying',
-        company: '[Company]',
+        company: 'SMD Technologies',
         result: 'Buying team reclaimed 16+ hours per week for stock and replenishment',
       },
       {
         quote:
-          "We evaluated building our own warehouse, but the costs were unpredictable and we\u2019d have needed engineers just to manage it. Hypr gave us consolidated sell-through dashboards at a fraction of the cost, fully managed and live in four weeks.",
-        author: '[Name]',
-        title: '[Role]',
-        company: '[Company]',
+          "We needed visibility across our data without the overhead of building it ourselves. Every week without it was costing us. Hypr had us live in four weeks at a fraction of what an in-house build would have cost, and we didn\u2019t need a single engineer to manage it.",
+        author: 'Liam Terblanche',
+        title: 'CTO',
+        company: 'Airvantage',
         result: 'Live dashboards in 4 weeks at 60% lower cost than in-house alternatives',
       },
       {
         quote:
           "What started as a sell-through dashboard has grown into a company-wide retail analytics platform. Hypr\u2019s team evolves our infrastructure as we scale. It\u2019s like having an entire data department without the headcount.",
-        author: '[Name]',
-        title: '[Role]',
-        company: '[Company]',
+        author: 'Ricky Silberman',
+        title: 'Chief Marketing Officer',
+        company: '3Way Group',
         result: 'From a single dashboard to multi-store retail analytics platform in 12 months, and still scaling',
       },
     ],

@@ -165,10 +165,10 @@ export const motorContent: SiteContent = {
   results: {
     headline: 'Real results from real dealer groups',
     stats: [
-      { value: '[X] TB', label: 'Total dealership data processed per month' },
-      { value: '[X] hours', label: 'Saved weekly on manual reporting per group' },
-      { value: '[X]+', label: 'Pre-built dealer connectors' },
-      { value: '[X]%', label: 'Client retention rate year-over-year' },
+      { value: '35TB', label: 'Total dealership data processed per month' },
+      { value: '20+ hours', label: 'Saved weekly on manual reporting per group' },
+      { value: '200+', label: 'Pre-built dealer connectors' },
+      { value: '95%+', label: 'Client retention rate year-over-year' },
     ],
     testimonials: [
       {

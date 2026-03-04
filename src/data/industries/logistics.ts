@@ -165,10 +165,10 @@ export const logisticsContent: SiteContent = {
   results: {
     headline: 'Real results from real logistics companies',
     stats: [
-      { value: '[X] TB', label: 'Total logistics data processed per month' },
-      { value: '[X] hours', label: 'Saved weekly on manual reporting per client' },
-      { value: '[X]+', label: 'Pre-built logistics connectors' },
-      { value: '[X]%', label: 'Client retention rate year-over-year' },
+      { value: '35TB', label: 'Total logistics data processed per month' },
+      { value: '20+ hours', label: 'Saved weekly on manual reporting per client' },
+      { value: '200+', label: 'Pre-built logistics connectors' },
+      { value: '95%+', label: 'Client retention rate year-over-year' },
     ],
     testimonials: [
       {
