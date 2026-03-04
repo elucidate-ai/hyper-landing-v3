@@ -1,4 +1,4 @@
-import { useState, useCallback, KeyboardEvent } from 'react'
+import { useState, useCallback, type KeyboardEvent } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useContent } from '../../../data/ContentContext'
 import { ScrollReveal } from '../../../shared/components/ScrollReveal'
@@ -21,8 +21,8 @@ const metricIcons = [
 
 const panelVariants = {
   enter: (skip: boolean) => skip ? {} : { opacity: 0, y: 8 },
-  center: (skip: boolean) => skip ? {} : { opacity: 1, y: 0, transition: { duration: 0.2, ease: [0.25, 0.1, 0.25, 1] } },
-  exit: (skip: boolean) => skip ? {} : { opacity: 0, y: -8, transition: { duration: 0.15, ease: [0.25, 0.1, 0.25, 1] } },
+  center: (skip: boolean) => skip ? {} : { opacity: 1, y: 0, transition: { duration: 0.2, ease: [0.25, 0.1, 0.25, 1] as const } },
+  exit: (skip: boolean) => skip ? {} : { opacity: 0, y: -8, transition: { duration: 0.15, ease: [0.25, 0.1, 0.25, 1] as const } },
 }
 
 export function AUComparisonMatrix() {
