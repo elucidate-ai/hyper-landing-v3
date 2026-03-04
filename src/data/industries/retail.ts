@@ -78,9 +78,9 @@ export const retailContent: SiteContent = {
       { iconKey: 'TbFileSpreadsheet', color: '#34A853', name: 'Wholesale CSVs' },
     ],
     outputs: [
-      { iconKey: 'TbChartBar', color: '#1a3a5c', name: 'Sell-Through Dashboards' },
-      { iconKey: 'TbReportAnalytics', color: '#1a3a5c', name: 'Channel Reports' },
-      { iconKey: 'TbFileAnalytics', color: '#1a3a5c', name: 'Stock Insights' },
+      { iconKey: 'TbChartBar', color: '#1a3a5c', name: 'Dashboards' },
+      { iconKey: 'TbReportAnalytics', color: '#1a3a5c', name: 'Reports' },
+      { iconKey: 'TbFileAnalytics', color: '#1a3a5c', name: 'Insights' },
     ],
   },
   process: {

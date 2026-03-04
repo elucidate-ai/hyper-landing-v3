@@ -502,7 +502,7 @@ const BLUEPRINT_CSS = `
     max-width: calc(50% - 4px);
     margin-inline: auto;
   }
-  .bp-col--out { transform: translateY(-10%); }
+  .bp-col--out { transform: none; }
 
   /* Horizontal platform on mobile */
   .bp-platform {

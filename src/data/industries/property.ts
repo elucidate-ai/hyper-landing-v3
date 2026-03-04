@@ -78,9 +78,9 @@ export const propertyContent: SiteContent = {
       { iconKey: 'TbFileSpreadsheet', color: '#34A853', name: 'Maintenance CSVs' },
     ],
     outputs: [
-      { iconKey: 'TbChartBar', color: '#1a3a5c', name: 'Portfolio Dashboards' },
-      { iconKey: 'TbReportAnalytics', color: '#1a3a5c', name: 'Owner Reports' },
-      { iconKey: 'TbFileAnalytics', color: '#1a3a5c', name: 'Vacancy Analysis' },
+      { iconKey: 'TbChartBar', color: '#1a3a5c', name: 'Dashboards' },
+      { iconKey: 'TbReportAnalytics', color: '#1a3a5c', name: 'Reports' },
+      { iconKey: 'TbFileAnalytics', color: '#1a3a5c', name: 'Analytics' },
     ],
   },
   process: {
