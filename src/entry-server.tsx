@@ -26,6 +26,19 @@ export const routes: string[] = [
 ]
 
 /**
+ * Per-route SEO metadata, consumed by the prerender script to inject
+ * <title>, <meta description>, OG tags, etc. into each static page.
+ */
+export const routesMeta: Record<string, { title: string; description: string }> = {
+  '/': { title: 'Hypr | Dedicated Data Engineering', description: 'Dedicated data engineering for mid-market companies.' },
+  '/authority': { title: 'Hypr | Dedicated Data Engineering', description: 'Dedicated data engineering for mid-market companies.' },
+  '/retail': { title: retailContent.siteMetadata.title, description: retailContent.siteMetadata.description },
+  '/property': { title: propertyContent.siteMetadata.title, description: propertyContent.siteMetadata.description },
+  '/motor': { title: motorContent.siteMetadata.title, description: motorContent.siteMetadata.description },
+  '/logistics': { title: logisticsContent.siteMetadata.title, description: logisticsContent.siteMetadata.description },
+}
+
+/**
  * Render the app for a given URL path, returning an HTML string.
  * Called by the prerender script during `vite build --ssr`.
  */
