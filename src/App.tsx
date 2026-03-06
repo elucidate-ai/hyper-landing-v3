@@ -5,6 +5,7 @@ import logoSvg from '../assets/logo-blue.svg'
 
 const AuthorityPage = lazy(() => import('./pages/authority/AuthorityPage'))
 const IndustryPage = lazy(() => import('./pages/industry/IndustryPage'))
+const NotFound = lazy(() => import('./pages/NotFound'))
 
 // Lazy-load industry content to keep main bundle small
 const industryModules: Record<string, () => Promise<{ default?: SiteContent } & Record<string, SiteContent>>> = {
@@ -147,6 +148,7 @@ export default function App() {
             <Route path="/property" element={<IndustryRoute industry="property" />} />
             <Route path="/motor" element={<IndustryRoute industry="motor" />} />
             <Route path="/logistics" element={<IndustryRoute industry="logistics" />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </SplashWrapper>
       </Suspense>

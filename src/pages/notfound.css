@@ -1,0 +1,379 @@
+/* =========================================
+   404 — Drift
+   Scoped under [data-page="not-found"]
+   ========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;800&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap');
+
+[data-page="not-found"] {
+  --nf-bg: #f8f7f5;
+  --nf-navy: #1a3a5c;
+  --nf-navy-light: #2a5a8c;
+  --nf-text: #1a1a1a;
+  --nf-text-muted: #5c5c5c;
+  --nf-text-light: #8899aa;
+  --nf-border: #e2e0db;
+
+  --nf-font-display: "Plus Jakarta Sans", "Helvetica Neue", Arial, sans-serif;
+  --nf-font-body: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --nf-font-mono: "IBM Plex Mono", "Menlo", "Consolas", monospace;
+
+  --mx: 0;
+  --my: 0;
+
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--nf-bg);
+  color: var(--nf-text);
+  font-family: var(--nf-font-body);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* -----------------------------------------
+   Dot-grid background (matches authority)
+   ----------------------------------------- */
+.nf-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, var(--nf-navy) 0.6px, transparent 0.6px);
+  background-size: 28px 28px;
+  opacity: 0.04;
+  pointer-events: none;
+}
+
+/* -----------------------------------------
+   Header
+   ----------------------------------------- */
+.nf-header {
+  position: relative;
+  z-index: 10;
+  padding: 1.5rem clamp(1.25rem, 4vw, 3rem);
+}
+
+.nf-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: var(--nf-navy);
+  transition: opacity 0.2s ease;
+}
+
+.nf-brand:hover {
+  opacity: 0.7;
+}
+
+.nf-brand__logo {
+  height: 22px;
+  width: auto;
+}
+
+.nf-brand__name {
+  font-family: var(--nf-font-display);
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+}
+
+/* -----------------------------------------
+   Floating shapes
+   ----------------------------------------- */
+.nf-shapes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.nf-shape {
+  position: absolute;
+  color: var(--nf-navy);
+  will-change: transform;
+}
+
+.nf-shape--1 {
+  width: clamp(60px, 10vw, 120px);
+  top: 12%;
+  right: 8%;
+  opacity: 0.035;
+  animation: nf-drift-1 22s ease-in-out infinite;
+  transform: translate(
+    calc(var(--mx) * -8px),
+    calc(var(--my) * -6px)
+  ) rotate(-15deg);
+}
+
+.nf-shape--2 {
+  width: clamp(40px, 6vw, 70px);
+  top: 65%;
+  left: 5%;
+  opacity: 0.04;
+  animation: nf-drift-2 18s ease-in-out infinite;
+  transform: translate(
+    calc(var(--mx) * 12px),
+    calc(var(--my) * 8px)
+  ) rotate(25deg);
+}
+
+.nf-shape--3 {
+  width: clamp(50px, 8vw, 90px);
+  bottom: 20%;
+  right: 12%;
+  opacity: 0.03;
+  animation: nf-drift-3 25s ease-in-out infinite;
+  transform: translate(
+    calc(var(--mx) * -10px),
+    calc(var(--my) * 10px)
+  ) rotate(45deg);
+}
+
+.nf-shape--4 {
+  width: clamp(35px, 5vw, 55px);
+  top: 30%;
+  left: 15%;
+  opacity: 0.025;
+  animation: nf-drift-4 20s ease-in-out infinite;
+  transform: translate(
+    calc(var(--mx) * 15px),
+    calc(var(--my) * -5px)
+  ) rotate(-30deg);
+}
+
+.nf-shape--5 {
+  width: clamp(45px, 7vw, 80px);
+  top: 8%;
+  left: 40%;
+  opacity: 0.02;
+  animation: nf-drift-5 28s ease-in-out infinite;
+  transform: translate(
+    calc(var(--mx) * -6px),
+    calc(var(--my) * -12px)
+  ) rotate(60deg);
+}
+
+.nf-shape--6 {
+  width: clamp(30px, 4vw, 50px);
+  bottom: 15%;
+  left: 35%;
+  opacity: 0.03;
+  animation: nf-drift-6 15s ease-in-out infinite;
+  transform: translate(
+    calc(var(--mx) * 10px),
+    calc(var(--my) * 6px)
+  ) rotate(12deg);
+}
+
+@keyframes nf-drift-1 {
+  0%, 100% { translate: 0 0; rotate: -15deg; }
+  33% { translate: 12px -18px; rotate: -8deg; }
+  66% { translate: -8px 10px; rotate: -20deg; }
+}
+
+@keyframes nf-drift-2 {
+  0%, 100% { translate: 0 0; rotate: 25deg; }
+  50% { translate: -15px 12px; rotate: 35deg; }
+}
+
+@keyframes nf-drift-3 {
+  0%, 100% { translate: 0 0; rotate: 45deg; }
+  25% { translate: 10px 15px; rotate: 55deg; }
+  75% { translate: -12px -8px; rotate: 38deg; }
+}
+
+@keyframes nf-drift-4 {
+  0%, 100% { translate: 0 0; rotate: -30deg; }
+  40% { translate: 18px 6px; rotate: -22deg; }
+  80% { translate: -5px -14px; rotate: -35deg; }
+}
+
+@keyframes nf-drift-5 {
+  0%, 100% { translate: 0 0; rotate: 60deg; }
+  50% { translate: -10px -20px; rotate: 50deg; }
+}
+
+@keyframes nf-drift-6 {
+  0%, 100% { translate: 0 0; rotate: 12deg; }
+  33% { translate: 14px -8px; rotate: 20deg; }
+  66% { translate: -10px 12px; rotate: 5deg; }
+}
+
+/* -----------------------------------------
+   Main content
+   ----------------------------------------- */
+.nf-main {
+  position: relative;
+  z-index: 5;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+}
+
+.nf-content {
+  text-align: center;
+  max-width: 600px;
+  animation: nf-fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.nf-label {
+  display: inline-block;
+  font-family: var(--nf-font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--nf-text-light);
+  border: 1px solid var(--nf-border);
+  padding: 0.35rem 0.9rem;
+  margin-bottom: 2rem;
+  animation: nf-fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+.nf-number {
+  font-family: var(--nf-font-display);
+  font-weight: 800;
+  font-size: clamp(7rem, 20vw, 16rem);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: var(--nf-navy);
+  margin: 0;
+  position: relative;
+  animation: nf-fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+  background: linear-gradient(
+    180deg,
+    var(--nf-navy) 0%,
+    var(--nf-navy-light) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nf-message {
+  font-family: var(--nf-font-body);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 400;
+  color: var(--nf-text-muted);
+  margin: 1.5rem 0 2.5rem;
+  line-height: 1.6;
+  animation: nf-fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+}
+
+/* -----------------------------------------
+   Buttons
+   ----------------------------------------- */
+.nf-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  animation: nf-fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+}
+
+.nf-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--nf-font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 0.7rem 1.6rem;
+  border-radius: 2px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.nf-btn--primary {
+  background: var(--nf-navy);
+  color: #fff;
+}
+
+.nf-btn--primary:hover {
+  background: var(--nf-navy-light);
+  transform: translateY(-1px);
+}
+
+.nf-btn--secondary {
+  background: transparent;
+  color: var(--nf-text-muted);
+  border: 1px solid var(--nf-border);
+}
+
+.nf-btn--secondary:hover {
+  border-color: var(--nf-navy);
+  color: var(--nf-navy);
+  transform: translateY(-1px);
+}
+
+/* -----------------------------------------
+   Footer
+   ----------------------------------------- */
+.nf-footer {
+  position: relative;
+  z-index: 10;
+  padding: 1.5rem clamp(1.25rem, 4vw, 3rem);
+  text-align: center;
+}
+
+.nf-footer__text {
+  font-family: var(--nf-font-mono);
+  font-size: 0.7rem;
+  color: var(--nf-text-light);
+  letter-spacing: 0.05em;
+}
+
+/* -----------------------------------------
+   Entrance animation
+   ----------------------------------------- */
+@keyframes nf-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* -----------------------------------------
+   Focus styles
+   ----------------------------------------- */
+[data-page="not-found"] *:focus-visible {
+  outline: 2px solid var(--nf-navy);
+  outline-offset: 2px;
+}
+
+/* -----------------------------------------
+   Reduced motion
+   ----------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .nf-shape {
+    animation: none !important;
+  }
+
+  .nf-content,
+  .nf-label,
+  .nf-number,
+  .nf-message,
+  .nf-actions {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+
+  [data-page="not-found"] {
+    --mx: 0 !important;
+    --my: 0 !important;
+  }
+}

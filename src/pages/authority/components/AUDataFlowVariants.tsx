@@ -706,17 +706,17 @@ const BLUEPRINT_CSS = `
 // Left connections: each source node connects to the platform's left edge
 // These are calculated based on the grid layout proportions
 const LEFT_PATHS = [
-  "M 220 76 C 244 76, 252 210, 268 210",
-  "M 220 142 C 248 142, 256 210, 268 210",
-  "M 220 210 L 268 210",
-  "M 220 278 C 248 278, 256 210, 268 210",
-  "M 220 344 C 244 344, 252 210, 268 210",
+  "M 220 94 C 248 94, 260 236, 276 236",
+  "M 220 165 C 248 165, 264 236, 276 236",
+  "M 220 236 L 276 236",
+  "M 220 307 C 248 307, 264 236, 276 236",
+  "M 220 378 C 248 378, 260 236, 276 236",
 ];
 
 const RIGHT_PATHS = [
-  "M 736 210 C 760 210, 780 148, 830 148",
-  "M 736 210 L 830 210",
-  "M 736 210 C 760 210, 780 310, 830 310",
+  "M 732 236 C 748 236, 772 165, 788 165",
+  "M 732 236 L 788 236",
+  "M 732 236 C 748 236, 772 307, 788 307",
 ];
 
 function Blueprint({ sources, outputs, titleBlockText }: {
@@ -884,7 +884,7 @@ function Blueprint({ sources, outputs, titleBlockText }: {
           {/* SVG connections layer */}
           <svg
             className="bp-svg"
-            viewBox="0 0 1004 420"
+            viewBox="0 0 988 440"
             preserveAspectRatio="none"
           >
             <defs>
@@ -914,8 +914,8 @@ function Blueprint({ sources, outputs, titleBlockText }: {
             ))}
 
             {/* Junction dots at platform edges */}
-            <circle className="bp-junction" cx="268" cy="210" r="3" />
-            <circle className="bp-junction" cx="736" cy="210" r="3" />
+            <circle className="bp-junction" cx="276" cy="236" r="3" />
+            <circle className="bp-junction" cx="732" cy="236" r="3" />
 
             {/* Flowing particle dots along left paths */}
             {LEFT_PATHS.map((d, i) => (
