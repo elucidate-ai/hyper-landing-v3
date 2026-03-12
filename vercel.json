@@ -21,6 +21,11 @@
       "has": [{ "type": "host", "value": "logistics.usehypr.com" }],
       "destination": "/logistics/$1"
     },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "investment.usehypr.com" }],
+      "destination": "/investment/$1"
+    },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
