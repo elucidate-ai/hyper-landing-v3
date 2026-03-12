@@ -492,17 +492,28 @@ const BLUEPRINT_CSS = `
   }
   .bp-node-name {
     font-size: 11px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: normal;
+    line-height: 1.3;
+    overflow-wrap: break-word;
   }
   /* Center the last node when odd count (label is child 1, so odd nodes end at even child index) */
   .bp-col > .bp-node:last-child:nth-child(even) {
     grid-column: 1 / -1;
-    max-width: calc(50% - 4px);
+    max-width: 60%;
     margin-inline: auto;
   }
   .bp-col--out { transform: none; }
+
+  @media (max-width: 379px) {
+    .bp-col {
+      grid-template-columns: 1fr;
+    }
+    .bp-col > .bp-node:last-child:nth-child(even) {
+      grid-column: unset;
+      max-width: none;
+      margin-inline: 0;
+    }
+  }
 
   /* Horizontal platform on mobile */
   .bp-platform {
