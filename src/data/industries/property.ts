@@ -8,7 +8,7 @@ export const propertyContent: SiteContent = {
   },
   navigation,
   hero: {
-    eyebrow: 'Dedicated data engineering for mid-market property groups',
+    eyebrow: 'Portfolio data consolidation for mid-market property groups',
     headline: 'Portfolio data consolidation,\nbuilt and managed for you.',
     subheadline:
       'We design, build, and operate production-grade rental roll pipelines, consolidation, and governance, turning scattered property data into a clean, reliable foundation your team can query and act on.',
@@ -72,14 +72,14 @@ export const propertyContent: SiteContent = {
     titleBlockText: 'HYPR SYSTEMS | PROPERTY DATA ARCHITECTURE',
     sources: [
       { iconKey: 'TbDatabase', color: '#2CA01C', name: 'PayProp' },
-      { iconKey: 'TbPlug', color: '#0072C6', name: 'MDA' },
+      { iconKey: 'TbPlug', color: '#0072C6', name: 'MDA Property' },
+      { iconKey: 'SiXero', color: '#13B5EA', name: 'Xero/QuickBooks' },
       { iconKey: 'TbApi', color: '#FF7A59', name: 'WeConnectU' },
-      { iconKey: 'TbPlug', color: '#6B4C9A', name: 'Sage' },
-      { iconKey: 'TbFileSpreadsheet', color: '#34A853', name: 'Maintenance CSVs' },
+      { iconKey: 'TbBuildingBank', color: '#6B4C9A', name: 'Standard Bank/FNB' },
     ],
     outputs: [
-      { iconKey: 'TbChartBar', color: '#1a3a5c', name: 'Dashboards' },
-      { iconKey: 'TbReportAnalytics', color: '#1a3a5c', name: 'Reports' },
+      { iconKey: 'TbChartBar', color: '#1a3a5c', name: 'Portfolio Dashboards' },
+      { iconKey: 'TbReportAnalytics', color: '#1a3a5c', name: 'Owner Reports' },
       { iconKey: 'TbFileAnalytics', color: '#1a3a5c', name: 'Analytics' },
     ],
   },

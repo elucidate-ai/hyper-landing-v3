@@ -12,6 +12,7 @@ import { retailContent } from './data/industries/retail'
 import { propertyContent } from './data/industries/property'
 import { motorContent } from './data/industries/motor'
 import { logisticsContent } from './data/industries/logistics'
+import { investmentContent } from './data/industries/investment'
 
 /**
  * All routes that should be statically prerendered at build time.
@@ -23,6 +24,7 @@ export const routes: string[] = [
   '/property',
   '/motor',
   '/logistics',
+  '/investment',
 ]
 
 /**
@@ -36,6 +38,7 @@ export const routesMeta: Record<string, { title: string; description: string }> 
   '/property': { title: propertyContent.siteMetadata.title, description: propertyContent.siteMetadata.description },
   '/motor': { title: motorContent.siteMetadata.title, description: motorContent.siteMetadata.description },
   '/logistics': { title: logisticsContent.siteMetadata.title, description: logisticsContent.siteMetadata.description },
+  '/investment': { title: investmentContent.siteMetadata.title, description: investmentContent.siteMetadata.description },
 }
 
 /**
@@ -53,6 +56,7 @@ export function render(url: string): string {
           <Route path="/property" element={<IndustryPage content={propertyContent} />} />
           <Route path="/motor" element={<IndustryPage content={motorContent} />} />
           <Route path="/logistics" element={<IndustryPage content={logisticsContent} />} />
+          <Route path="/investment" element={<IndustryPage content={investmentContent} />} />
         </Routes>
       </StaticRouter>
     </StrictMode>

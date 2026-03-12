@@ -8,7 +8,7 @@ export const retailContent: SiteContent = {
   },
   navigation,
   hero: {
-    eyebrow: 'Dedicated data engineering for mid-market retailers',
+    eyebrow: 'Sell-through data consolidation for mid-market retailers',
     headline: 'Sell-through data consolidation,\nbuilt and managed for you.',
     subheadline:
       'We design, build, and operate production-grade sell-through pipelines, consolidation, and governance, turning scattered channel data into a clean, reliable foundation your team can query and act on.',
@@ -71,15 +71,15 @@ export const retailContent: SiteContent = {
   dataFlow: {
     titleBlockText: 'HYPR SYSTEMS | RETAIL DATA ARCHITECTURE',
     sources: [
-      { iconKey: 'TbBuildingStore', color: '#96bf01', name: 'Lightspeed' },
       { iconKey: 'SiShopify', color: '#96bf48', name: 'Shopify' },
-      { iconKey: 'TbDatabase', color: '#0072C6', name: 'Takealot Seller' },
+      { iconKey: 'TbDatabase', color: '#0072C6', name: 'Takealot' },
+      { iconKey: 'TbBuildingStore', color: '#96bf01', name: 'Lightspeed' },
       { iconKey: 'TbPlug', color: '#6B4C9A', name: 'Sage/SYSPRO' },
-      { iconKey: 'TbFileSpreadsheet', color: '#34A853', name: 'Wholesale CSVs' },
+      { iconKey: 'SiGooglesheets', color: '#34A853', name: 'Google Sheets' },
     ],
     outputs: [
-      { iconKey: 'TbChartBar', color: '#1a3a5c', name: 'Dashboards' },
-      { iconKey: 'TbReportAnalytics', color: '#1a3a5c', name: 'Reports' },
+      { iconKey: 'TbChartBar', color: '#1a3a5c', name: 'Sell-Through Dashboards' },
+      { iconKey: 'TbReportAnalytics', color: '#1a3a5c', name: 'Channel Reports' },
       { iconKey: 'TbFileAnalytics', color: '#1a3a5c', name: 'Insights' },
     ],
   },

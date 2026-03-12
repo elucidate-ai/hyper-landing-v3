@@ -1,17 +1,17 @@
 import type { SiteContent } from '../content-types'
 import { navigation, trustBar, footer } from '../content'
 
-export const logisticsContent: SiteContent = {
+export const investmentContent: SiteContent = {
   siteMetadata: {
-    title: 'Hypr | Logistics Data',
-    description: 'Dedicated data engineering for mid-market logistics companies.',
+    title: 'Hypr | Investment Data',
+    description: 'Dedicated data engineering for mid-market investment managers.',
   },
   navigation,
   hero: {
-    eyebrow: 'Operational data consolidation for mid-market logistics companies',
-    headline: 'Operational data consolidation,\nbuilt and managed for you.',
+    eyebrow: 'Portfolio data consolidation for mid-market investment managers',
+    headline: 'Portfolio data consolidation,\nbuilt and managed for you.',
     subheadline:
-      'We design, build, and operate production-grade logistics pipelines, consolidation, and governance, turning scattered operational data into a clean, reliable foundation your team can query and act on.',
+      'We design, build, and operate production-grade investment pipelines, consolidation, and governance, turning scattered portfolio data into a clean, reliable foundation your team can query and act on.',
     ctas: [
       { label: 'Book a Free Discovery Call', href: 'https://calendly.com/saul-bloch-meeting/30min', variant: 'primary' },
       { label: 'Get in Touch', action: 'contact-form', href: '#', variant: 'secondary' },
@@ -24,115 +24,115 @@ export const logisticsContent: SiteContent = {
       {
         headline: 'Your data lives in 15 tools. Your decisions live in the dark.',
         fragments: [
-          'Warehouse in one system. Fleet in another. Billing in spreadsheets.',
+          'Positions in one system. Risk in another. Reporting in spreadsheets.',
           'Simple questions take <strong>half a day</strong> to answer.',
-          "It\u2019s not a delivery problem. It\u2019s a <strong>visibility</strong> problem.",
+          "It\u2019s not a data problem. It\u2019s a <strong>visibility</strong> problem.",
         ],
       },
       {
         headline: 'You tried consolidating in Excel. Then reality hit.',
         fragments: [
-          '<strong>Ten</strong> systems. <strong>Ten</strong> different formats. Every week.',
+          '<strong>Ten</strong> funds. <strong>Ten</strong> different formats. Every month.',
           'You still need someone just to keep the numbers current.',
-          "Built for one person\u2019s logic, <strong>not a growing logistics operation</strong>.",
+          "Built for one person\u2019s logic, <strong>not a growing investment operation</strong>.",
         ],
       },
       {
-        headline: "You hired a data person. You still can\u2019t see fleet performance.",
+        headline: "You hired a data person. You still can\u2019t see portfolio performance.",
         fragments: [
           'Analysts build reports, not the pipelines behind them.',
-          "<strong>One person</strong> can\u2019t maintain pipelines across depots and clients.",
+          "<strong>One person</strong> can\u2019t maintain pipelines across funds and mandates.",
           'Internal teams <strong>cost more</strong> and <strong>deliver less</strong> than dedicated specialists.',
         ],
       },
     ],
     transition:
-      "You don\u2019t need another platform, another tool, or another hire. You need a specialist team that delivers the operations dashboards your leadership needs and fully manages the infrastructure behind them, so your people can focus on making better routing decisions.",
+      "You don\u2019t need another platform, another tool, or another hire. You need a specialist team that delivers the portfolio dashboards your leadership needs and fully manages the infrastructure behind them, so your people can focus on making better investment decisions.",
   },
   solution: {
-    headline: 'Production-grade logistics data infrastructure: designed, built, and fully managed',
+    headline: 'Production-grade investment data infrastructure: designed, built, and fully managed',
     subheadline:
-      'Our specialist team builds and operates your complete logistics data layer, including ingestion, consolidation, governance, and monitoring, so your organisation gets clean, reliable, queryable data without building the capability in-house. Dashboards, operational insights, and better routing decisions follow from a foundation you can trust.',
+      'Our specialist team builds and operates your complete investment data layer, including ingestion, consolidation, governance, and monitoring, so your organisation gets clean, reliable, queryable data without building the capability in-house. Dashboards, portfolio insights, and better investment decisions follow from a foundation you can trust.',
     products: [
       {
         name: 'HyprFlow',
         tagline: 'Connect & Sync',
         description:
-          'Every logistics data source, from WMS platforms and fleet trackers to POD systems and ERPs, connected into a single, automated pipeline. Data arrives clean, on time, and governed. No engineering effort from your team.',
+          'Every investment data source, from portfolio management systems and custodian feeds to Bloomberg, risk engines, and fund accounting platforms, connected into a single, automated pipeline. Data arrives clean, on time, and governed. No engineering effort from your team.',
       },
       {
         name: 'HyprStore',
         tagline: 'Warehouse & Govern',
         description:
-          'A fully managed, production-grade logistics warehouse: modelled for operational performance, governed, and queryable from day one. The reliable foundation your business needs for SLA tracking, fleet utilisation, and cost-per-delivery.',
+          'A fully managed, production-grade investment warehouse: modelled for portfolio reporting, governed, and queryable from day one. The reliable foundation your business needs for performance attribution, risk monitoring, and client reporting.',
       },
     ],
   },
   dataFlow: {
-    titleBlockText: 'HYPR SYSTEMS | LOGISTICS DATA ARCHITECTURE',
+    titleBlockText: 'HYPR SYSTEMS | INVESTMENT DATA ARCHITECTURE',
     sources: [
-      { iconKey: 'TbMapPin', color: '#0072C6', name: 'Cartrack' },
-      { iconKey: 'TbTruck', color: '#FF7A59', name: 'MiX Telematics' },
-      { iconKey: 'TbDatabase', color: '#2CA01C', name: 'CartonCloud' },
-      { iconKey: 'SiSap', color: '#0FAAFF', name: 'Sage/SAP' },
-      { iconKey: 'SiXero', color: '#13B5EA', name: 'Xero' },
+      { iconKey: 'TbDatabase', color: '#0072C6', name: 'Iress' },
+      { iconKey: 'TbChartLine', color: '#FF6900', name: 'Bloomberg' },
+      { iconKey: 'SiXero', color: '#13B5EA', name: 'Xero/Sage' },
+      { iconKey: 'TbApi', color: '#6B4C9A', name: 'SS&C Advent' },
+      { iconKey: 'TbChartBar', color: '#2CA01C', name: 'MetaTrader/FlexTrade' },
     ],
     outputs: [
-      { iconKey: 'TbChartBar', color: '#1a3a5c', name: 'SLA Dashboards' },
+      { iconKey: 'TbChartBar', color: '#1a3a5c', name: 'Portfolio Dashboards' },
       { iconKey: 'TbReportAnalytics', color: '#1a3a5c', name: 'Client Reports' },
-      { iconKey: 'TbFileAnalytics', color: '#1a3a5c', name: 'Fleet Analytics' },
+      { iconKey: 'TbFileAnalytics', color: '#1a3a5c', name: 'Risk Analytics' },
     ],
   },
   process: {
-    headline: 'From scattered logistics data to clear insights in weeks',
+    headline: 'From scattered investment data to clear insights in weeks',
     subheadline:
-      'A proven process refined across dozens of logistics engagements. Your first tailored demo ships in days. Most logistics companies have production operational reporting within five weeks.',
+      'A proven process refined across dozens of investment engagements. Your first tailored demo ships in days. Most investment firms have production portfolio reporting within five weeks.',
     stages: [
       {
         phase: 'Discover',
         headline: 'A diagnostic worth having, even if you stop here',
         description:
-          'We map every logistics data source, interview ops and finance leads, and deliver a prioritised roadmap with quick wins: a standalone deliverable your team can act on, whether or not you move forward with Hypr.',
+          'We map every investment data source, interview portfolio and compliance leads, and deliver a prioritised roadmap with quick wins: a standalone deliverable your team can act on, whether or not you move forward with Hypr.',
         duration: 'Week 1',
       },
       {
         phase: 'Build',
         headline: 'Your first tailored demo in days, actionable insights in weeks',
         description:
-          'A working demo tailored to your logistics data within the first week. Weekly walkthroughs, full transparency, no surprises. Most logistics companies are in production within five weeks.',
+          'A working demo tailored to your investment data within the first week. Weekly walkthroughs, full transparency, no surprises. Most investment firms are in production within five weeks.',
         duration: 'Weeks 2\u20134',
       },
       {
         phase: 'Validate',
         headline: 'Your team tests, verifies, and signs off',
         description:
-          "Your team reviews the dashboards, checks delivery records against the WMS, and verifies the numbers match. We don\u2019t go live until you\u2019re confident the data is right.",
+          "Your team reviews the dashboards, checks portfolio valuations against your custodian, and verifies the numbers match. We don\u2019t go live until you\u2019re confident the data is right.",
         duration: 'Week 5',
       },
       {
         phase: 'Operate',
-        headline: 'A long-term partnership that scales with your depots',
+        headline: 'A long-term partnership that scales with your AUM',
         description:
-          'We monitor 24/7, resolve issues before they reach you, and evolve your platform as you grow. New depots, new clients, and new integrations, all from your managed logistics data department.',
+          'We monitor 24/7, resolve issues before they reach you, and evolve your platform as you grow. New funds, new mandates, and new integrations, all from your managed investment data department.',
         duration: 'Ongoing',
       },
     ],
   },
   comparison: {
-    headline: "Three paths to logistics analytics. One doesn\u2019t need a data team.",
+    headline: "Three paths to portfolio analytics. One doesn\u2019t need a data team.",
     subheadline:
       "Every approach has trade-offs. Here\u2019s what each one actually costs, how long it takes, and what it demands from your team.",
     approaches: [
       {
         name: 'Hypr',
-        tagline: 'Managed logistics data partner',
+        tagline: 'Managed investment data partner',
         highlighted: true,
         metrics: [
           { label: 'Time to first insight', value: 'Days' },
           { label: 'Total cost of ownership', value: 'Up to 80% less' },
           { label: 'Ongoing iteration speed', value: 'Fast' },
           { label: 'Risk of project failure', value: "Guaranteed or you don\u2019t pay" },
-          { label: 'Expertise included', value: 'Logistics data eng. + operational modelling' },
+          { label: 'Expertise included', value: 'Investment data eng. + portfolio modelling' },
           { label: 'Switching cost / lock-in', value: 'Transition to in-house anytime' },
         ],
       },
@@ -163,29 +163,29 @@ export const logisticsContent: SiteContent = {
     ],
   },
   results: {
-    headline: 'Real results from real logistics companies',
+    headline: 'Real results from real investment managers',
     stats: [
-      { value: '35TB', label: 'Total logistics data processed per month' },
+      { value: '35TB', label: 'Total investment data processed per month' },
       { value: '20+ hours', label: 'Saved weekly on manual reporting per client' },
-      { value: '200+', label: 'Pre-built logistics connectors' },
+      { value: '200+', label: 'Pre-built investment connectors' },
       { value: '95%+', label: 'Client retention rate year-over-year' },
     ],
     testimonials: [
       {
         quote:
-          "When you\u2019re distributing ten brands into three thousand stores, every retailer sends you data in a different format and none of it lines up by default. We were spending serious time every week just reconciling what actually sold, where, and at what margin. Hypr built us one place where all of it lives (by brand, by retailer, by region) and now that reconciliation just happens.",
-        author: 'Avi Mishan',
-        title: 'Managing Director',
-        company: 'SMD Technologies',
-        result: 'Multi-brand sell-through and margin visibility across 3,000+ retail doors, fully automated',
+          "When your business runs on financial data across multiple platforms, the worst thing you can do is make decisions on numbers that aren\u2019t reconciled. Before Hypr, getting to a clean, trusted view took days of manual work every month. Now it\u2019s just there. As a CA I care about the integrity of the numbers and that\u2019s exactly what Hypr delivers.",
+        author: 'Michael Roffey CA(SA)',
+        title: 'Co-Founder',
+        company: 'Airvantage',
+        result: 'From days of manual reconciliation to live, trusted financial data',
       },
       {
         quote:
-          "What started as a single dashboard has grown into how our whole company looks at performance. Hypr\u2019s team keeps evolving it as we grow with new data sources, new questions, new parts of the business asking for the same visibility. We never had to hire a data team to get here.",
-        author: 'Lisa-Marie B.',
-        title: 'Head of Operations',
-        company: 'SayHi',
-        result: 'From a single dashboard to company-wide analytics platform in 12 months, still scaling',
+          "We seriously considered building our own data infrastructure. The quotes we got back were unpredictable, the timelines were optimistic, and we\u2019d have needed engineers just to keep it running. Hypr was live and managed in four weeks. The build option would still be running today.",
+        author: 'Joshua K.',
+        title: 'CEO',
+        company: 'Sourcefin',
+        result: 'Live dashboards in 6 weeks at 60% lower cost than building in-house',
       },
       {
         quote:
@@ -193,12 +193,12 @@ export const logisticsContent: SiteContent = {
         author: 'Verified 5-star client review',
         title: '',
         company: 'G2.com',
-        result: 'Every G2 reviewer says the same thing: Hypr understood their business',
+        result: 'Every verified G2 reviewer says the same thing: Hypr understood their business',
       },
     ],
   },
   security: {
-    headline: 'Your logistics data security is non-negotiable',
+    headline: 'Your investment data security is non-negotiable',
     subheadline:
       'Every layer of our infrastructure is built to protect your most sensitive data. No shortcuts.',
     features: [
@@ -220,7 +220,7 @@ export const logisticsContent: SiteContent = {
       },
       {
         name: 'Role-Based Access',
-        description: 'Granular permissions ensure depot managers, fleet coordinators, and finance only access the data they need, with complete audit logging of every action. Integrates with your existing SSO provider for centralised identity management.',
+        description: 'Granular permissions ensure portfolio managers, compliance, and client reporting teams only access the data they need, with complete audit logging of every action. Integrates with your existing SSO provider for centralised identity management.',
       },
       {
         name: 'Data Residency',
@@ -230,9 +230,9 @@ export const logisticsContent: SiteContent = {
   },
   finalCta: {
     badge: 'START HERE',
-    headline: 'See what your logistics analytics could look like in five weeks',
+    headline: 'See what your investment analytics could look like in five weeks',
     subheadline:
-      "Start with a free discovery call. We\u2019ll map your logistics data sources, identify quick wins, and show you a tailored preview of the operations dashboards we\u2019d build. It\u2019s a valuable diagnostic whether or not you move forward.",
+      "Start with a free discovery call. We\u2019ll map your investment data sources, identify quick wins, and show you a tailored preview of the portfolio dashboards we\u2019d build. It\u2019s a valuable diagnostic whether or not you move forward.",
     ctas: [
       { label: 'Book a Free Discovery Call', href: 'https://calendly.com/saul-bloch-meeting/30min', variant: 'primary' },
       { label: 'Get in Touch', action: 'contact-form', href: '#', variant: 'secondary' },
@@ -240,7 +240,7 @@ export const logisticsContent: SiteContent = {
     trustBadges: ['Free data diagnostic included', 'Zero obligation', 'Fully managed from day one'],
   },
   contactModal: {
-    title: 'Tell us about your logistics data challenge',
+    title: 'Tell us about your investment data challenge',
     subtitle: "Not ready for a call? No problem. Drop us a message and we\u2019ll get back to you within one business day.",
   },
   footer,

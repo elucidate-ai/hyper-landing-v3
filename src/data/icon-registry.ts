@@ -6,9 +6,11 @@ import {
   SiQuickbooks,
   SiGooglesheets,
   SiShopify,
+  SiXero,
 } from 'react-icons/si'
 import {
   TbChartBar,
+  TbChartLine,
   TbBrain,
   TbFileAnalytics,
   TbDatabase,
@@ -18,6 +20,7 @@ import {
   TbTruck,
   TbMapPin,
   TbBuildingStore,
+  TbBuildingBank,
   TbCar,
   TbReportAnalytics,
 } from 'react-icons/tb'
@@ -34,9 +37,11 @@ export const iconRegistry: Record<string, IconType> = {
   SiQuickbooks,
   SiGooglesheets,
   SiShopify,
+  SiXero,
 
   // Generic Tabler icons for industry-specific tools
   TbChartBar,
+  TbChartLine,
   TbBrain,
   TbFileAnalytics,
   TbDatabase,
@@ -46,6 +51,7 @@ export const iconRegistry: Record<string, IconType> = {
   TbTruck,
   TbMapPin,
   TbBuildingStore,
+  TbBuildingBank,
   TbCar,
   TbReportAnalytics,
 }

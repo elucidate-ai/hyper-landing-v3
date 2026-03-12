@@ -8,7 +8,7 @@ export const motorContent: SiteContent = {
   },
   navigation,
   hero: {
-    eyebrow: 'Dedicated data engineering for mid-market dealer groups',
+    eyebrow: 'Dealership data consolidation for mid-market motor groups',
     headline: 'Dealership data consolidation,\nbuilt and managed for you.',
     subheadline:
       'We design, build, and operate production-grade dealership pipelines, consolidation, and governance, turning scattered rooftop data into a clean, reliable foundation your team can query and act on.',
@@ -71,11 +71,11 @@ export const motorContent: SiteContent = {
   dataFlow: {
     titleBlockText: 'HYPR SYSTEMS | DEALER DATA ARCHITECTURE',
     sources: [
-      { iconKey: 'TbCar', color: '#0072C6', name: 'Automate' },
-      { iconKey: 'TbDatabase', color: '#FF7A59', name: 'ERIS' },
-      { iconKey: 'TbPlug', color: '#2CA01C', name: 'Pinewood' },
-      { iconKey: 'TbApi', color: '#6B4C9A', name: 'OEM Portals' },
-      { iconKey: 'TbPlug', color: '#0FAAFF', name: 'Sage/SAP B1' },
+      { iconKey: 'TbDatabase', color: '#0072C6', name: 'Keyloop' },
+      { iconKey: 'TbCar', color: '#FF7A59', name: 'Toyota/VW' },
+      { iconKey: 'SiSap', color: '#0FAAFF', name: 'SAP/Sage' },
+      { iconKey: 'TbPlug', color: '#6B4C9A', name: 'AutoMate' },
+      { iconKey: 'TbApi', color: '#2CA01C', name: 'Pinewood' },
     ],
     outputs: [
       { iconKey: 'TbChartBar', color: '#1a3a5c', name: 'Group Dashboards' },
@@ -173,27 +173,27 @@ export const motorContent: SiteContent = {
     testimonials: [
       {
         quote:
-          "Before Hypr, our group finance team spent two days every week pulling data from twelve rooftops into spreadsheets. Now we have live dashboards that update automatically. We\u2019ve reallocated that time to actually improving dealership performance.",
-        author: '[Name]',
-        title: 'Group Financial Director',
-        company: '[Company]',
-        result: 'Group finance reclaimed 16+ hours per week for performance analysis',
+          "Before Hypr, my team spent two full days every week just pulling numbers from different platforms into spreadsheets before we could even start analysing anything. Now the data is just there, live, every morning. We stopped talking about where the numbers come from and started talking about what to do about them.",
+        author: 'Ricky M.',
+        title: 'CMO',
+        company: '3Way Marketing',
+        result: 'Marketing team reclaimed 25+ hours per week for actual decision-making',
       },
       {
         quote:
-          "We evaluated building our own warehouse, but the costs were unpredictable and we\u2019d have needed engineers just to manage it. Hypr gave us consolidated group performance dashboards at a fraction of the cost, fully managed and live in four weeks.",
-        author: '[Name]',
-        title: '[Role]',
-        company: '[Company]',
-        result: 'Live dashboards in 4 weeks at 60% lower cost than in-house alternatives',
+          "We seriously considered building our own data infrastructure. The quotes we got were unpredictable, the timelines were optimistic, and we would have needed to hire engineers just to keep it running. Hypr gave us everything we needed. The build option would still be running today.",
+        author: 'Joshua K.',
+        title: 'CEO',
+        company: 'Sourcefin',
+        result: 'Live dashboards in 6 weeks at 60% lower cost than building in-house',
       },
       {
         quote:
-          "What started as a sales performance dashboard has grown into a company-wide dealer analytics platform. Hypr\u2019s team evolves our infrastructure as we expand. It\u2019s like having an entire data department without the headcount.",
-        author: '[Name]',
-        title: '[Role]',
-        company: '[Company]',
-        result: 'From a single dashboard to multi-rooftop dealer analytics platform in 12 months, and still scaling',
+          "We\u2019d been through other providers who could build things, but never really understood what we were trying to achieve. Hypr was different from day one. They came in, understood the business, and built something we actually use every day. Twelve months later we\u2019re still expanding it.",
+        author: 'Verified 5-star client review',
+        title: '',
+        company: 'G2.com',
+        result: 'From first dashboard to company-wide analytics platform in 12 months, still scaling',
       },
     ],
   },

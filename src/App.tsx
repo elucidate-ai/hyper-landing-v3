@@ -13,6 +13,7 @@ const industryModules: Record<string, () => Promise<{ default?: SiteContent } & 
   property: () => import('./data/industries/property').then((m) => ({ propertyContent: m.propertyContent }) as never),
   motor: () => import('./data/industries/motor').then((m) => ({ motorContent: m.motorContent }) as never),
   logistics: () => import('./data/industries/logistics').then((m) => ({ logisticsContent: m.logisticsContent }) as never),
+  investment: () => import('./data/industries/investment').then((m) => ({ investmentContent: m.investmentContent }) as never),
 }
 
 const contentKeys: Record<string, string> = {
@@ -20,6 +21,7 @@ const contentKeys: Record<string, string> = {
   property: 'propertyContent',
   motor: 'motorContent',
   logistics: 'logisticsContent',
+  investment: 'investmentContent',
 }
 
 function IndustryRoute({ industry }: { industry: string }) {
@@ -44,7 +46,7 @@ function IndustryRoute({ industry }: { industry: string }) {
  */
 function resolveIndustryFromHost(): string | null {
   const host = window.location.hostname
-  const match = host.match(/^(retail|property|motor|logistics)\./)
+  const match = host.match(/^(retail|property|motor|logistics|investment)\./)
   return match ? match[1] : null
 }
 
@@ -148,6 +150,7 @@ export default function App() {
             <Route path="/property" element={<IndustryRoute industry="property" />} />
             <Route path="/motor" element={<IndustryRoute industry="motor" />} />
             <Route path="/logistics" element={<IndustryRoute industry="logistics" />} />
+            <Route path="/investment" element={<IndustryRoute industry="investment" />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </SplashWrapper>
