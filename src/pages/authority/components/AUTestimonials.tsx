@@ -85,7 +85,7 @@ export function AUTestimonials() {
                 <div className="au-testimonial__author">
                   <div className="au-testimonial__author-name">{testimonial.author}</div>
                   <div className="au-testimonial__author-role">
-                    {testimonial.title}, {testimonial.company}
+                    {testimonial.title}{testimonial.title && testimonial.company ? ', ' : ''}{testimonial.company}
                   </div>
                 </div>
               </div>
