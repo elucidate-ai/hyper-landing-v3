@@ -1,4 +1,5 @@
-import { useRef, useCallback } from 'react'
+import { useRef, useCallback, useEffect } from 'react'
+import { usePostHog, PostHogCaptureOnViewed } from '@posthog/react'
 import { ContentProvider } from '../../data/ContentContext'
 import { defaultContent } from '../../data/content'
 import './authority.css'
@@ -16,8 +17,13 @@ import { AUFinalCta } from './components/AUFinalCta'
 import { AUContactModal, type ContactModalHandle } from './components/AUContactModal'
 
 export default function AuthorityPage() {
+  const posthog = usePostHog()
   const contactRef = useRef<ContactModalHandle>(null)
   const openContact = useCallback(() => contactRef.current?.open(), [])
+
+  useEffect(() => {
+    posthog?.register({ page_variant: 'authority' })
+  }, [posthog])
 
   return (
     <ContentProvider content={defaultContent}>
@@ -27,23 +33,41 @@ export default function AuthorityPage() {
         <AUNav />
 
         <main id="main-content">
-          <AUHero onOpenContact={openContact} />
+          <PostHogCaptureOnViewed name="section_viewed" properties={{ section: 'hero' }}>
+            <AUHero onOpenContact={openContact} />
+          </PostHogCaptureOnViewed>
 
-          <AUProblem />
+          <PostHogCaptureOnViewed name="section_viewed" properties={{ section: 'problem' }}>
+            <AUProblem />
+          </PostHogCaptureOnViewed>
 
-          <AUDataFlowVariants />
+          <PostHogCaptureOnViewed name="section_viewed" properties={{ section: 'solutions' }}>
+            <AUDataFlowVariants />
+          </PostHogCaptureOnViewed>
 
-          <AUStatsWall />
+          <PostHogCaptureOnViewed name="section_viewed" properties={{ section: 'stats' }}>
+            <AUStatsWall />
+          </PostHogCaptureOnViewed>
 
-          <AUTestimonials />
+          <PostHogCaptureOnViewed name="section_viewed" properties={{ section: 'testimonials' }}>
+            <AUTestimonials />
+          </PostHogCaptureOnViewed>
 
-          <AUProcess />
+          <PostHogCaptureOnViewed name="section_viewed" properties={{ section: 'process' }}>
+            <AUProcess />
+          </PostHogCaptureOnViewed>
 
-          <AUComparisonMatrix />
+          <PostHogCaptureOnViewed name="section_viewed" properties={{ section: 'comparison' }}>
+            <AUComparisonMatrix />
+          </PostHogCaptureOnViewed>
 
-          <AUSecurity />
+          <PostHogCaptureOnViewed name="section_viewed" properties={{ section: 'security' }}>
+            <AUSecurity />
+          </PostHogCaptureOnViewed>
 
-          <AUFinalCta onOpenContact={openContact} />
+          <PostHogCaptureOnViewed name="section_viewed" properties={{ section: 'final_cta' }}>
+            <AUFinalCta onOpenContact={openContact} />
+          </PostHogCaptureOnViewed>
         </main>
 
         <AUContactModal ref={contactRef} />

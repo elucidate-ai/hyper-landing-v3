@@ -1,3 +1,4 @@
+import { usePostHog } from '@posthog/react'
 import { useContent } from '../../../data/ContentContext'
 import { ScrollReveal } from '../../../shared/components/ScrollReveal'
 import logoSvg from '../../../../assets/logo-blue.svg'
@@ -7,6 +8,7 @@ interface AUFinalCtaProps {
 }
 
 export function AUFinalCta({ onOpenContact }: AUFinalCtaProps) {
+  const posthog = usePostHog()
   const { finalCta } = useContent()
   return (
     <section className="au-final-cta" id="contact" aria-label="Call to action" style={{ paddingBottom: '6rem' }}>
@@ -36,12 +38,20 @@ export function AUFinalCta({ onOpenContact }: AUFinalCtaProps) {
                   key={cta.label}
                   type="button"
                   className={btnClass}
-                  onClick={onOpenContact}
+                  onClick={() => {
+                    posthog?.capture('cta_clicked', { label: cta.label, location: 'final_cta', action: 'contact_form' })
+                    onOpenContact?.()
+                  }}
                 >
                   {cta.label}
                 </button>
               ) : (
-                <a key={cta.label} href={cta.href} className={btnClass}>
+                <a
+                  key={cta.label}
+                  href={cta.href}
+                  className={btnClass}
+                  onClick={() => posthog?.capture('cta_clicked', { label: cta.label, location: 'final_cta', action: 'calendly' })}
+                >
                   {cta.label}
                 </a>
               )

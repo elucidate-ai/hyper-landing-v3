@@ -1,8 +1,10 @@
 import { useRef, useCallback, useEffect } from 'react'
+import { usePostHog } from '@posthog/react'
 import { useContent } from '../../../data/ContentContext'
 import { ScrollReveal } from '../../../shared/components/ScrollReveal'
 
 export function AUTestimonials() {
+  const posthog = usePostHog()
   const { results } = useContent()
   const scrollRef = useRef<HTMLDivElement>(null)
   const dotsRef = useRef<HTMLDivElement>(null)
@@ -47,11 +49,12 @@ export function AUTestimonials() {
     if (!el) return
     const cards = el.querySelectorAll<HTMLElement>('.au-testimonial')
     if (index >= cards.length) return
+    posthog?.capture('testimonial_navigated', { index, total: cards.length })
     const containerLeft = el.getBoundingClientRect().left
     const cardLeft = cards[index].getBoundingClientRect().left
     const offset = cardLeft - containerLeft + el.scrollLeft
     el.scrollTo({ left: offset, behavior: 'smooth' })
-  }, [])
+  }, [posthog])
 
   useEffect(() => {
     updateDots(0)

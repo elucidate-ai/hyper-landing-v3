@@ -37,7 +37,7 @@ function IndustryRoute({ industry }: { industry: string }) {
   }, [industry])
 
   if (!content) return <LoadingFallback />
-  return <IndustryPage content={content} />
+  return <IndustryPage content={content} industry={industry} />
 }
 
 /**

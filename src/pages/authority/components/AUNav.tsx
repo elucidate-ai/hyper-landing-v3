@@ -1,9 +1,11 @@
 import { useState, useCallback, useEffect } from 'react'
+import { usePostHog } from '@posthog/react'
 import { useContent } from '../../../data/ContentContext'
 import { Menu, X } from 'lucide-react'
 import logoSvg from '../../../../assets/logo-blue.svg'
 
 export function AUNav() {
+  const posthog = usePostHog()
   const { navigation } = useContent()
   const [open, setOpen] = useState(false)
 
@@ -36,11 +38,26 @@ export function AUNav() {
 
         <div className={`au-nav__links${open ? ' au-nav__links--open' : ''}`}>
           {navigation.items.map((item) => (
-            <a key={item.label} href={item.href} className="au-nav__link" onClick={close}>
+            <a
+              key={item.label}
+              href={item.href}
+              className="au-nav__link"
+              onClick={() => {
+                posthog?.capture('nav_link_clicked', { label: item.label, href: item.href })
+                close()
+              }}
+            >
               {item.label}
             </a>
           ))}
-          <a href={navigation.cta.href} className="au-nav__cta" onClick={close}>
+          <a
+            href={navigation.cta.href}
+            className="au-nav__cta"
+            onClick={() => {
+              posthog?.capture('cta_clicked', { label: navigation.cta.label, location: 'nav' })
+              close()
+            }}
+          >
             {navigation.cta.label}
           </a>
         </div>

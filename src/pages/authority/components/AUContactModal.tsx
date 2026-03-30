@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect, useImperativeHandle, forwardRef } from 'react'
+import { usePostHog } from '@posthog/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, CheckCircle } from 'lucide-react'
 import { useContent } from '../../../data/ContentContext'
@@ -8,11 +9,17 @@ export interface ContactModalHandle {
 }
 
 export const AUContactModal = forwardRef<ContactModalHandle>(function AUContactModal(_, ref) {
+  const posthog = usePostHog()
   const { contactModal } = useContent()
   const [open, setOpen] = useState(false)
   const onClose = useCallback(() => setOpen(false), [])
 
-  useImperativeHandle(ref, () => ({ open: () => setOpen(true) }), [])
+  useImperativeHandle(ref, () => ({
+    open: () => {
+      posthog?.capture('contact_form_opened')
+      setOpen(true)
+    },
+  }), [posthog])
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
@@ -34,8 +41,10 @@ export const AUContactModal = forwardRef<ContactModalHandle>(function AUContactM
         })
 
         if (!res.ok) throw new Error('Submission failed')
+        posthog?.capture('contact_form_submitted', { email })
         setSubmitted(true)
       } catch {
+        posthog?.capture('contact_form_error')
         setError('Something went wrong. Please try again.')
       } finally {
         setSubmitting(false)
@@ -44,9 +53,13 @@ export const AUContactModal = forwardRef<ContactModalHandle>(function AUContactM
     [name, email, message]
   )
 
-  // Reset on close
+  // Track abandonment & reset on close
   useEffect(() => {
     if (!open) {
+      const hadInput = !!(name.trim() || email.trim() || message.trim())
+      if (hadInput && !submitted) {
+        posthog?.capture('contact_form_abandoned', { had_name: !!name.trim(), had_email: !!email.trim(), had_message: !!message.trim() })
+      }
       const timeout = setTimeout(() => {
         setName('')
         setEmail('')

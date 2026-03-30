@@ -1,3 +1,4 @@
+import { usePostHog } from '@posthog/react'
 import { useContent } from '../../../data/ContentContext'
 import { ScrollReveal } from '../../../shared/components/ScrollReveal'
 import { IsometricBlocks } from './hero-graphics/IsometricBlocks'
@@ -8,6 +9,7 @@ interface AUHeroProps {
 }
 
 export function AUHero({ onOpenContact }: AUHeroProps) {
+  const posthog = usePostHog()
   const { hero } = useContent()
   return (
     <section className="au-hero" aria-label="Hero">
@@ -36,7 +38,10 @@ export function AUHero({ onOpenContact }: AUHeroProps) {
                     key={cta.label}
                     type="button"
                     className={`au-btn au-btn--${cta.variant}`}
-                    onClick={onOpenContact}
+                    onClick={() => {
+                      posthog?.capture('cta_clicked', { label: cta.label, location: 'hero', action: 'contact_form' })
+                      onOpenContact?.()
+                    }}
                   >
                     {cta.label}
                   </button>
@@ -45,6 +50,7 @@ export function AUHero({ onOpenContact }: AUHeroProps) {
                     key={cta.label}
                     href={cta.href}
                     className={`au-btn au-btn--${cta.variant}`}
+                    onClick={() => posthog?.capture('cta_clicked', { label: cta.label, location: 'hero', action: 'calendly' })}
                   >
                     {cta.label}
                   </a>
