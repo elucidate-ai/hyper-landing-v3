@@ -5,7 +5,9 @@ import { Routes, Route } from 'react-router-dom'
 
 // Synchronous imports — no lazy loading for SSR
 import AuthorityPage from './pages/authority/AuthorityPage'
+import DiagnosticPage from './pages/diagnostic/DiagnosticPage'
 import IndustryPage from './pages/industry/IndustryPage'
+import { defaultContent } from './data/content'
 
 // Synchronous industry content imports
 import { retailContent } from './data/industries/retail'
@@ -20,6 +22,7 @@ import { investmentContent } from './data/industries/investment'
 export const routes: string[] = [
   '/',
   '/authority',
+  '/diagnostic',
   '/retail',
   '/property',
   '/motor',
@@ -34,6 +37,10 @@ export const routes: string[] = [
 export const routesMeta: Record<string, { title: string; description: string }> = {
   '/': { title: 'Hypr | Dedicated Data Engineering', description: 'Dedicated data engineering for mid-market companies.' },
   '/authority': { title: 'Hypr | Dedicated Data Engineering', description: 'Dedicated data engineering for mid-market companies.' },
+  '/diagnostic': {
+    title: `Hypr | ${defaultContent.diagnostic.title}`,
+    description: `${defaultContent.diagnostic.intro.subheadline} ${defaultContent.diagnostic.cta.supportingText}`,
+  },
   '/retail': { title: retailContent.siteMetadata.title, description: retailContent.siteMetadata.description },
   '/property': { title: propertyContent.siteMetadata.title, description: propertyContent.siteMetadata.description },
   '/motor': { title: motorContent.siteMetadata.title, description: motorContent.siteMetadata.description },
@@ -52,6 +59,7 @@ export function render(url: string): string {
         <Routes>
           <Route path="/" element={<AuthorityPage />} />
           <Route path="/authority" element={<AuthorityPage />} />
+          <Route path="/diagnostic" element={<DiagnosticPage />} />
           <Route path="/retail" element={<IndustryPage content={retailContent} />} />
           <Route path="/property" element={<IndustryPage content={propertyContent} />} />
           <Route path="/motor" element={<IndustryPage content={motorContent} />} />

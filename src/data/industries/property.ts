@@ -1,5 +1,6 @@
 import type { SiteContent } from '../content-types'
 import { navigation, trustBar, footer } from '../content'
+import { buildIndustryDiagnosticContent, diagnosticBookingHref, diagnosticHrefByIndustry } from '../diagnostic-content'
 
 export const propertyContent: SiteContent = {
   siteMetadata: {
@@ -13,7 +14,8 @@ export const propertyContent: SiteContent = {
     subheadline:
       'We design, build, and operate production-grade rental roll pipelines, consolidation, and governance, turning scattered property data into a clean, reliable foundation your team can query and act on.',
     ctas: [
-      { label: 'Book a Free Discovery Call', href: 'https://calendly.com/saul-bloch-meeting/30min', variant: 'primary' },
+      { label: 'Book a Free Discovery Call', href: diagnosticBookingHref, variant: 'primary' },
+      { label: 'Run the Property Diagnostic', href: diagnosticHrefByIndustry.property, variant: 'tertiary' },
       { label: 'Get in Touch', action: 'contact-form', href: '#', variant: 'secondary' },
     ],
   },
@@ -234,8 +236,9 @@ export const propertyContent: SiteContent = {
     subheadline:
       "Start with a free discovery call. We\u2019ll map your property data sources, identify quick wins, and show you a tailored preview of the portfolio dashboards we\u2019d build. It\u2019s a valuable diagnostic whether or not you move forward.",
     ctas: [
-      { label: 'Book a Free Discovery Call', href: 'https://calendly.com/saul-bloch-meeting/30min', variant: 'primary' },
-      { label: 'Get in Touch', action: 'contact-form', href: '#', variant: 'secondary' },
+      { label: 'Book a Free Discovery Call', href: diagnosticBookingHref, variant: 'primary' },
+      { label: 'Run the Property Diagnostic', href: diagnosticHrefByIndustry.property, variant: 'secondary' },
+      { label: 'Get in Touch', action: 'contact-form', href: '#', variant: 'tertiary' },
     ],
     trustBadges: ['Free data diagnostic included', 'Zero obligation', 'Fully managed from day one'],
   },
@@ -244,4 +247,5 @@ export const propertyContent: SiteContent = {
     subtitle: "Not ready for a call? No problem. Drop us a message and we\u2019ll get back to you within one business day.",
   },
   footer,
+  diagnostic: buildIndustryDiagnosticContent('property'),
 }

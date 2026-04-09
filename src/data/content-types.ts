@@ -190,6 +190,140 @@ export interface ContactModalContent {
   subtitle: string
 }
 
+export type IndustrySlug = 'retail' | 'property' | 'motor' | 'logistics' | 'investment'
+
+export type DiagnosticProductKey = 'flow' | 'store' | 'lens'
+
+export type DiagnosticProfileId =
+  | 'visibility-gap'
+  | 'trust-gap'
+  | 'manual-drag'
+  | 'foundation-strain'
+  | 'full-stack-pressure'
+
+export type DiagnosticMaturityValue = 1 | 2 | 3 | 4 | 5
+
+export type DiagnosticScoreBand = 'low' | 'mid' | 'high'
+
+export interface DiagnosticMaturityOption {
+  value: DiagnosticMaturityValue
+  label: string
+  description: string
+}
+
+export interface DiagnosticQuestion {
+  id: string
+  theme: string
+  prompt: string
+  options: DiagnosticMaturityOption[]
+}
+
+export interface DiagnosticPillarRecommendations {
+  low: string[]
+  mid: string[]
+  high: string[]
+}
+
+export interface DiagnosticPillar {
+  id: string
+  name: string
+  description: string
+  accent: string
+  questions: DiagnosticQuestion[]
+  productWeights: Partial<Record<DiagnosticProductKey, number>>
+  profileWeights: Partial<Record<Exclude<DiagnosticProfileId, 'full-stack-pressure'>, number>>
+  recommendations: DiagnosticPillarRecommendations
+}
+
+export interface DiagnosticIntroContent {
+  eyebrow: string
+  headline: string
+  subheadline: string
+  bullets: string[]
+  estimatedTime: string
+  secondaryCta: {
+    label: string
+    href: string
+  }
+}
+
+export interface DiagnosticRecommendation {
+  key: DiagnosticProductKey
+  name: string
+  tagline: string
+  description: string
+  outcome: string
+}
+
+export interface DiagnosticResultProfile {
+  id: DiagnosticProfileId
+  headline: string
+  summary: string
+  rootCause: string
+  recommendationLead: string
+  bookingPrompt: string
+}
+
+export interface DiagnosticReviewContent {
+  eyebrow: string
+  headline: string
+  subheadline: string
+  incompleteMessage: string
+  completeMessage: string
+  emptyMessage: string
+}
+
+export interface DiagnosticContent {
+  title: string
+  contextLabel: string
+  intro: DiagnosticIntroContent
+  pillars: DiagnosticPillar[]
+  profiles: Record<DiagnosticProfileId, DiagnosticResultProfile>
+  recommendations: Record<DiagnosticProductKey, DiagnosticRecommendation>
+  review: DiagnosticReviewContent
+  cta: {
+    label: string
+    href: string
+    supportingText: string
+  }
+}
+
+export interface DiagnosticQuestionScore {
+  questionId: string
+  theme: string
+  prompt: string
+  score: DiagnosticMaturityValue | null
+}
+
+export interface DiagnosticPillarScore {
+  pillarId: string
+  pillarName: string
+  pillarDescription: string
+  accent: string
+  score: number | null
+  maturity: string | null
+  answeredCount: number
+  totalQuestions: number
+  questionScores: DiagnosticQuestionScore[]
+  recommendations: string[]
+}
+
+export interface DiagnosticOutcome {
+  overallScore: number | null
+  overallMaturity: string | null
+  answeredCount: number
+  totalQuestions: number
+  completionPercent: number
+  pillarScores: DiagnosticPillarScore[]
+  strongestPillars: DiagnosticPillarScore[]
+  weakestPillars: DiagnosticPillarScore[]
+  quickWins: string[]
+  products: DiagnosticProductKey[]
+  productScores: Record<DiagnosticProductKey, number>
+  profile: DiagnosticResultProfile | null
+  profileScores: Record<DiagnosticProfileId, number>
+}
+
 // Aggregate site content — everything needed to render the full page
 export interface SiteContent {
   siteMetadata: SiteMetadata
@@ -206,4 +340,5 @@ export interface SiteContent {
   finalCta: FinalCtaSection
   contactModal: ContactModalContent
   footer: FooterContent
+  diagnostic: DiagnosticContent
 }

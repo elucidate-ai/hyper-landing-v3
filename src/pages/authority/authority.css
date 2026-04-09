@@ -291,6 +291,18 @@
   transform: translateY(-1px);
 }
 
+[data-page="authority"] .au-btn--tertiary {
+  background: transparent;
+  color: var(--au-text);
+  border: 1px dashed rgba(26, 58, 92, 0.25);
+}
+
+[data-page="authority"] .au-btn--tertiary:hover {
+  border-color: rgba(26, 58, 92, 0.45);
+  background: rgba(26, 58, 92, 0.04);
+  transform: translateY(-1px);
+}
+
 [data-page="authority"] .au-btn--primary-inverted {
   background: #ffffff;
   color: var(--au-navy);
@@ -310,6 +322,18 @@
 
 [data-page="authority"] .au-btn--secondary-inverted:hover {
   border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-1px);
+}
+
+[data-page="authority"] .au-btn--tertiary-inverted {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.86);
+  border: 1px dashed rgba(255, 255, 255, 0.28);
+}
+
+[data-page="authority"] .au-btn--tertiary-inverted:hover {
+  border-color: rgba(255, 255, 255, 0.54);
+  background: rgba(255, 255, 255, 0.06);
   transform: translateY(-1px);
 }
 

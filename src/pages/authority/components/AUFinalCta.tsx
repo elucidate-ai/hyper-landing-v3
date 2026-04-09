@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useContent } from '../../../data/ContentContext'
 import { ScrollReveal } from '../../../shared/components/ScrollReveal'
 import logoSvg from '../../../../assets/logo-blue.svg'
@@ -8,6 +9,19 @@ interface AUFinalCtaProps {
 
 export function AUFinalCta({ onOpenContact }: AUFinalCtaProps) {
   const { finalCta } = useContent()
+
+  function buttonClass(variant: 'primary' | 'secondary' | 'tertiary') {
+    if (variant === 'primary') {
+      return 'au-btn au-btn--primary-inverted'
+    }
+
+    if (variant === 'tertiary') {
+      return 'au-btn au-btn--tertiary-inverted'
+    }
+
+    return 'au-btn au-btn--secondary-inverted'
+  }
+
   return (
     <section className="au-final-cta" id="contact" aria-label="Call to action" style={{ paddingBottom: '6rem' }}>
       <div className="au-container" style={{ position: 'relative' }}>
@@ -27,10 +41,7 @@ export function AUFinalCta({ onOpenContact }: AUFinalCtaProps) {
         <ScrollReveal delay={0.2}>
           <div className="au-final-cta__buttons">
             {finalCta.ctas.map((cta) => {
-              const btnClass =
-                cta.variant === 'primary'
-                  ? 'au-btn au-btn--primary-inverted'
-                  : 'au-btn au-btn--secondary-inverted'
+              const btnClass = buttonClass(cta.variant)
               return cta.action === 'contact-form' ? (
                 <button
                   key={cta.label}
@@ -40,6 +51,10 @@ export function AUFinalCta({ onOpenContact }: AUFinalCtaProps) {
                 >
                   {cta.label}
                 </button>
+              ) : cta.href.startsWith('/') ? (
+                <Link key={cta.label} to={cta.href} className={btnClass}>
+                  {cta.label}
+                </Link>
               ) : (
                 <a key={cta.label} href={cta.href} className={btnClass}>
                   {cta.label}

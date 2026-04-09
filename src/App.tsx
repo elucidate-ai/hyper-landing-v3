@@ -5,6 +5,7 @@ import logoSvg from '../assets/logo-blue.svg'
 
 const AuthorityPage = lazy(() => import('./pages/authority/AuthorityPage'))
 const IndustryPage = lazy(() => import('./pages/industry/IndustryPage'))
+const DiagnosticPage = lazy(() => import('./pages/diagnostic/DiagnosticPage'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 // Lazy-load industry content to keep main bundle small
@@ -146,6 +147,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<SubdomainRedirect />} />
             <Route path="/authority" element={<AuthorityPage />} />
+            <Route path="/diagnostic" element={<DiagnosticPage />} />
             <Route path="/retail" element={<IndustryRoute industry="retail" />} />
             <Route path="/property" element={<IndustryRoute industry="property" />} />
             <Route path="/motor" element={<IndustryRoute industry="motor" />} />

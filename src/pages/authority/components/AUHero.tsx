@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useContent } from '../../../data/ContentContext'
 import { ScrollReveal } from '../../../shared/components/ScrollReveal'
 import { IsometricBlocks } from './hero-graphics/IsometricBlocks'
@@ -9,6 +10,25 @@ interface AUHeroProps {
 
 export function AUHero({ onOpenContact }: AUHeroProps) {
   const { hero } = useContent()
+
+  function renderLinkCta(label: string, href: string, variant: 'primary' | 'secondary' | 'tertiary') {
+    const className = `au-btn au-btn--${variant}`
+
+    if (href.startsWith('/')) {
+      return (
+        <Link key={label} to={href} className={className}>
+          {label}
+        </Link>
+      )
+    }
+
+    return (
+      <a key={label} href={href} className={className}>
+        {label}
+      </a>
+    )
+  }
+
   return (
     <section className="au-hero" aria-label="Hero">
       <div className="au-container au-hero__inner">
@@ -41,13 +61,7 @@ export function AUHero({ onOpenContact }: AUHeroProps) {
                     {cta.label}
                   </button>
                 ) : (
-                  <a
-                    key={cta.label}
-                    href={cta.href}
-                    className={`au-btn au-btn--${cta.variant}`}
-                  >
-                    {cta.label}
-                  </a>
+                  renderLinkCta(cta.label, cta.href, cta.variant)
                 )
               )}
             </div>

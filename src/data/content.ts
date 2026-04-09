@@ -10,6 +10,7 @@ import type {
   FinalCtaSection, FooterContent, SiteMetadata, DataFlowContent,
   ContactModalContent, SiteContent,
 } from './content-types'
+import { diagnosticBookingHref, genericDiagnosticContent } from './diagnostic-content'
 
 // Re-export all types so existing imports still work
 export type {
@@ -31,7 +32,7 @@ export const navigation: Navigation = {
     { label: 'Process', href: '#process' },
     { label: 'Security', href: '#security' },
   ],
-  cta: { label: 'BOOK A CALL', href: 'https://calendly.com/saul-bloch-meeting/30min' },
+  cta: { label: 'BOOK A CALL', href: diagnosticBookingHref },
 }
 
 // -----------------------------------------
@@ -44,7 +45,8 @@ export const hero: HeroContent = {
   subheadline:
     'We design, build, and operate production-grade warehousing, orchestration, and governance, turning scattered data into a clean, reliable foundation your team can query and act on.',
   ctas: [
-    { label: 'Book a Free Discovery Call', href: 'https://calendly.com/saul-bloch-meeting/30min', variant: 'primary' },
+    { label: 'Book a Free Discovery Call', href: diagnosticBookingHref, variant: 'primary' },
+    { label: 'Run the Data Diagnostic', href: '/diagnostic', variant: 'tertiary' },
     { label: 'Get in Touch', action: 'contact-form', href: '#', variant: 'secondary' },
   ],
 }
@@ -315,14 +317,19 @@ export const finalCta: FinalCtaSection = {
   ctas: [
     {
       label: 'Book a Free Discovery Call',
-      href: 'https://calendly.com/saul-bloch-meeting/30min',
+      href: diagnosticBookingHref,
       variant: 'primary',
+    },
+    {
+      label: 'Run the Data Diagnostic',
+      href: '/diagnostic',
+      variant: 'secondary',
     },
     {
       label: 'Get in Touch',
       action: 'contact-form',
       href: '#',
-      variant: 'secondary',
+      variant: 'tertiary',
     },
   ],
   trustBadges: ['Free data diagnostic included', 'Zero obligation', 'Fully managed from day one'],
@@ -405,6 +412,8 @@ export const siteMetadata: SiteMetadata = {
     "Go from scattered data to live dashboards in weeks. Hypr's specialist team builds and fully manages your analytics, data warehouse, and pipelines so you get the visibility to make better decisions without hiring a data team.",
 }
 
+export const diagnostic = genericDiagnosticContent
+
 // -----------------------------------------
 // Default (aggregate) content — used by main site
 // -----------------------------------------
@@ -424,4 +433,5 @@ export const defaultContent: SiteContent = {
   finalCta,
   contactModal,
   footer,
+  diagnostic,
 }
