@@ -8,7 +8,8 @@ import { AUHero } from './components/AUHero'
 import { AUProblem } from './components/AUProblem'
 import { AUDataFlowVariants } from './components/AUDataFlowVariants'
 import { AUStatsWall } from './components/AUStatsWall'
-import { AUTestimonials } from './components/AUTestimonials'
+// Testimonials hidden for now. Re-enable by restoring this import and the <AUTestimonials /> render below.
+// import { AUTestimonials } from './components/AUTestimonials'
 import { AUProcess } from './components/AUProcess'
 import { AUComparisonMatrix } from './components/AUComparisonMatrix'
 import { AUSecurity } from './components/AUSecurity'
@@ -35,7 +36,7 @@ export default function AuthorityPage() {
 
           <AUStatsWall />
 
-          <AUTestimonials />
+          {/* <AUTestimonials /> */}
 
           <AUProcess />
 

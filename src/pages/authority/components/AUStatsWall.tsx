@@ -73,6 +73,7 @@ export function AUStatsWall() {
   return (
     <section
       className="au-stats"
+      id="results"
       ref={sectionRef}
       aria-label="Key statistics"
     >

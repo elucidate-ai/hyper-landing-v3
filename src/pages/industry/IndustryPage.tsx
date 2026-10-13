@@ -8,7 +8,8 @@ import { AUHero } from '../authority/components/AUHero'
 import { AUProblem } from '../authority/components/AUProblem'
 import { AUDataFlowVariants } from '../authority/components/AUDataFlowVariants'
 import { AUStatsWall } from '../authority/components/AUStatsWall'
-import { AUTestimonials } from '../authority/components/AUTestimonials'
+// Testimonials hidden for now. Re-enable by restoring this import and the <AUTestimonials /> render below.
+// import { AUTestimonials } from '../authority/components/AUTestimonials'
 import { AUProcess } from '../authority/components/AUProcess'
 import { AUComparisonMatrix } from '../authority/components/AUComparisonMatrix'
 import { AUSecurity } from '../authority/components/AUSecurity'
@@ -43,7 +44,7 @@ export default function IndustryPage({ content }: { content: SiteContent }) {
 
           <AUStatsWall />
 
-          <AUTestimonials />
+          {/* <AUTestimonials /> */}
 
           <AUProcess />
 

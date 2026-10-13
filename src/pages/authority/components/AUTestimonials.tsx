@@ -58,7 +58,7 @@ export function AUTestimonials() {
   }, [updateDots])
 
   return (
-    <section className="au-testimonials" id="results" aria-label="Testimonials">
+    <section className="au-testimonials" id="testimonials" aria-label="Testimonials">
       <div className="au-container">
         <ScrollReveal>
           <div className="au-testimonials__header">
