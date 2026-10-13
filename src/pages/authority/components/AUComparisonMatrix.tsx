@@ -1,4 +1,5 @@
 import { useState, useCallback, type KeyboardEvent } from 'react'
+import { usePostHog } from '@posthog/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useContent } from '../../../data/ContentContext'
 import { ScrollReveal } from '../../../shared/components/ScrollReveal'
@@ -26,6 +27,7 @@ const panelVariants = {
 }
 
 export function AUComparisonMatrix() {
+  const posthog = usePostHog()
   const { comparison } = useContent()
   const approaches = comparison.approaches
   const metrics = approaches[0].metrics
@@ -51,8 +53,9 @@ export function AUComparisonMatrix() {
     }
     e.preventDefault()
     tabs[next].focus()
+    posthog?.capture('comparison_tab_selected', { approach: approaches[next].name, highlighted: !!approaches[next].highlighted })
     setActiveTab(next)
-  }, [])
+  }, [posthog, approaches])
 
   const active = approaches[activeTab]
   const panelId = `comparison-panel-${activeTab}`
@@ -129,7 +132,10 @@ export function AUComparisonMatrix() {
                   aria-controls={panelId}
                   tabIndex={i === activeTab ? 0 : -1}
                   className={`au-comparison__tab${i === activeTab ? ' au-comparison__tab--active' : ''}${a.highlighted ? ' au-comparison__tab--hl' : ''}`}
-                  onClick={() => setActiveTab(i)}
+                  onClick={() => {
+                    posthog?.capture('comparison_tab_selected', { approach: a.name, highlighted: !!a.highlighted })
+                    setActiveTab(i)
+                  }}
                 >
                   <span className="au-comparison__tab-name">{a.name}</span>
                   {a.highlighted && i === activeTab && (
